@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>share on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/categories/share/</link>
+		<description>Recent content in share on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 23 Oct 2023 17:20:33 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/categories/share/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>How to Switch Boot Target to Text or GUI in Systemd Linux</title>
+			<link>http://www.averainy.com/post/how-to-switch-boot-target-to-text-or-GUI-in-systemd-linux/</link>
+			<pubDate>Mon, 23 Oct 2023 17:20:33 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-switch-boot-target-to-text-or-GUI-in-systemd-linux/</guid>
+			<description>
+			
+				Find wich target uni is used by default sudo systemctl get-default Switching boot target to text To change boot target to the text mode: …
+			
+			</description>
+		</item>
+		<item>
+			<title>Get Windows Installed Software by Winreg</title>
+			<link>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</link>
+			<pubDate>Mon, 16 Oct 2023 16:48:39 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</guid>
+			<description>
+			
+				def getInstalledProgramsFromRegistry(): registry_key =r"Software\Microsoft\Windows\CurrentVersion\Uninstall" registry_key_64bit = …
+			
+			</description>
+		</item>
+		<item>
+			<title>Use Jquery Filter Same Elements with the same attributes and Hide Them</title>
+			<link>http://www.averainy.com/post/use-jquery-filter-same-elements-and-hide-them/</link>
+			<pubDate>Mon, 04 Sep 2023 16:19:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-jquery-filter-same-elements-and-hide-them/</guid>
+			<description>
+			
+				Use jquery to filter elements with the same attributes and hide them:
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"> </script> <script> $(document).ready(function(){ $("a").each(function(){ let href …</script></meta></head></html></!DOCTYPE>
+			
+			</description>
+		</item>
+		<item>
+			<title>常用正则表达式一览</title>
+			<link>http://www.averainy.com/post/common-regular-expression/</link>
+			<pubDate>Mon, 28 Aug 2023 14:38:40 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/common-regular-expression/</guid>
+			<description>
+			
+				目录 前言
+邮箱
+电话
+域名
+IP
+帐号校验
+字符校验
+汉字 英文和数字 长度为3-20的所有字符 英文字符 由26个英文字母组成的字符串 由26个大写英文字母组成的字符串 由26个小写英文字母组成的字符串 由数字和26个英文字母组成的字符串 由数字、26个英文字母或者下划线组成 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Use Checkbox to Simulate Radio</title>
+			<link>http://www.averainy.com/post/use-checkbox-to-simulate-radio/</link>
+			<pubDate>Fri, 14 Jul 2023 19:26:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-checkbox-to-simulate-radio/</guid>
+			<description>
+			
+				复选框checkbox模拟单选框代码。
+<html> <head> <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script> <script> $(document).ready(function() { $("input[name^='a']").on("click", function() { …</script></head></html>
+			
+			</description>
+		</item>
+		<item>
+			<title>Angular RxJS: Limiting Concurrent HTTP Requests</title>
+			<link>http://www.averainy.com/post/Angular-RxJS-Limiting-Concurrent-HTTP-Requests/</link>
+			<pubDate>Thu, 15 Jun 2023 21:04:04 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/Angular-RxJS-Limiting-Concurrent-HTTP-Requests/</guid>
+			<description>
+			
+				详细内容青参考Angular/RxJS: Limiting Concurrent HTTP Requests
+其逻辑主要是用到了mergemap的concurrent参数，mergemap会尽可能多的执行请求，加上concurrent参数之后就能够使得一次执行concurrent …
+			
+			</description>
+		</item>
+		<item>
+			<title>Aws Api Gateway Upload File 415 Unsupported Media Type</title>
+			<link>http://www.averainy.com/post/aws-api-gateway-upload-file-415-unsupported-media-type/</link>
+			<pubDate>Thu, 15 Jun 2023 20:57:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/aws-api-gateway-upload-file-415-unsupported-media-type/</guid>
+			<description>
+			
+				aws api gateway upload file 415 Unsupported Media Type 一般情况下，前端向服务端上传文件的方式基本如下：
+const formData = new FormData(); formData.append("userInfo", …
+			
+			</description>
+		</item>
+		<item>
+			<title>sessionStorage用法</title>
+			<link>http://www.averainy.com/post/sessionStorage-usage/</link>
+			<pubDate>Wed, 07 Jun 2023 22:56:39 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/sessionStorage-usage/</guid>
+			<description>
+			
+				sessionStorage存储的数据会在会话结束（如关闭标签页或者浏览器时）的时候清除掉。每新开一个新的标签页就会有新的sessionStorage。各个sessionStorage之间无法互相访问。
+sessionStorage语法 // 保存到sessionStorage …
+			
+			</description>
+		</item>
+		<item>
+			<title>在Linux服务器上安装jstack、jmap等命令</title>
+			<link>http://www.averainy.com/post/install-jstack-on-linux/</link>
+			<pubDate>Mon, 13 Mar 2023 10:34:41 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/install-jstack-on-linux/</guid>
+			<description>
+			
+				如果你安装的是oracle jdk的话，应该不会有这样的问题。如果你安装的是openjdk，那么这篇文章会帮到你。
+openjdk是不包含jstack、jmap等命令，你需要安装对应的openjdk-devel。
+查看openjdk版本 yum list installed …
+			
+			</description>
+		</item>
+		<item>
+			<title>如何查看Google Chrome标签页的内存使用量</title>
+			<link>http://www.averainy.com/post/how-to-find-google-chrome-tab-memory-usage/</link>
+			<pubDate>Fri, 06 Jan 2023 16:25:07 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-find-google-chrome-tab-memory-usage/</guid>
+			<description>
+			
+				最近有项目需要查看画面的内存使用量，于是搜索了一下，发现可以通过一下方法查询内存使用量:
+在Chrome浏览器标签页按Shift+Esc按键就可以打开Chrome Task Manager。在Chrome Task Manager里可以看到实用程序、标签页、扩展等的内存、CPU、 …
+			
+			</description>
+		</item>
+		<item>
+			<title>用python实现自动重启tplink路由器</title>
+			<link>http://www.averainy.com/post/auto-reboot-tplink-router/</link>
+			<pubDate>Tue, 06 Dec 2022 11:29:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/auto-reboot-tplink-router/</guid>
+			<description>
+			
+				原因 自从我的iPhone升级到iOS16之后，总是连不上家里的5G WiFi。开始确实是因为iOS16的bug造成的，升级到最新iOS版本之后稳定了几天，但是之后就又出现了连不上的情况，不过我老婆的手机和iPad倒是挺正常的。最后祭出重启路由大招，完美解决问题。于是想着做个定时 …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用python监控systemd服务修改版</title>
+			<link>http://www.averainy.com/post/monitor-systemd-services-with-python-2022/</link>
+			<pubDate>Tue, 08 Nov 2022 09:40:18 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/monitor-systemd-services-with-python-2022/</guid>
+			<description>
+			
+				以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下：
+# -*- …
+			
+			</description>
+		</item>
+		<item>
+			<title>在群晖设备上使用docker搭建cups服务器</title>
+			<link>http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/</link>
+			<pubDate>Sat, 29 Oct 2022 23:03:56 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/</guid>
+			<description>
+			
+				今天终于在群晖ds218+上面配置好了cups打印服务。特地记录一下。
+起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218+上面搭建一个docker容器。
+搭 …
+			
+			</description>
+		</item>
+		<item>
+			<title>在Cockpit中创建新的虚拟机</title>
+			<link>http://www.averainy.com/post/create-new-VM-in-cockpit/</link>
+			<pubDate>Mon, 10 Oct 2022 15:04:38 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-new-VM-in-cockpit/</guid>
+			<description>
+			
+				在KVM里可以通过命令行创建虚拟机，但是对于一个没怎么接触过Linux的人来说创建一个虚拟机就太不友好了。
+如果你在用cockpit web console的话，那么通过点几下鼠标也是可以轻松创建虚拟机的。下面是创建步骤：
+创建存储卷 点击左侧的虚拟机。 然后点击右侧上方的存储 …
+			
+			</description>
+		</item>
+		<item>
+			<title>自动删除空文件以及空文件夹</title>
+			<link>http://www.averainy.com/post/remove-empty-direcotry-and-file/</link>
+			<pubDate>Sun, 09 Oct 2022 11:02:42 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/remove-empty-direcotry-and-file/</guid>
+			<description>
+			
+				背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。
+代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用firewalld将端口流量转发到另一台服务器</title>
+			<link>http://www.averainy.com/post/firewalld-port-forwarding/</link>
+			<pubDate>Fri, 02 Sep 2022 16:38:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/firewalld-port-forwarding/</guid>
+			<description>
+			
+				目前国内处于新冠动态清零阶段，隔三岔五就会有地方被封控。因此有时候会有在家远程工作的需求。为了能够远程访问公司网络，我们采用了搭建wireguard vpn的解决方案。这样的话，每个人都需要在家里和公司的电脑上安装wireguard客户端，这样虽然也没什么问题。但是操作起来特别麻 …
+			
+			</description>
+		</item>
+		<item>
+			<title>解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39;</title>
+			<link>http://www.averainy.com/post/nginx-emerg-host-not-found-in-upstream/</link>
+			<pubDate>Fri, 02 Sep 2022 11:17:40 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/nginx-emerg-host-not-found-in-upstream/</guid>
+			<description>
+			
+				我用nginx配置了一个反向代理，每次服务器重启之后，nginx都会报：nginx: [emerg] host not found in upstream 'xxx.com'的错误。这个错误的原因其实很简单，就是nginx无法解析xxx.com。解决方法就是以下流程：
+确 …
+			
+			</description>
+		</item>
+		<item>
+			<title>每月的第一个周六运行一个cron job</title>
+			<link>http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/</link>
+			<pubDate>Fri, 02 Sep 2022 10:24:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/</guid>
+			<description>
+			
+				我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是
+0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行， …
+			
+			</description>
+		</item>
+		<item>
+			<title>Mount Partitions Useing Uuid on Linux</title>
+			<link>http://www.averainy.com/post/mount-partitions-useing-uuid-on-linux/</link>
+			<pubDate>Mon, 22 Aug 2022 10:30:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/mount-partitions-useing-uuid-on-linux/</guid>
+			<description>
+			
+				今天真是撞大运，碰巧碰上了Rehhat 9系统里的/dev/sdx的名字每次重启系统后都跟着变。虽然听说过硬盘的名字可能会改变，但一直没见过。这次算是真开眼了。
+为了解决这个问题，只好修改/etc/fstab里的配置，将硬盘名换成了硬盘名对应的uuid。据说这样就能够保证挂载的硬 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Wireguard客户端AllowedIPs 配置排除一个ip或者一个ip段</title>
+			<link>http://www.averainy.com/post/wireguard-exclude-a-single-ip-address/</link>
+			<pubDate>Wed, 17 Aug 2022 09:32:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/wireguard-exclude-a-single-ip-address/</guid>
+			<description>
+			
+				Wireguard客户端的配置中只有一个AllowedIPs配置来定义哪些ip或者ip段可以允许通过Wireguard客户端路由，因此如果想排除某个ip或者ip段，就需要将这些ip排除掉。
+由于ip段太多，如果手动写会非常麻烦，幸好python有一个库可以帮我们解决这个问题,代码 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Wireguard Install Script</title>
+			<link>http://www.averainy.com/post/wireguard-install-script/</link>
+			<pubDate>Mon, 01 Aug 2022 16:30:39 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/wireguard-install-script/</guid>
+			<description>
+			
+				最近用wireguard安装脚本搭建wireguard服务器，用起来非常方便，推荐使用。 在下载脚本之后，强烈建议修改下生成客户端脚本的代码第313行，加入以下配置：
+PersistentKeepalive = 25 这样每隔25秒就会发送一次心跳包，以保持客户端与服务端的连接。 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Forwarding Ports With Firewalld</title>
+			<link>http://www.averainy.com/post/forwarding-ports-with-firewalld/</link>
+			<pubDate>Tue, 19 Jul 2022 10:57:31 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/forwarding-ports-with-firewalld/</guid>
+			<description>
+			
+				1.Enable IPv4 masquerade.
+firewall-cmd --add-masquerade --permanent 2.add firewalld rule.
+firewall-cmd …
+			
+			</description>
+		</item>
+		<item>
+			<title>Use Chrony Test Ntp Server</title>
+			<link>http://www.averainy.com/post/use-chrony-test-ntp-server/</link>
+			<pubDate>Fri, 08 Jul 2022 14:57:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-chrony-test-ntp-server/</guid>
+			<description>
+			
+				when we have setuped a ntp service ,we need to test the ntp service if it work well.
+we can use the following command to test the NTP …
+			
+			</description>
+		</item>
+		<item>
+			<title>Backup Kvm Vms With Python Libvirt</title>
+			<link>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</link>
+			<pubDate>Tue, 14 Jun 2022 15:25:35 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</guid>
+			<description>
+			
+				we changed the vm platform from esxi to kvm a few months ago,so we need to writ e some scripts to backup vms automatically. we only have a …
+			
+			</description>
+		</item>
+		<item>
+			<title>Use Wireguard as Relay Node to Access Lan  Network in Openwrt</title>
+			<link>http://www.averainy.com/post/use-wireguard-as-relay-node-to-access-lan--network-in-openwrt/</link>
+			<pubDate>Sat, 14 May 2022 17:21:53 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-wireguard-as-relay-node-to-access-lan--network-in-openwrt/</guid>
+			<description>
+			
+				背景 平时为了能够在外面随时连接家庭内部网络,通常有以下几种方式:
+1.有公网ip的情况下,做端口映射
+2. 没有公网ip的情况下,可以使用frp类似的技术做反向代理.
+3. 使用vpn技术连接.
+前面两种方式都需要将端口映射到公网,这就带来了被入侵的风险.这就不得不提到新冠病毒 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Create Kms Service in Linux</title>
+			<link>http://www.averainy.com/post/create-kms-service-in-linux/</link>
+			<pubDate>Thu, 05 May 2022 10:15:03 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-kms-service-in-linux/</guid>
+			<description>
+			
+				I create a kms service for the lan computers in a linux server recently,so record the steps
+download kms source and compile it cd …
+			
+			</description>
+		</item>
+		<item>
+			<title>How to Convert Free Space in Qcow2 Image to Kvm Host</title>
+			<link>http://www.averainy.com/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/</link>
+			<pubDate>Sun, 24 Apr 2022 16:35:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/</guid>
+			<description>
+			
+				How do you convert free space within the QCOW2 disk image to free space on the kvm host? I use Virt-sparsify to do this.
+qcow2 image is a …
+			
+			</description>
+		</item>
+		<item>
+			<title>Auto Select Fastest Proxy in Clash With Python</title>
+			<link>http://www.averainy.com/post/auto-select-fastest-proxy-in-clash-with-python/</link>
+			<pubDate>Sat, 23 Apr 2022 09:43:35 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/auto-select-fastest-proxy-in-clash-with-python/</guid>
+			<description>
+			
+				起因 为了能够方便家里的电脑，电视盒子以及手机能够方便的使用代理，因此在我的群晖上用docker部署了clash。同时为了能够自动选择响应速度最快的代理，因此，用python写了这个脚本。 将这个脚本加入到定时任务即可实现自动切换最快代理。
+代码 # coding=utf-8 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Run Wireguard in Windows With No Administrator Permission</title>
+			<link>http://www.averainy.com/post/run-wireguard-in-windows-with-no-administrator-permission/</link>
+			<pubDate>Wed, 20 Apr 2022 08:59:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/run-wireguard-in-windows-with-no-administrator-permission/</guid>
+			<description>
+			
+				原因 在无管理员权限的Windows系统上无法运行wireguard GUI客户端，为此需要通过安装wireguard服务来解决这个问题。
+操作方法 在没有管理权限的Windows系统上安装运行wireguard方法：
+以管理员权限打开powershell窗口，运行： …
+			
+			</description>
+		</item>
+		<item>
+			<title>Monitor Systemd Services With Python</title>
+			<link>http://www.averainy.com/post/monitor-systemd-services-with-python/</link>
+			<pubDate>Sat, 02 Apr 2022 09:00:25 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/monitor-systemd-services-with-python/</guid>
+			<description>
+			
+				systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。
+代码如下
+# -*- coding: utf-8 …
+			
+			</description>
+		</item>
+		<item>
+			<title>免费使用红帽开发者计划的个人红帽开发者订阅</title>
+			<link>http://www.averainy.com/post/no-cost-red-hat-enterprise-linux-individual-developer/</link>
+			<pubDate>Thu, 31 Mar 2022 10:21:21 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/no-cost-red-hat-enterprise-linux-individual-developer/</guid>
+			<description>
+			
+				1.什么是红帽开发者计划的个人红帽开发者订阅？ 红帽开发者个人订阅是红帽开发者计划的免费产品，包括访问红帽企业 Linux 以及其他红帽产品。 它是一个专为个人开发者设计的计划和产品，可通过红帽开发者计划获得。
+2.哪些 Red Hat Enterprise Linux 开发人员 …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用virt-install创建kvm虚拟机</title>
+			<link>http://www.averainy.com/post/create_kvm_virtual_machnine_by_virt_install/</link>
+			<pubDate>Fri, 04 Mar 2022 15:03:21 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create_kvm_virtual_machnine_by_virt_install/</guid>
+			<description>
+			
+				终端命令行使用virt-install 创建win10虚拟机大概流程如下：
+创建虚拟硬盘 qemu-img create -f qcow2 /home/kvm/data/win10_test/win10_test.img 40G 创建虚拟机 virt-install …
+			
+			</description>
+		</item>
+		<item>
+			<title>获取当前Java程序PID</title>
+			<link>http://www.averainy.com/post/get_self_pid_in_java/</link>
+			<pubDate>Tue, 01 Mar 2022 16:04:55 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/get_self_pid_in_java/</guid>
+			<description>
+			
+				获取当前Java程序PID
+jvm1.8以上通用方式：
+String pid = ManagementFactory.getRuntimeMXBean().getName(); pid = pid.substring(0, pid.indexOf("@")); 
+			
+			</description>
+		</item>
+		<item>
+			<title>使用python删除重复文件</title>
+			<link>http://www.averainy.com/post/use_python_to_delete_duplicate_files/</link>
+			<pubDate>Sun, 27 Feb 2022 18:24:51 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use_python_to_delete_duplicate_files/</guid>
+			<description>
+			
+				原因 群晖系统更新到 dsm7 之后，图片管理给切换到了 synology photos。结果就出现了没办法同步备份的问题，想解决问题只能将图片上传到共享空间，个人空间没办法自动同步备份。 为了解决这个问题，只好讲已有的文件挪到共享空间。同时又重新将 iCloud 上的图片同步了 …
+			
+			</description>
+		</item>
+		<item>
+			<title>在LInux上使用ncftp上传整个目录到ftp服务器</title>
+			<link>http://www.averainy.com/post/linux-upload-the-files-and-directory-tree-to-remote-ftp-server/</link>
+			<pubDate>Fri, 11 Jun 2021 16:10:25 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/linux-upload-the-files-and-directory-tree-to-remote-ftp-server/</guid>
+			<description>
+			
+				一般有图形界面得环境下，我们都是通过有GUI的ftp客户端如winscp之类的上传文件夹。但是如果是在命令行模式下应该用哪个呢？
+今天给大家推荐一个非常好用的命令ncftp。
+安装ncftp客户端 ubuntu/debian系：
+sudo apt-get install …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

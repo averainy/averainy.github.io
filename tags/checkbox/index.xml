@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>checkbox on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/checkbox/</link>
+		<description>Recent content in checkbox on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 14 Jul 2023 19:26:26 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/checkbox/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Use Checkbox to Simulate Radio</title>
+			<link>http://www.averainy.com/post/use-checkbox-to-simulate-radio/</link>
+			<pubDate>Fri, 14 Jul 2023 19:26:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-checkbox-to-simulate-radio/</guid>
+			<description>
+			
+				复选框checkbox模拟单选框代码。
+<html> <head> <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script> <script> $(document).ready(function() { $("input[name^='a']").on("click", function() { …</script></head></html>
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

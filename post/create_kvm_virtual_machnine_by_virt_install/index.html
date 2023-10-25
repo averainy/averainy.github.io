@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="使用virt-install创建kvm虚拟机">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="kvm"><meta name="description" content="终端命令行使用virt-install 创建win10虚拟机大概流程如下：
+创建虚拟硬盘 qemu-img create -f qcow2 /home/kvm/data/win10_test/win10_test.img 40G 创建虚拟机 virt-install …"><meta property="og:title" content="使用virt-install创建kvm虚拟机" />
+<meta property="og:description" content="终端命令行使用virt-install 创建win10虚拟机大概流程如下： 创建虚拟硬盘 qemu-img create -f qcow2 /home/kvm/data/win10_test/win10_test.img 40G 创建虚拟机 virt-install --virt-type kvm \ #虚拟机类型kvm --name win10_test \ #虚拟机名字 --memory 10240 \ #内存10240M --cdrom=/home/kvm/data/isos/Win10_21H2_Japanese_x64.iso \ #cdrom镜像路径 --boot cdrom \ #从cdrom启动 --disk path=/home/kvm/data/win10_test/win10_test.img,bus=sata \ #虚拟磁盘路径 总线是sata，安装好之后可以通过安装" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/create_kvm_virtual_machnine_by_virt_install/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-04T15:03:21+08:00" />
+<meta property="article:modified_time" content="2022-03-04T15:03:21+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用virt-install创建kvm虚拟机"/>
+<meta name="twitter:description" content="终端命令行使用virt-install 创建win10虚拟机大概流程如下： 创建虚拟硬盘 qemu-img create -f qcow2 /home/kvm/data/win10_test/win10_test.img 40G 创建虚拟机 virt-install --virt-type kvm \ #虚拟机类型kvm --name win10_test \ #虚拟机名字 --memory 10240 \ #内存10240M --cdrom=/home/kvm/data/isos/Win10_21H2_Japanese_x64.iso \ #cdrom镜像路径 --boot cdrom \ #从cdrom启动 --disk path=/home/kvm/data/win10_test/win10_test.img,bus=sata \ #虚拟磁盘路径 总线是sata，安装好之后可以通过安装"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>使用virt-install创建kvm虚拟机 | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">04</span>
+				<span class="rest">Mar 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">使用virt-install创建kvm虚拟机</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>终端命令行使用virt-install 创建win10虚拟机大概流程如下：</p>
+<h3 id="创建虚拟硬盘">创建虚拟硬盘</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qemu-img create -f qcow2 /home/kvm/data/win10_test/win10_test.img 40G 
+</span></span></code></pre></div><h3 id="创建虚拟机">创建虚拟机</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>virt-install --virt-type kvm <span style="color:#ae81ff">\ </span><span style="color:#75715e">#虚拟机类型kvm</span>
+</span></span><span style="display:flex;"><span>--name win10_test <span style="color:#ae81ff">\ </span><span style="color:#75715e">#虚拟机名字</span>
+</span></span><span style="display:flex;"><span>--memory <span style="color:#ae81ff">10240</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e">#内存10240M</span>
+</span></span><span style="display:flex;"><span>--cdrom<span style="color:#f92672">=</span>/home/kvm/data/isos/Win10_21H2_Japanese_x64.iso <span style="color:#ae81ff">\ </span><span style="color:#75715e">#cdrom镜像路径</span>
+</span></span><span style="display:flex;"><span>--boot cdrom <span style="color:#ae81ff">\ </span><span style="color:#75715e">#从cdrom启动</span>
+</span></span><span style="display:flex;"><span>--disk path<span style="color:#f92672">=</span>/home/kvm/data/win10_test/win10_test.img,bus<span style="color:#f92672">=</span>sata  <span style="color:#ae81ff">\ </span><span style="color:#75715e">#虚拟磁盘路径 总线是sata，安装好之后可以通过安装virtio驱动这样性能会更好。</span>
+</span></span><span style="display:flex;"><span>--cpu host-model-only <span style="color:#ae81ff">\ </span><span style="color:#75715e">#cpu类型跟宿主机一样</span>
+</span></span><span style="display:flex;"><span>--network<span style="color:#f92672">=</span>default,model<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;e1000&#39;</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e">#默认网络，网卡位e1000,等安装好之后可以通过安装virtio驱动以提高性能</span>
+</span></span><span style="display:flex;"><span>--graphics vnc,listen<span style="color:#f92672">=</span>0.0.0.0 <span style="color:#ae81ff">\ </span><span style="color:#75715e">#vnc监听所有网卡，vnc端口随机</span>
+</span></span><span style="display:flex;"><span>--vcpus <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e">#虚拟cpu内核数为5</span>
+</span></span><span style="display:flex;"><span>--noautoconsole <span style="color:#ae81ff">\ </span><span style="color:#75715e">#不自动打开控制台</span>
+</span></span><span style="display:flex;"><span>--os-variant win10 <span style="color:#ae81ff">\ </span><span style="color:#75715e">#虚拟机类型为win10，装什么系统就选哪个，尽量一致或相近，以提高性能。</span>
+</span></span></code></pre></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/kvm/"> kvm </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>html on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/html/</link>
+		<description>Recent content in html on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 04 Sep 2023 16:19:43 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/html/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Use Jquery Filter Same Elements with the same attributes and Hide Them</title>
+			<link>http://www.averainy.com/post/use-jquery-filter-same-elements-and-hide-them/</link>
+			<pubDate>Mon, 04 Sep 2023 16:19:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-jquery-filter-same-elements-and-hide-them/</guid>
+			<description>
+			
+				Use jquery to filter elements with the same attributes and hide them:
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"> </script> <script> $(document).ready(function(){ $("a").each(function(){ let href …</script></meta></head></html></!DOCTYPE>
+			
+			</description>
+		</item>
+		<item>
+			<title>Use Checkbox to Simulate Radio</title>
+			<link>http://www.averainy.com/post/use-checkbox-to-simulate-radio/</link>
+			<pubDate>Fri, 14 Jul 2023 19:26:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-checkbox-to-simulate-radio/</guid>
+			<description>
+			
+				复选框checkbox模拟单选框代码。
+<html> <head> <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script> <script> $(document).ready(function() { $("input[name^='a']").on("click", function() { …</script></head></html>
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

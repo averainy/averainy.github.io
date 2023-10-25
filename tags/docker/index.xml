@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>docker on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/docker/</link>
+		<description>Recent content in docker on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Sat, 29 Oct 2022 23:03:56 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>在群晖设备上使用docker搭建cups服务器</title>
+			<link>http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/</link>
+			<pubDate>Sat, 29 Oct 2022 23:03:56 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/</guid>
+			<description>
+			
+				今天终于在群晖ds218+上面配置好了cups打印服务。特地记录一下。
+起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218+上面搭建一个docker容器。
+搭 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

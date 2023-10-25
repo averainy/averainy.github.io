@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>firewalld on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/firewalld/</link>
+		<description>Recent content in firewalld on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 02 Sep 2022 16:38:43 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/firewalld/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>使用firewalld将端口流量转发到另一台服务器</title>
+			<link>http://www.averainy.com/post/firewalld-port-forwarding/</link>
+			<pubDate>Fri, 02 Sep 2022 16:38:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/firewalld-port-forwarding/</guid>
+			<description>
+			
+				目前国内处于新冠动态清零阶段，隔三岔五就会有地方被封控。因此有时候会有在家远程工作的需求。为了能够远程访问公司网络，我们采用了搭建wireguard vpn的解决方案。这样的话，每个人都需要在家里和公司的电脑上安装wireguard客户端，这样虽然也没什么问题。但是操作起来特别麻 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Forwarding Ports With Firewalld</title>
+			<link>http://www.averainy.com/post/forwarding-ports-with-firewalld/</link>
+			<pubDate>Tue, 19 Jul 2022 10:57:31 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/forwarding-ports-with-firewalld/</guid>
+			<description>
+			
+				1.Enable IPv4 masquerade.
+firewall-cmd --add-masquerade --permanent 2.add firewalld rule.
+firewall-cmd …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>kms on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/kms/</link>
+		<description>Recent content in kms on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Thu, 05 May 2022 10:15:03 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/kms/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Create Kms Service in Linux</title>
+			<link>http://www.averainy.com/post/create-kms-service-in-linux/</link>
+			<pubDate>Thu, 05 May 2022 10:15:03 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-kms-service-in-linux/</guid>
+			<description>
+			
+				I create a kms service for the lan computers in a linux server recently,so record the steps
+download kms source and compile it cd …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

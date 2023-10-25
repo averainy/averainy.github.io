@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="使用virt-v2v将Esxi虚拟机迁移到kvm">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="esxi,kvm,virt-v2v"><meta name="description" content="鉴于VMware esxi系统支持的网卡型号比较少，第三方网卡驱动的可靠性又比较差，因此将虚拟机到kvm。目前比较方便的方式就是使用ovftool导出ova文件，再用virt-v2v将ova文件转成kvm能够识别的文件。基本语法如下：
+导出虚拟机
+ovftool.exe …"><meta property="og:title" content="使用virt-v2v将Esxi虚拟机迁移到kvm" />
+<meta property="og:description" content="鉴于VMware esxi系统支持的网卡型号比较少，第三方网卡驱动的可靠性又比较差，因此将虚拟机到kvm。目前比较方便的方式就是使用ovftool导出ova文件，再用virt-v2v将ova文件转成kvm能够识别的文件。基本语法如下： 导出虚拟机 ovftool.exe vi://username:password@esxiserver:port/vmName E:\download\vmName.ova 下方命令执行前需要保证/home" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/esxi2kvm/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-18T14:38:40+08:00" />
+<meta property="article:modified_time" content="2022-02-18T14:38:40+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用virt-v2v将Esxi虚拟机迁移到kvm"/>
+<meta name="twitter:description" content="鉴于VMware esxi系统支持的网卡型号比较少，第三方网卡驱动的可靠性又比较差，因此将虚拟机到kvm。目前比较方便的方式就是使用ovftool导出ova文件，再用virt-v2v将ova文件转成kvm能够识别的文件。基本语法如下： 导出虚拟机 ovftool.exe vi://username:password@esxiserver:port/vmName E:\download\vmName.ova 下方命令执行前需要保证/home"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>使用virt-v2v将Esxi虚拟机迁移到kvm | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">18</span>
+				<span class="rest">Feb 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">使用virt-v2v将Esxi虚拟机迁移到kvm</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>鉴于VMware esxi系统支持的网卡型号比较少，第三方网卡驱动的可靠性又比较差，因此将虚拟机到kvm。目前比较方便的方式就是使用ovftool导出ova文件，再用virt-v2v将ova文件转成kvm能够识别的文件。基本语法如下：<br>
+导出虚拟机</p>
+<pre tabindex="0"><code>ovftool.exe vi://username:password@esxiserver:port/vmName E:\download\vmName.ova
+</code></pre><p>下方命令执行前需要保证/home/kvm/data/vmName目录存在</p>
+<pre tabindex="0"><code>virt-v2v -i ova vmName.ova -o local -os /home/kvm/data/vmName -of qcow2 --bridge bridge0
+</code></pre><p>注册虚拟机</p>
+<pre tabindex="0"><code>cd /home/kvm/data/vmName
+virsh define vmName.xml
+</code></pre><p>启动虚拟机</p>
+<pre tabindex="0"><code>virsh start vmname
+</code></pre><p>由于网卡信息的变化，启动之后需要进入系统配置ip地址。
+如果是Windows系统，为了能够使得虚拟机系统运行更流畅，需要更新网卡和磁盘的驱动。不然会比较卡顿。</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			<a href="/categories/command/"> command </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/esxi/"> esxi </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/kvm/"> kvm </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/virt-v2v/"> virt-v2v </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>libvirt on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/libvirt/</link>
+		<description>Recent content in libvirt on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Tue, 14 Jun 2022 15:25:35 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/libvirt/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Backup Kvm Vms With Python Libvirt</title>
+			<link>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</link>
+			<pubDate>Tue, 14 Jun 2022 15:25:35 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</guid>
+			<description>
+			
+				we changed the vm platform from esxi to kvm a few months ago,so we need to writ e some scripts to backup vms automatically. we only have a …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

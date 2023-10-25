@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>java on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/java/</link>
+		<description>Recent content in java on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Tue, 01 Mar 2022 16:04:55 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>获取当前Java程序PID</title>
+			<link>http://www.averainy.com/post/get_self_pid_in_java/</link>
+			<pubDate>Tue, 01 Mar 2022 16:04:55 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/get_self_pid_in_java/</guid>
+			<description>
+			
+				获取当前Java程序PID
+jvm1.8以上通用方式：
+String pid = ManagementFactory.getRuntimeMXBean().getName(); pid = pid.substring(0, pid.indexOf("@")); 
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

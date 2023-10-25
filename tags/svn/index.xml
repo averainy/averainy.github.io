@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>svn on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/svn/</link>
+		<description>Recent content in svn on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Wed, 07 Apr 2021 08:37:00 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/svn/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>使用rsync自动备份svn仓库</title>
+			<link>http://www.averainy.com/post/auto_backup_svn_server/</link>
+			<pubDate>Wed, 07 Apr 2021 08:37:00 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/auto_backup_svn_server/</guid>
+			<description>
+			
+				配置密钥登录 这里不做说明，想知道如何配置可以参照菜鸟教程
+自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo "is running" exit 1 fi …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

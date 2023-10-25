@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>吐槽 on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/%E5%90%90%E6%A7%BD/</link>
+		<description>Recent content in 吐槽 on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 27 Jan 2023 21:37:22 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/%E5%90%90%E6%A7%BD/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>ATM cannot deposit money</title>
+			<link>http://www.averainy.com/post/atm-cannot-deposit-money/</link>
+			<pubDate>Fri, 27 Jan 2023 21:37:22 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/atm-cannot-deposit-money/</guid>
+			<description>
+			
+				中国大陆的ATM机依然无法存款。
+是的，这就是事实。几个月前由于COVID19的原因，所有银行的ATM机暂停了存款功能。那个时候好歹还有一个防止病毒传播的幌子。然而现在全面放开的情况下依然无法在ATM机存款。我去了我家附近的工商银行、建设银行、光大银行和徽商银行，所有的ATM机上 …
+			
+			</description>
+		</item>
+		<item>
+			<title>新冠肺炎三年</title>
+			<link>http://www.averainy.com/post/three-years-of-covid19/</link>
+			<pubDate>Sat, 17 Dec 2022 02:15:56 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/three-years-of-covid19/</guid>
+			<description>
+			
+				从新冠病毒在武汉爆发，到中国政府宣布放开整整过去了三年多。
+在这三年多里，躲过了入户消杀，躲过了强制隔离，躲过了封死消防通道。唯一没躲过的就是天天核酸。但是跟前面那些一比做核酸啥都不是。
+在这三年多里，见识了汉语的博大精深，封城先是叫封城，后来叫静默，再后来叫静态管理。还有啥时空 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

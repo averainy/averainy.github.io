@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="常用正则表达式一览">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="regex"><meta name="description" content="目录 前言
+邮箱
+电话
+域名
+IP
+帐号校验
+字符校验
+汉字 英文和数字 长度为3-20的所有字符 英文字符 由26个英文字母组成的字符串 由26个大写英文字母组成的字符串 由26个小写英文字母组成的字符串 由数字和26个英文字母组成的字符串 由数字、26个英文字母或者下划线组成 …"><meta property="og:title" content="常用正则表达式一览" />
+<meta property="og:description" content="目录 前言 邮箱 电话 域名 IP 帐号校验 字符校验 汉字 英文和数字 长度为3-20的所有字符 英文字符 由26个英文字母组成的字符串 由26个大写英文字母组成的字符串 由26个小写英文字母组成的字符串 由数字和26个英文字母组成的字符串 由数字、26个英文字母或者下划线组成的字符串 中文、英文、数字包括下划线" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/common-regular-expression/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-08-28T14:38:40+08:00" />
+<meta property="article:modified_time" content="2023-08-28T14:38:40+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="常用正则表达式一览"/>
+<meta name="twitter:description" content="目录 前言 邮箱 电话 域名 IP 帐号校验 字符校验 汉字 英文和数字 长度为3-20的所有字符 英文字符 由26个英文字母组成的字符串 由26个大写英文字母组成的字符串 由26个小写英文字母组成的字符串 由数字和26个英文字母组成的字符串 由数字、26个英文字母或者下划线组成的字符串 中文、英文、数字包括下划线"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>常用正则表达式一览 | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">28</span>
+				<span class="rest">Aug 2023</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">常用正则表达式一览</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<h2 id="目录">目录</h2>
+<ul>
+<li>
+<p><a href="#%e5%89%8d%e8%a8%80">前言</a></p>
+</li>
+<li>
+<p><a href="#%e9%82%ae%e7%ae%b1">邮箱</a></p>
+</li>
+<li>
+<p><a href="#%e7%94%b5%e8%af%9d">电话</a></p>
+</li>
+<li>
+<p><a href="#%e5%9f%9f%e5%90%8d">域名</a></p>
+</li>
+<li>
+<p><a href="#ip">IP</a></p>
+</li>
+<li>
+<p><a href="#%e5%b8%90%e5%8f%b7%e6%a0%a1%e9%aa%8c">帐号校验</a></p>
+</li>
+<li>
+<p><a href="#%e5%ad%97%e7%ac%a6%e6%a0%a1%e9%aa%8c">字符校验</a></p>
+<ul>
+<li><a href="#%e6%b1%89%e5%ad%97">汉字</a></li>
+<li><a href="#%e8%8b%b1%e6%96%87%e5%92%8c%e6%95%b0%e5%ad%97">英文和数字</a></li>
+<li><a href="#%e9%95%bf%e5%ba%a6%e4%b8%ba3-20%e7%9a%84%e6%89%80%e6%9c%89%e5%ad%97%e7%ac%a6">长度为3-20的所有字符</a></li>
+<li><a href="#%e8%8b%b1%e6%96%87%e5%ad%97%e7%ac%a6">英文字符</a>
+<ul>
+<li><a href="#%e7%94%b126%e4%b8%aa%e8%8b%b1%e6%96%87%e5%ad%97%e6%af%8d%e7%bb%84%e6%88%90%e7%9a%84%e5%ad%97%e7%ac%a6%e4%b8%b2">由26个英文字母组成的字符串</a></li>
+<li><a href="#%e7%94%b126%e4%b8%aa%e5%a4%a7%e5%86%99%e8%8b%b1%e6%96%87%e5%ad%97%e6%af%8d%e7%bb%84%e6%88%90%e7%9a%84%e5%ad%97%e7%ac%a6%e4%b8%b2">由26个大写英文字母组成的字符串</a></li>
+<li><a href="#%e7%94%b126%e4%b8%aa%e5%b0%8f%e5%86%99%e8%8b%b1%e6%96%87%e5%ad%97%e6%af%8d%e7%bb%84%e6%88%90%e7%9a%84%e5%ad%97%e7%ac%a6%e4%b8%b2">由26个小写英文字母组成的字符串</a></li>
+<li><a href="#%e7%94%b1%e6%95%b0%e5%ad%97%e5%92%8c26%e4%b8%aa%e8%8b%b1%e6%96%87%e5%ad%97%e6%af%8d%e7%bb%84%e6%88%90%e7%9a%84%e5%ad%97%e7%ac%a6%e4%b8%b2">由数字和26个英文字母组成的字符串</a></li>
+<li><a href="#%e7%94%b1%e6%95%b0%e5%ad%9726%e4%b8%aa%e8%8b%b1%e6%96%87%e5%ad%97%e6%af%8d%e6%88%96%e8%80%85%e4%b8%8b%e5%88%92%e7%ba%bf%e7%bb%84%e6%88%90%e7%9a%84%e5%ad%97%e7%ac%a6%e4%b8%b2">由数字、26个英文字母或者下划线组成的字符串</a></li>
+</ul>
+</li>
+<li><a href="#%e4%b8%ad%e6%96%87%e8%8b%b1%e6%96%87%e6%95%b0%e5%ad%97%e5%8c%85%e6%8b%ac%e4%b8%8b%e5%88%92%e7%ba%bf">中文、英文、数字包括下划线</a></li>
+<li><a href="#%e4%b8%ad%e6%96%87%e8%8b%b1%e6%96%87%e6%95%b0%e5%ad%97%e4%bd%86%e4%b8%8d%e5%8c%85%e6%8b%ac%e4%b8%8b%e5%88%92%e7%ba%bf%e7%ad%89%e7%ac%a6%e5%8f%b7">中文、英文、数字但不包括下划线等符号</a></li>
+<li><a href="#%e7%a6%81%e6%ad%a2%e8%be%93%e5%85%a5%e5%90%ab%e6%9c%89%e7%ad%89%e5%ad%97%e7%ac%a6">禁止输入特殊字符</a></li>
+<li><a href="#%e7%a6%81%e6%ad%a2%e8%be%93%e5%85%a5%e5%90%ab%e6%9c%89%e7%9a%84%e5%ad%97%e7%ac%a6">禁止输入含有~的字符</a></li>
+<li><a href="#%e6%97%a5%e6%96%87">日文</a>
+<ul>
+<li><a href="#japanese-kanji">Japanese Kanji</a></li>
+<li><a href="#hirgana">Hirgana</a></li>
+<li><a href="#katakana">Katakana</a></li>
+<li><a href="#half-width-katakana">half-width Katakana</a></li>
+<li><a href="#full-width-numbers">full-width Numbers</a></li>
+<li><a href="#full-width-letters">full-width Letters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#%e6%95%b0%e5%ad%97%e6%ad%a3%e5%88%99">数字正则</a></p>
+<ul>
+<li><a href="#%e6%95%b4%e6%95%b0">整数</a>
+<ul>
+<li><a href="#%e6%ad%a3%e6%95%b4%e6%95%b0">正整数</a></li>
+<li><a href="#%e8%b4%9f%e6%95%b4%e6%95%b0">负整数</a></li>
+<li><a href="#%e9%9d%9e%e8%b4%9f%e6%95%b4%e6%95%b0">非负整数</a></li>
+<li><a href="#%e9%9d%9e%e6%ad%a3%e6%95%b4%e6%95%b0">非正整数</a></li>
+</ul>
+</li>
+<li><a href="#%e6%b5%ae%e7%82%b9%e6%95%b0">浮点数</a>
+<ul>
+<li><a href="#%e6%ad%a3%e6%b5%ae%e7%82%b9%e6%95%b0">正浮点数</a></li>
+<li><a href="#%e8%b4%9f%e6%b5%ae%e7%82%b9%e6%95%b0">负浮点数</a></li>
+<li><a href="#%e9%9d%9e%e8%b4%9f%e6%b5%ae%e7%82%b9%e6%95%b0">非负浮点数</a></li>
+<li><a href="#%e9%9d%9e%e6%ad%a3%e6%b5%ae%e7%82%b9%e6%95%b0">非正浮点数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="前言">前言</h2>
+<p>这里的正则表达式主要来源于<a href="https://github.com/cdoco/common-regex" target="_blank">这里</a>。我在这个的基础上添加了一些平时自己用的一些正则表达式。</p>
+<h2 id="邮箱">邮箱</h2>
+<p><code>gaozihang-001@gmail.com</code> 只允许英文字母、数字、下划线、英文句号、以及中划线组成</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>a-zA-Z0-9_-<span style="color:#f92672">]</span>+@<span style="color:#f92672">[</span>a-zA-Z0-9_-<span style="color:#f92672">]</span>+<span style="color:#f92672">(</span><span style="color:#ae81ff">\.</span><span style="color:#f92672">[</span>a-zA-Z0-9_-<span style="color:#f92672">]</span>+<span style="color:#f92672">)</span>+$
+</span></span></code></pre></div><p><code>高子航001Abc@bowbee.com.cn</code> 名称允许汉字、字母、数字，域名只允许英文域名</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>A-Za-z0-9<span style="color:#ae81ff">\u</span>4e00-<span style="color:#ae81ff">\u</span>9fa5<span style="color:#f92672">]</span>+@<span style="color:#f92672">[</span>a-zA-Z0-9_-<span style="color:#f92672">]</span>+<span style="color:#f92672">(</span><span style="color:#ae81ff">\.</span><span style="color:#f92672">[</span>a-zA-Z0-9_-<span style="color:#f92672">]</span>+<span style="color:#f92672">)</span>+$
+</span></span></code></pre></div><h2 id="电话">电话</h2>
+<p><code>13012345678</code> 手机号</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^1<span style="color:#f92672">(</span>3|4|5|6|7|8|9<span style="color:#f92672">)</span><span style="color:#ae81ff">\d</span><span style="color:#f92672">{</span>9<span style="color:#f92672">}</span>$
+</span></span></code></pre></div><p><code>XXX-XXXXXXX</code> <code>XXXX-XXXXXXXX</code> 固定电话</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span><span style="color:#ae81ff">\(\d</span><span style="color:#f92672">{</span>3,4<span style="color:#f92672">}</span><span style="color:#ae81ff">\)</span>|<span style="color:#ae81ff">\d</span><span style="color:#f92672">{</span>3,4<span style="color:#f92672">}</span>-|<span style="color:#ae81ff">\s</span><span style="color:#f92672">)</span>?<span style="color:#ae81ff">\d</span><span style="color:#f92672">{</span>8<span style="color:#f92672">}</span>
+</span></span></code></pre></div><h2 id="域名">域名</h2>
+<p><code>https://google.com/</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">((</span>http:<span style="color:#ae81ff">\/\/</span><span style="color:#f92672">)</span>|<span style="color:#f92672">(</span>https:<span style="color:#ae81ff">\/\/</span><span style="color:#f92672">))</span>?<span style="color:#f92672">([</span>a-zA-Z0-9<span style="color:#f92672">]([</span>a-zA-Z0-9<span style="color:#ae81ff">\-</span><span style="color:#f92672">]{</span>0,61<span style="color:#f92672">}[</span>a-zA-Z0-9<span style="color:#f92672">])</span>?<span style="color:#ae81ff">\.</span><span style="color:#f92672">)</span>+<span style="color:#f92672">[</span>a-zA-Z<span style="color:#f92672">]{</span>2,6<span style="color:#f92672">}(</span><span style="color:#ae81ff">\/</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><h2 id="ip">IP</h2>
+<p><code>127.0.0.1</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">((</span>?:<span style="color:#f92672">(</span>?:25<span style="color:#f92672">[</span>0-5<span style="color:#f92672">]</span>|2<span style="color:#f92672">[</span>0-4<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>|<span style="color:#f92672">[</span>01<span style="color:#f92672">]</span>?<span style="color:#ae81ff">\d</span>?<span style="color:#ae81ff">\d</span><span style="color:#f92672">)</span><span style="color:#ae81ff">\.</span><span style="color:#f92672">){</span>3<span style="color:#f92672">}(</span>?:25<span style="color:#f92672">[</span>0-5<span style="color:#f92672">]</span>|2<span style="color:#f92672">[</span>0-4<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>|<span style="color:#f92672">[</span>01<span style="color:#f92672">]</span>?<span style="color:#ae81ff">\d</span>?<span style="color:#ae81ff">\d</span><span style="color:#f92672">))</span>
+</span></span></code></pre></div><h2 id="帐号校验">帐号校验</h2>
+<p><code>gaozihang_001</code> 字母开头，允许5-16字节，允许字母数字下划线</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>a-zA-Z<span style="color:#f92672">][</span>a-zA-Z0-9_<span style="color:#f92672">]{</span>4,15<span style="color:#f92672">}</span>$
+</span></span></code></pre></div><h2 id="字符校验">字符校验</h2>
+<h3 id="汉字">汉字</h3>
+<p><code>高子航</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span><span style="color:#ae81ff">\u</span>4e00-<span style="color:#ae81ff">\u</span>9fa5<span style="color:#f92672">]{</span>0,<span style="color:#f92672">}</span>$
+</span></span></code></pre></div><h3 id="英文和数字">英文和数字</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>A-Za-z0-9<span style="color:#f92672">]</span>+$
+</span></span></code></pre></div><h3 id="长度为3-20的所有字符">长度为3-20的所有字符</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^.<span style="color:#f92672">{</span>3,20<span style="color:#f92672">}</span>$
+</span></span></code></pre></div><h3 id="英文字符">英文字符</h3>
+<h4 id="由26个英文字母组成的字符串">由26个英文字母组成的字符串</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>A-Za-z<span style="color:#f92672">]</span>+$
+</span></span></code></pre></div><h4 id="由26个大写英文字母组成的字符串">由26个大写英文字母组成的字符串</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>A-Z<span style="color:#f92672">]</span>+$
+</span></span></code></pre></div><h4 id="由26个小写英文字母组成的字符串">由26个小写英文字母组成的字符串</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>a-z<span style="color:#f92672">]</span>+$
+</span></span></code></pre></div><h4 id="由数字和26个英文字母组成的字符串">由数字和26个英文字母组成的字符串</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>A-Za-z0-9<span style="color:#f92672">]</span>+$
+</span></span></code></pre></div><h4 id="由数字26个英文字母或者下划线组成的字符串">由数字、26个英文字母或者下划线组成的字符串</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#ae81ff">\w</span>+$
+</span></span></code></pre></div><h3 id="中文英文数字包括下划线">中文、英文、数字包括下划线</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span><span style="color:#ae81ff">\u</span>4E00-<span style="color:#ae81ff">\u</span>9FA5A-Za-z0-9_<span style="color:#f92672">]</span>+$
+</span></span></code></pre></div><h3 id="中文英文数字但不包括下划线等符号">中文、英文、数字但不包括下划线等符号</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span><span style="color:#ae81ff">\u</span>4E00-<span style="color:#ae81ff">\u</span>9FA5A-Za-z0-9<span style="color:#f92672">]</span>+$
+</span></span></code></pre></div><h3 id="禁止输入含有等字符">禁止输入含有%&amp;&rsquo;,;=?$&quot;等字符</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>^%&amp;<span style="color:#960050;background-color:#1e0010">&#39;</span>,;<span style="color:#f92672">=</span>?$<span style="color:#ae81ff">\x</span>22<span style="color:#f92672">]</span>+
+</span></span></code></pre></div><h3 id="禁止输入含有的字符">禁止输入含有~的字符</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>^~<span style="color:#ae81ff">\x</span>22<span style="color:#f92672">]</span>+
+</span></span></code></pre></div><h2 id="数字正则">数字正则</h2>
+<h3 id="整数">整数</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^-?<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*$
+</span></span></code></pre></div><h4 id="正整数">正整数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*$
+</span></span></code></pre></div><h4 id="负整数">负整数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^-<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*$
+</span></span></code></pre></div><h4 id="非负整数">非负整数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*|0$
+</span></span></code></pre></div><h4 id="非正整数">非正整数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^-<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*|0$
+</span></span></code></pre></div><h3 id="浮点数">浮点数</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^-?<span style="color:#f92672">([</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*<span style="color:#ae81ff">\.\d</span>*|0<span style="color:#ae81ff">\.\d</span>*<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*|0?<span style="color:#ae81ff">\.</span>0+|0<span style="color:#f92672">)</span>$
+</span></span></code></pre></div><h4 id="正浮点数">正浮点数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*<span style="color:#ae81ff">\.\d</span>*|0<span style="color:#ae81ff">\.\d</span>*<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*$
+</span></span></code></pre></div><h4 id="负浮点数">负浮点数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^-<span style="color:#f92672">([</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*<span style="color:#ae81ff">\.\d</span>*|0<span style="color:#ae81ff">\.\d</span>*<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*<span style="color:#f92672">)</span>$
+</span></span></code></pre></div><h4 id="非负浮点数">非负浮点数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*<span style="color:#ae81ff">\.\d</span>*|0<span style="color:#ae81ff">\.\d</span>*<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*|0?<span style="color:#ae81ff">\.</span>0+|0$
+</span></span></code></pre></div><h4 id="非正浮点数">非正浮点数</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">(</span>-<span style="color:#f92672">([</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*<span style="color:#ae81ff">\.\d</span>*|0<span style="color:#ae81ff">\.\d</span>*<span style="color:#f92672">[</span>1-9<span style="color:#f92672">]</span><span style="color:#ae81ff">\d</span>*<span style="color:#f92672">))</span>|0?<span style="color:#ae81ff">\.</span>0+|0$
+</span></span></code></pre></div><h2 id="日文">日文</h2>
+<h3 id="japanese-kanji">Japanese Kanji</h3>
+<p>Regex for matching ALL Japanese common &amp; uncommon Kanji (4e00 – 9fcf) ~ The Big Kahuna!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>一-龯<span style="color:#f92672">]</span>*$
+</span></span></code></pre></div><h3 id="hirgana">Hirgana</h3>
+<p>Regex for matching Hirgana</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span><span style="color:#ae81ff">\u</span>3041-<span style="color:#ae81ff">\u</span>0x309E<span style="color:#f92672">]</span>*$
+</span></span><span style="display:flex;"><span>or
+</span></span><span style="display:flex;"><span>^<span style="color:#f92672">[</span>ぁ-ゞ<span style="color:#f92672">]</span>*$
+</span></span></code></pre></div><h3 id="katakana">Katakana</h3>
+<p>Regex for matching Katakana</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span><span style="color:#ae81ff">\u</span>30A1-<span style="color:#ae81ff">\u</span>30FE<span style="color:#f92672">]</span>*$
+</span></span><span style="display:flex;"><span>or
+</span></span><span style="display:flex;"><span>^<span style="color:#f92672">[</span>ァ-ヾ<span style="color:#f92672">]</span>*$
+</span></span></code></pre></div><h3 id="half-width-katakana">half-width Katakana</h3>
+<p>Regex for matching half-width Katakana</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span><span style="color:#ae81ff">\u</span>FF65-<span style="color:#ae81ff">\u</span>FF9F<span style="color:#f92672">]</span>*$
+</span></span><span style="display:flex;"><span>or
+</span></span><span style="display:flex;"><span>^<span style="color:#f92672">[</span>･-ﾟ<span style="color:#f92672">]</span>*$
+</span></span></code></pre></div><h3 id="full-width-numbers">full-width Numbers</h3>
+<p>Regex for matching full-width Numbers (zenkaku 全角)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>０-９<span style="color:#f92672">]</span>*$
+</span></span></code></pre></div><h3 id="full-width-letters">full-width Letters</h3>
+<p>Regex for matching full-width Letters (zenkaku 全角)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>^<span style="color:#f92672">[</span>Ａ-ｚ<span style="color:#f92672">]</span>*$
+</span></span></code></pre></div><p><strong><a href="#%e7%9b%ae%e5%bd%95">⬆ top</a></strong></p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/regex/"> regex </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

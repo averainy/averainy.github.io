@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>script on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/script/</link>
+		<description>Recent content in script on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Sun, 09 Oct 2022 11:02:42 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/script/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>自动删除空文件以及空文件夹</title>
+			<link>http://www.averainy.com/post/remove-empty-direcotry-and-file/</link>
+			<pubDate>Sun, 09 Oct 2022 11:02:42 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/remove-empty-direcotry-and-file/</guid>
+			<description>
+			
+				背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。
+代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

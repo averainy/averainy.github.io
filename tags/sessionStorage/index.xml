@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>sessionStorage on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/sessionStorage/</link>
+		<description>Recent content in sessionStorage on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Wed, 07 Jun 2023 22:56:39 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/sessionStorage/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>sessionStorage用法</title>
+			<link>http://www.averainy.com/post/sessionStorage-usage/</link>
+			<pubDate>Wed, 07 Jun 2023 22:56:39 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/sessionStorage-usage/</guid>
+			<description>
+			
+				sessionStorage存储的数据会在会话结束（如关闭标签页或者浏览器时）的时候清除掉。每新开一个新的标签页就会有新的sessionStorage。各个sessionStorage之间无法互相访问。
+sessionStorage语法 // 保存到sessionStorage …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

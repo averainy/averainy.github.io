@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>python on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/python/</link>
+		<description>Recent content in python on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 16 Oct 2023 16:48:39 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Get Windows Installed Software by Winreg</title>
+			<link>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</link>
+			<pubDate>Mon, 16 Oct 2023 16:48:39 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</guid>
+			<description>
+			
+				def getInstalledProgramsFromRegistry(): registry_key =r"Software\Microsoft\Windows\CurrentVersion\Uninstall" registry_key_64bit = …
+			
+			</description>
+		</item>
+		<item>
+			<title>用python实现自动重启tplink路由器</title>
+			<link>http://www.averainy.com/post/auto-reboot-tplink-router/</link>
+			<pubDate>Tue, 06 Dec 2022 11:29:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/auto-reboot-tplink-router/</guid>
+			<description>
+			
+				原因 自从我的iPhone升级到iOS16之后，总是连不上家里的5G WiFi。开始确实是因为iOS16的bug造成的，升级到最新iOS版本之后稳定了几天，但是之后就又出现了连不上的情况，不过我老婆的手机和iPad倒是挺正常的。最后祭出重启路由大招，完美解决问题。于是想着做个定时 …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用python监控systemd服务修改版</title>
+			<link>http://www.averainy.com/post/monitor-systemd-services-with-python-2022/</link>
+			<pubDate>Tue, 08 Nov 2022 09:40:18 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/monitor-systemd-services-with-python-2022/</guid>
+			<description>
+			
+				以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下：
+# -*- …
+			
+			</description>
+		</item>
+		<item>
+			<title>自动删除空文件以及空文件夹</title>
+			<link>http://www.averainy.com/post/remove-empty-direcotry-and-file/</link>
+			<pubDate>Sun, 09 Oct 2022 11:02:42 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/remove-empty-direcotry-and-file/</guid>
+			<description>
+			
+				背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。
+代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import …
+			
+			</description>
+		</item>
+		<item>
+			<title>Backup Kvm Vms With Python Libvirt</title>
+			<link>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</link>
+			<pubDate>Tue, 14 Jun 2022 15:25:35 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</guid>
+			<description>
+			
+				we changed the vm platform from esxi to kvm a few months ago,so we need to writ e some scripts to backup vms automatically. we only have a …
+			
+			</description>
+		</item>
+		<item>
+			<title>Auto Select Fastest Proxy in Clash With Python</title>
+			<link>http://www.averainy.com/post/auto-select-fastest-proxy-in-clash-with-python/</link>
+			<pubDate>Sat, 23 Apr 2022 09:43:35 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/auto-select-fastest-proxy-in-clash-with-python/</guid>
+			<description>
+			
+				起因 为了能够方便家里的电脑，电视盒子以及手机能够方便的使用代理，因此在我的群晖上用docker部署了clash。同时为了能够自动选择响应速度最快的代理，因此，用python写了这个脚本。 将这个脚本加入到定时任务即可实现自动切换最快代理。
+代码 # coding=utf-8 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Monitor Systemd Services With Python</title>
+			<link>http://www.averainy.com/post/monitor-systemd-services-with-python/</link>
+			<pubDate>Sat, 02 Apr 2022 09:00:25 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/monitor-systemd-services-with-python/</guid>
+			<description>
+			
+				systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。
+代码如下
+# -*- coding: utf-8 …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用python删除重复文件</title>
+			<link>http://www.averainy.com/post/use_python_to_delete_duplicate_files/</link>
+			<pubDate>Sun, 27 Feb 2022 18:24:51 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use_python_to_delete_duplicate_files/</guid>
+			<description>
+			
+				原因 群晖系统更新到 dsm7 之后，图片管理给切换到了 synology photos。结果就出现了没办法同步备份的问题，想解决问题只能将图片上传到共享空间，个人空间没办法自动同步备份。 为了解决这个问题，只好讲已有的文件挪到共享空间。同时又重新将 iCloud 上的图片同步了 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

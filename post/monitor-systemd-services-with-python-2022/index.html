@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="使用python监控systemd服务修改版">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="python,linux,systemd"><meta name="description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下：
+# -*- …"><meta property="og:title" content="使用python监控systemd服务修改版" />
+<meta property="og:description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下： # -*- coding: utf-8 -*- import logging import subprocess from subprocess import check_output,run logger = logging.getLogger() logger.setLevel(logging.DEBUG) # 设置全局日志level，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/monitor-systemd-services-with-python-2022/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-08T09:40:18+08:00" />
+<meta property="article:modified_time" content="2022-11-08T09:40:18+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用python监控systemd服务修改版"/>
+<meta name="twitter:description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下： # -*- coding: utf-8 -*- import logging import subprocess from subprocess import check_output,run logger = logging.getLogger() logger.setLevel(logging.DEBUG) # 设置全局日志level，"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>使用python监控systemd服务修改版 | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">08</span>
+				<span class="rest">Nov 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">使用python监控systemd服务修改版</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>以前写过一个<a href="/post/monitor-systemd-services-with-python/">监控systemd service的脚本</a>，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。
+代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># -*- coding: utf-8 -*-</span>
+</span></span><span style="display:flex;"><span>import logging
+</span></span><span style="display:flex;"><span>import subprocess
+</span></span><span style="display:flex;"><span>from subprocess import check_output,run
+</span></span><span style="display:flex;"><span>logger <span style="color:#f92672">=</span> logging.getLogger<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>logger.setLevel<span style="color:#f92672">(</span>logging.DEBUG<span style="color:#f92672">)</span>  <span style="color:#75715e"># 设置全局日志level，不设置默认WARN</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># save log to file</span>
+</span></span><span style="display:flex;"><span>file_handler <span style="color:#f92672">=</span> logging.FileHandler<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/tmp/test.log&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>file_handler.setLevel<span style="color:#f92672">(</span>logging.INFO<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>formatter <span style="color:#f92672">=</span> logging.Formatter<span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;%(asctime)s: %(levelname)s: &#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;[%(filename)s: %(lineno)d]: %(message)s&#39;</span>,
+</span></span><span style="display:flex;"><span>        datefmt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%Y-%m-%d %H:%M:%S&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>file_handler.setFormatter<span style="color:#f92672">(</span>formatter<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># print to screen</span>
+</span></span><span style="display:flex;"><span>stream_handler <span style="color:#f92672">=</span> logging.StreamHandler<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>stream_handler.setLevel<span style="color:#f92672">(</span>logging.DEBUG<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># add handlers to logger</span>
+</span></span><span style="display:flex;"><span>logger.addHandler<span style="color:#f92672">(</span>file_handler<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>logger.addHandler<span style="color:#f92672">(</span>stream_handler<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def is_active<span style="color:#f92672">(</span>service<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; 返回服务的主进程 PID &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;systemctl is-active %s&#39;</span> % service
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#output = check_output(cmd, shell=1).decode(&#39;utf8&#39;)</span>
+</span></span><span style="display:flex;"><span>    output <span style="color:#f92672">=</span> subprocess.getoutput<span style="color:#f92672">(</span>cmd<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> output.strip<span style="color:#f92672">()</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;active&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> True
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> False
+</span></span><span style="display:flex;"><span>def check_service<span style="color:#f92672">(</span>service<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_active<span style="color:#f92672">(</span>service<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        logger.debug<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{0} is active&#34;</span>.format<span style="color:#f92672">(</span>service<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    cmd <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;systemctl&#34;</span>,<span style="color:#e6db74">&#34;start&#34;</span>,service<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    ret <span style="color:#f92672">=</span> subprocess.run<span style="color:#f92672">(</span>cmd<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ret.returncode <span style="color:#f92672">==</span> 0:
+</span></span><span style="display:flex;"><span>        logger.debug<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;success:&#34;</span>,ret<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        logger.debug<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;error:&#34;</span>,ret<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    check_service<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;wg-quick@wg0&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>本文完。</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/python/"> python </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/systemd/"> systemd </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

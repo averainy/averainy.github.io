@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>uuid on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/uuid/</link>
+		<description>Recent content in uuid on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 22 Aug 2022 10:30:47 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/uuid/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Mount Partitions Useing Uuid on Linux</title>
+			<link>http://www.averainy.com/post/mount-partitions-useing-uuid-on-linux/</link>
+			<pubDate>Mon, 22 Aug 2022 10:30:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/mount-partitions-useing-uuid-on-linux/</guid>
+			<description>
+			
+				今天真是撞大运，碰巧碰上了Rehhat 9系统里的/dev/sdx的名字每次重启系统后都跟着变。虽然听说过硬盘的名字可能会改变，但一直没见过。这次算是真开眼了。
+为了解决这个问题，只好修改/etc/fstab里的配置，将硬盘名换成了硬盘名对应的uuid。据说这样就能够保证挂载的硬 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

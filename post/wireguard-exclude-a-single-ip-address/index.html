@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Wireguard客户端AllowedIPs 配置排除一个ip或者一个ip段">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="wireguard"><meta name="description" content="Wireguard客户端的配置中只有一个AllowedIPs配置来定义哪些ip或者ip段可以允许通过Wireguard客户端路由，因此如果想排除某个ip或者ip段，就需要将这些ip排除掉。
+由于ip段太多，如果手动写会非常麻烦，幸好python有一个库可以帮我们解决这个问题,代码 …"><meta property="og:title" content="Wireguard客户端AllowedIPs 配置排除一个ip或者一个ip段" />
+<meta property="og:description" content="Wireguard客户端的配置中只有一个AllowedIPs配置来定义哪些ip或者ip段可以允许通过Wireguard客户端路由，因此如果想排除某个ip或者ip段，就需要将这些ip排除掉。 由于ip段太多，如果手动写会非常麻烦，幸好python有一个库可以帮我们解决这个问题,代码如" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/wireguard-exclude-a-single-ip-address/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-08-17T09:32:26+08:00" />
+<meta property="article:modified_time" content="2022-08-17T09:32:26+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Wireguard客户端AllowedIPs 配置排除一个ip或者一个ip段"/>
+<meta name="twitter:description" content="Wireguard客户端的配置中只有一个AllowedIPs配置来定义哪些ip或者ip段可以允许通过Wireguard客户端路由，因此如果想排除某个ip或者ip段，就需要将这些ip排除掉。 由于ip段太多，如果手动写会非常麻烦，幸好python有一个库可以帮我们解决这个问题,代码如"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>Wireguard客户端AllowedIPs 配置排除一个ip或者一个ip段 | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">17</span>
+				<span class="rest">Aug 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Wireguard客户端AllowedIPs 配置排除一个ip或者一个ip段</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>Wireguard客户端的配置中只有一个AllowedIPs配置来定义哪些ip或者ip段可以允许通过Wireguard客户端路由，因此如果想排除某个ip或者ip段，就需要将这些ip排除掉。<br>
+由于ip段太多，如果手动写会非常麻烦，幸好python有一个库可以帮我们解决这个问题,代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> ipaddress <span style="color:#f92672">import</span> ip_network
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>start <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0.0.0.0/0&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#需要排除的ip或者ip段</span>
+</span></span><span style="display:flex;"><span>exclude <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;192.168.1.0/24&#39;</span>, <span style="color:#e6db74">&#39;192.168.2.0/24&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> [ip_network(start)]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> exclude:
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> ip_network(x)
+</span></span><span style="display:flex;"><span>    new <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> result:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> y<span style="color:#f92672">.</span>overlaps(n):
+</span></span><span style="display:flex;"><span>            new<span style="color:#f92672">.</span>extend(y<span style="color:#f92672">.</span>address_exclude(n))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            new<span style="color:#f92672">.</span>append(y)
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> new
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;,&#39;</span><span style="color:#f92672">.</span>join(str(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> sorted(result)))
+</span></span></code></pre></div><p>将输出的结果粘贴在wireguard配置AllowedIPs =后面即可。</p>
+<p>over</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/wireguard/"> wireguard </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

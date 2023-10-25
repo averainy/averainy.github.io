@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39;">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="linux,nginx,dns,systemd"><meta name="description" content="我用nginx配置了一个反向代理，每次服务器重启之后，nginx都会报：nginx: [emerg] host not found in upstream &#39;xxx.com&#39;的错误。这个错误的原因其实很简单，就是nginx无法解析xxx.com。解决方法就是以下流程：
+确 …"><meta property="og:title" content="解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39;" />
+<meta property="og:description" content="我用nginx配置了一个反向代理，每次服务器重启之后，nginx都会报：nginx: [emerg] host not found in upstream &#39;xxx.com&#39;的错误。这个错误的原因其实很简单，就是nginx无法解析xxx.com。解决方法就是以下流程： 确认xxx.com是否能够被本地的dns解析。 如果不能解析就在/etc/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/nginx-emerg-host-not-found-in-upstream/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-09-02T11:17:40+08:00" />
+<meta property="article:modified_time" content="2022-09-02T11:17:40+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39;"/>
+<meta name="twitter:description" content="我用nginx配置了一个反向代理，每次服务器重启之后，nginx都会报：nginx: [emerg] host not found in upstream &#39;xxx.com&#39;的错误。这个错误的原因其实很简单，就是nginx无法解析xxx.com。解决方法就是以下流程： 确认xxx.com是否能够被本地的dns解析。 如果不能解析就在/etc/"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39; | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">02</span>
+				<span class="rest">Sep 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39;</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>我用nginx配置了一个反向代理，每次服务器重启之后，nginx都会报：<code>nginx: [emerg] host not found in upstream 'xxx.com'</code>的错误。这个错误的原因其实很简单，就是nginx无法解析<code>xxx.com</code>。解决方法就是以下流程：</p>
+<ol>
+<li>确认<code>xxx.com</code>是否能够被本地的dns解析。</li>
+<li>如果不能解析就在<code>/etc/hosts</code>文件中添加相应的自定义解析</li>
+<li>如果能解析，那就是我碰到的这种情况。问题出在nginx启动时可能dns服务器没启动，或者没有正常解析。我的解决方法是修改nginx.service配置，修改如下：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Description<span style="color:#f92672">=</span>The nginx HTTP and reverse proxy server
+</span></span><span style="display:flex;"><span>After<span style="color:#f92672">=</span>network-online.target remote-fs.target nss-lookup.target
+</span></span><span style="display:flex;"><span>Wants<span style="color:#f92672">=</span>network-online.target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Type<span style="color:#f92672">=</span>forking
+</span></span><span style="display:flex;"><span>PIDFile<span style="color:#f92672">=</span>/run/nginx.pid
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Nginx will fail to start if /run/nginx.pid already exists but has the wrong</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># SELinux context. This might happen when running `nginx -t` from the cmdline.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># https://bugzilla.redhat.com/show_bug.cgi?id=1268621</span>
+</span></span><span style="display:flex;"><span>ExecStartPre<span style="color:#f92672">=</span>/usr/bin/rm -f /run/nginx.pid
+</span></span><span style="display:flex;"><span>ExecStartPre<span style="color:#f92672">=</span>/usr/sbin/nginx -t
+</span></span><span style="display:flex;"><span>ExecStart<span style="color:#f92672">=</span>/usr/sbin/nginx
+</span></span><span style="display:flex;"><span>ExecReload<span style="color:#f92672">=</span>/usr/sbin/nginx -s reload
+</span></span><span style="display:flex;"><span>KillSignal<span style="color:#f92672">=</span>SIGQUIT
+</span></span><span style="display:flex;"><span>TimeoutStopSec<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>KillMode<span style="color:#f92672">=</span>mixed
+</span></span><span style="display:flex;"><span>PrivateTmp<span style="color:#f92672">=</span>true
+</span></span><span style="display:flex;"><span>Restart<span style="color:#f92672">=</span>on-failure
+</span></span><span style="display:flex;"><span>RestartSec<span style="color:#f92672">=</span>42s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>WantedBy<span style="color:#f92672">=</span>multi-user.target
+</span></span></code></pre></div><p>增加了<code>Restart=on-failure</code>和<code>RestartSec=42s</code>。目的是在启动失败时，等待42秒之后再次重启。
+修改完记得执行<code>systemctl daemon-reload</code>。</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/dns/"> dns </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/nginx/"> nginx </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/systemd/"> systemd </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

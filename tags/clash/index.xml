@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>clash on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/clash/</link>
+		<description>Recent content in clash on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Sat, 23 Apr 2022 09:43:35 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/clash/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Auto Select Fastest Proxy in Clash With Python</title>
+			<link>http://www.averainy.com/post/auto-select-fastest-proxy-in-clash-with-python/</link>
+			<pubDate>Sat, 23 Apr 2022 09:43:35 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/auto-select-fastest-proxy-in-clash-with-python/</guid>
+			<description>
+			
+				起因 为了能够方便家里的电脑，电视盒子以及手机能够方便的使用代理，因此在我的群晖上用docker部署了clash。同时为了能够自动选择响应速度最快的代理，因此，用python写了这个脚本。 将这个脚本加入到定时任务即可实现自动切换最快代理。
+代码 # coding=utf-8 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

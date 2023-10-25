@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>新冠肺炎 on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/%E6%96%B0%E5%86%A0%E8%82%BA%E7%82%8E/</link>
+		<description>Recent content in 新冠肺炎 on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Sat, 17 Dec 2022 02:15:56 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/%E6%96%B0%E5%86%A0%E8%82%BA%E7%82%8E/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>新冠肺炎三年</title>
+			<link>http://www.averainy.com/post/three-years-of-covid19/</link>
+			<pubDate>Sat, 17 Dec 2022 02:15:56 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/three-years-of-covid19/</guid>
+			<description>
+			
+				从新冠病毒在武汉爆发，到中国政府宣布放开整整过去了三年多。
+在这三年多里，躲过了入户消杀，躲过了强制隔离，躲过了封死消防通道。唯一没躲过的就是天天核酸。但是跟前面那些一比做核酸啥都不是。
+在这三年多里，见识了汉语的博大精深，封城先是叫封城，后来叫静默，再后来叫静态管理。还有啥时空 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

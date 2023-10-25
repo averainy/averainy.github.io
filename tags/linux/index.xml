@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>linux on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/linux/</link>
+		<description>Recent content in linux on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 23 Oct 2023 17:20:33 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>How to Switch Boot Target to Text or GUI in Systemd Linux</title>
+			<link>http://www.averainy.com/post/how-to-switch-boot-target-to-text-or-GUI-in-systemd-linux/</link>
+			<pubDate>Mon, 23 Oct 2023 17:20:33 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-switch-boot-target-to-text-or-GUI-in-systemd-linux/</guid>
+			<description>
+			
+				Find wich target uni is used by default sudo systemctl get-default Switching boot target to text To change boot target to the text mode: …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用python监控systemd服务修改版</title>
+			<link>http://www.averainy.com/post/monitor-systemd-services-with-python-2022/</link>
+			<pubDate>Tue, 08 Nov 2022 09:40:18 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/monitor-systemd-services-with-python-2022/</guid>
+			<description>
+			
+				以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下：
+# -*- …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用firewalld将端口流量转发到另一台服务器</title>
+			<link>http://www.averainy.com/post/firewalld-port-forwarding/</link>
+			<pubDate>Fri, 02 Sep 2022 16:38:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/firewalld-port-forwarding/</guid>
+			<description>
+			
+				目前国内处于新冠动态清零阶段，隔三岔五就会有地方被封控。因此有时候会有在家远程工作的需求。为了能够远程访问公司网络，我们采用了搭建wireguard vpn的解决方案。这样的话，每个人都需要在家里和公司的电脑上安装wireguard客户端，这样虽然也没什么问题。但是操作起来特别麻 …
+			
+			</description>
+		</item>
+		<item>
+			<title>解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39;</title>
+			<link>http://www.averainy.com/post/nginx-emerg-host-not-found-in-upstream/</link>
+			<pubDate>Fri, 02 Sep 2022 11:17:40 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/nginx-emerg-host-not-found-in-upstream/</guid>
+			<description>
+			
+				我用nginx配置了一个反向代理，每次服务器重启之后，nginx都会报：nginx: [emerg] host not found in upstream 'xxx.com'的错误。这个错误的原因其实很简单，就是nginx无法解析xxx.com。解决方法就是以下流程：
+确 …
+			
+			</description>
+		</item>
+		<item>
+			<title>每月的第一个周六运行一个cron job</title>
+			<link>http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/</link>
+			<pubDate>Fri, 02 Sep 2022 10:24:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/</guid>
+			<description>
+			
+				我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是
+0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行， …
+			
+			</description>
+		</item>
+		<item>
+			<title>Mount Partitions Useing Uuid on Linux</title>
+			<link>http://www.averainy.com/post/mount-partitions-useing-uuid-on-linux/</link>
+			<pubDate>Mon, 22 Aug 2022 10:30:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/mount-partitions-useing-uuid-on-linux/</guid>
+			<description>
+			
+				今天真是撞大运，碰巧碰上了Rehhat 9系统里的/dev/sdx的名字每次重启系统后都跟着变。虽然听说过硬盘的名字可能会改变，但一直没见过。这次算是真开眼了。
+为了解决这个问题，只好修改/etc/fstab里的配置，将硬盘名换成了硬盘名对应的uuid。据说这样就能够保证挂载的硬 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Forwarding Ports With Firewalld</title>
+			<link>http://www.averainy.com/post/forwarding-ports-with-firewalld/</link>
+			<pubDate>Tue, 19 Jul 2022 10:57:31 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/forwarding-ports-with-firewalld/</guid>
+			<description>
+			
+				1.Enable IPv4 masquerade.
+firewall-cmd --add-masquerade --permanent 2.add firewalld rule.
+firewall-cmd …
+			
+			</description>
+		</item>
+		<item>
+			<title>Use Chrony Test Ntp Server</title>
+			<link>http://www.averainy.com/post/use-chrony-test-ntp-server/</link>
+			<pubDate>Fri, 08 Jul 2022 14:57:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-chrony-test-ntp-server/</guid>
+			<description>
+			
+				when we have setuped a ntp service ,we need to test the ntp service if it work well.
+we can use the following command to test the NTP …
+			
+			</description>
+		</item>
+		<item>
+			<title>Create Kms Service in Linux</title>
+			<link>http://www.averainy.com/post/create-kms-service-in-linux/</link>
+			<pubDate>Thu, 05 May 2022 10:15:03 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-kms-service-in-linux/</guid>
+			<description>
+			
+				I create a kms service for the lan computers in a linux server recently,so record the steps
+download kms source and compile it cd …
+			
+			</description>
+		</item>
+		<item>
+			<title>Monitor Systemd Services With Python</title>
+			<link>http://www.averainy.com/post/monitor-systemd-services-with-python/</link>
+			<pubDate>Sat, 02 Apr 2022 09:00:25 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/monitor-systemd-services-with-python/</guid>
+			<description>
+			
+				systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。
+代码如下
+# -*- coding: utf-8 …
+			
+			</description>
+		</item>
+		<item>
+			<title>在LInux上使用ncftp上传整个目录到ftp服务器</title>
+			<link>http://www.averainy.com/post/linux-upload-the-files-and-directory-tree-to-remote-ftp-server/</link>
+			<pubDate>Fri, 11 Jun 2021 16:10:25 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/linux-upload-the-files-and-directory-tree-to-remote-ftp-server/</guid>
+			<description>
+			
+				一般有图形界面得环境下，我们都是通过有GUI的ftp客户端如winscp之类的上传文件夹。但是如果是在命令行模式下应该用哪个呢？
+今天给大家推荐一个非常好用的命令ncftp。
+安装ncftp客户端 ubuntu/debian系：
+sudo apt-get install …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

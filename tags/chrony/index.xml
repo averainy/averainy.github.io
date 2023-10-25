@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>chrony on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/chrony/</link>
+		<description>Recent content in chrony on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 08 Jul 2022 14:57:43 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/chrony/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Use Chrony Test Ntp Server</title>
+			<link>http://www.averainy.com/post/use-chrony-test-ntp-server/</link>
+			<pubDate>Fri, 08 Jul 2022 14:57:43 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-chrony-test-ntp-server/</guid>
+			<description>
+			
+				when we have setuped a ntp service ,we need to test the ntp service if it work well.
+we can use the following command to test the NTP …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

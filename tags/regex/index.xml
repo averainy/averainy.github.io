@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>regex on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/regex/</link>
+		<description>Recent content in regex on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 28 Aug 2023 14:38:40 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/regex/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>常用正则表达式一览</title>
+			<link>http://www.averainy.com/post/common-regular-expression/</link>
+			<pubDate>Mon, 28 Aug 2023 14:38:40 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/common-regular-expression/</guid>
+			<description>
+			
+				目录 前言
+邮箱
+电话
+域名
+IP
+帐号校验
+字符校验
+汉字 英文和数字 长度为3-20的所有字符 英文字符 由26个英文字母组成的字符串 由26个大写英文字母组成的字符串 由26个小写英文字母组成的字符串 由数字和26个英文字母组成的字符串 由数字、26个英文字母或者下划线组成 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

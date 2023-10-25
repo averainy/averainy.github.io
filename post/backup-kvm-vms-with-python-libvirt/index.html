@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Backup Kvm Vms With Python Libvirt">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="python,kvm,libvirt"><meta name="description" content="we changed the vm platform from esxi to kvm a few months ago,so we need to writ e some scripts to backup vms automatically. we only have a …"><meta property="og:title" content="Backup Kvm Vms With Python Libvirt" />
+<meta property="og:description" content="we changed the vm platform from esxi to kvm a few months ago,so we need to writ e some scripts to backup vms automatically. we only have a few vms,so we just need a simple script that can do the following operation: shutdown vm backup configure xml and images start vm send email when backup completely so we write the following script to do that: #!/usr/bin/env python3 import sys import os import time import shutil import libvirt from xml.dom import minidom import logging logging.basicConfig( level=logging.INFO, encoding=&#39;utf-8&#39;, format=&#34;%(asctime)s [%(levelname)s] %(message)s&#34;, handlers=[ logging.FileHandler(&#34;~/backup_vm.log&#34;), logging.StreamHandler(sys.stdout) ] ) root_backup_dir=&#39;~/mnt&#39; backup_list = [&#39;vm_1&#39;,&#39;vm_2&#39;,&#39;vm_3&#39;] max_retry_count=20 def backup_vm(dom,domName): logging.info(&#34;backup vm:{0} start&#34;.format(domName)) back_path = os.path.join(root_backup_dir,domName&#43;time.strftime(&#34;_%Y%m%d&#34;, time.localtime())) if not os.path.exists(back_path): os.mkdir(back_path) #backup xml raw_xml = dom.XMLDesc(0) with open(os.path.join(back_path,domName&#43;&#39;.xml&#39;),&#39;w&#43;&#39;) as fp: fp.write(raw_xml) # backup vm disk xml = minidom.parseString(raw_xml) diskTypes = xml.getElementsByTagName(&#39;disk&#39;) for diskType in diskTypes: if diskType.getAttribute(&#39;device&#39;) != &#39;disk&#39;:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-14T15:25:35+08:00" />
+<meta property="article:modified_time" content="2022-06-14T15:25:35+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Backup Kvm Vms With Python Libvirt"/>
+<meta name="twitter:description" content="we changed the vm platform from esxi to kvm a few months ago,so we need to writ e some scripts to backup vms automatically. we only have a few vms,so we just need a simple script that can do the following operation: shutdown vm backup configure xml and images start vm send email when backup completely so we write the following script to do that: #!/usr/bin/env python3 import sys import os import time import shutil import libvirt from xml.dom import minidom import logging logging.basicConfig( level=logging.INFO, encoding=&#39;utf-8&#39;, format=&#34;%(asctime)s [%(levelname)s] %(message)s&#34;, handlers=[ logging.FileHandler(&#34;~/backup_vm.log&#34;), logging.StreamHandler(sys.stdout) ] ) root_backup_dir=&#39;~/mnt&#39; backup_list = [&#39;vm_1&#39;,&#39;vm_2&#39;,&#39;vm_3&#39;] max_retry_count=20 def backup_vm(dom,domName): logging.info(&#34;backup vm:{0} start&#34;.format(domName)) back_path = os.path.join(root_backup_dir,domName&#43;time.strftime(&#34;_%Y%m%d&#34;, time.localtime())) if not os.path.exists(back_path): os.mkdir(back_path) #backup xml raw_xml = dom.XMLDesc(0) with open(os.path.join(back_path,domName&#43;&#39;.xml&#39;),&#39;w&#43;&#39;) as fp: fp.write(raw_xml) # backup vm disk xml = minidom.parseString(raw_xml) diskTypes = xml.getElementsByTagName(&#39;disk&#39;) for diskType in diskTypes: if diskType.getAttribute(&#39;device&#39;) != &#39;disk&#39;:"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>Backup Kvm Vms With Python Libvirt | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">14</span>
+				<span class="rest">Jun 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Backup Kvm Vms With Python Libvirt</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>we changed the vm platform  from esxi to kvm a few months ago,so we need to writ
+e some scripts to  backup vms automatically. <br>
+we only have a few vms,so we just need a simple script that can do the following operation:</p>
+<ol>
+<li>shutdown vm</li>
+<li>backup configure xml and images</li>
+<li>start vm</li>
+<li>send email when backup completely<br>
+so we write the following script to do that:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> libvirt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> xml.dom <span style="color:#f92672">import</span> minidom
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> logging
+</span></span><span style="display:flex;"><span>logging<span style="color:#f92672">.</span>basicConfig(
+</span></span><span style="display:flex;"><span>        level<span style="color:#f92672">=</span>logging<span style="color:#f92672">.</span>INFO,
+</span></span><span style="display:flex;"><span>        encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>,
+</span></span><span style="display:flex;"><span>        format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%(asctime)s</span><span style="color:#e6db74"> [</span><span style="color:#e6db74">%(levelname)s</span><span style="color:#e6db74">] </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        handlers<span style="color:#f92672">=</span>[
+</span></span><span style="display:flex;"><span>            logging<span style="color:#f92672">.</span>FileHandler(<span style="color:#e6db74">&#34;~/backup_vm.log&#34;</span>),
+</span></span><span style="display:flex;"><span>            logging<span style="color:#f92672">.</span>StreamHandler(sys<span style="color:#f92672">.</span>stdout)
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>root_backup_dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;~/mnt&#39;</span>
+</span></span><span style="display:flex;"><span>backup_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;vm_1&#39;</span>,<span style="color:#e6db74">&#39;vm_2&#39;</span>,<span style="color:#e6db74">&#39;vm_3&#39;</span>]
+</span></span><span style="display:flex;"><span>max_retry_count<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">backup_vm</span>(dom,domName):
+</span></span><span style="display:flex;"><span>    logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;backup vm:</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> start&#34;</span><span style="color:#f92672">.</span>format(domName))
+</span></span><span style="display:flex;"><span>    back_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(root_backup_dir,domName<span style="color:#f92672">+</span>time<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;_%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span>, time<span style="color:#f92672">.</span>localtime()))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(back_path):
+</span></span><span style="display:flex;"><span>        os<span style="color:#f92672">.</span>mkdir(back_path)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#backup xml</span>
+</span></span><span style="display:flex;"><span>    raw_xml <span style="color:#f92672">=</span> dom<span style="color:#f92672">.</span>XMLDesc(<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(back_path,domName<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.xml&#39;</span>),<span style="color:#e6db74">&#39;w+&#39;</span>) <span style="color:#66d9ef">as</span> fp:
+</span></span><span style="display:flex;"><span>        fp<span style="color:#f92672">.</span>write(raw_xml)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># backup vm disk</span>
+</span></span><span style="display:flex;"><span>    xml <span style="color:#f92672">=</span> minidom<span style="color:#f92672">.</span>parseString(raw_xml)
+</span></span><span style="display:flex;"><span>    diskTypes <span style="color:#f92672">=</span> xml<span style="color:#f92672">.</span>getElementsByTagName(<span style="color:#e6db74">&#39;disk&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> diskType <span style="color:#f92672">in</span> diskTypes:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> diskType<span style="color:#f92672">.</span>getAttribute(<span style="color:#e6db74">&#39;device&#39;</span>) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;disk&#39;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        sourceNode <span style="color:#f92672">=</span> diskType<span style="color:#f92672">.</span>getElementsByTagName(<span style="color:#e6db74">&#39;source&#39;</span>)[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>        src<span style="color:#f92672">=</span>sourceNode<span style="color:#f92672">.</span>getAttribute(<span style="color:#e6db74">&#39;file&#39;</span>)
+</span></span><span style="display:flex;"><span>        shutil<span style="color:#f92672">.</span>copyfile(src,os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(back_path,os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(src)))
+</span></span><span style="display:flex;"><span>    logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;backup vm:</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> end&#34;</span><span style="color:#f92672">.</span>format(domName))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    conn <span style="color:#f92672">=</span> libvirt<span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#34;qemu:///system&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> domName <span style="color:#f92672">in</span> backup_list:
+</span></span><span style="display:flex;"><span>        dom <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>lookupByName(domName)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> dom<span style="color:#f92672">.</span>isActive():
+</span></span><span style="display:flex;"><span>            dom<span style="color:#f92672">.</span>shutdown()
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">60</span>)
+</span></span><span style="display:flex;"><span>    retry_count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> len(backup_list) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> domName <span style="color:#f92672">in</span> backup_list:
+</span></span><span style="display:flex;"><span>            dom <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>lookupByName(domName)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> dom<span style="color:#f92672">.</span>isActive():
+</span></span><span style="display:flex;"><span>                dom<span style="color:#f92672">.</span>shutdown()
+</span></span><span style="display:flex;"><span>                time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> retry_count <span style="color:#f92672">&gt;</span> max_retry_count:
+</span></span><span style="display:flex;"><span>                    backup_list<span style="color:#f92672">.</span>remove(domName)
+</span></span><span style="display:flex;"><span>                    logging<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#39;重试次数超过最大值。虚拟机:</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">备份失败&#39;</span><span style="color:#f92672">.</span>format(domName))
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>                retry_count <span style="color:#f92672">=</span> retry_count <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>            backup_vm(dom,domName)
+</span></span><span style="display:flex;"><span>            dom<span style="color:#f92672">.</span>create()
+</span></span><span style="display:flex;"><span>            backup_list<span style="color:#f92672">.</span>remove(domName)
+</span></span><span style="display:flex;"><span>            retry_count<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    conn<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        main()
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">from</span> youjian <span style="color:#f92672">import</span> SendEmail
+</span></span><span style="display:flex;"><span>        send <span style="color:#f92672">=</span> SendEmail()
+</span></span><span style="display:flex;"><span>        user_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;send_name@gmail.com&#39;</span>]
+</span></span><span style="display:flex;"><span>        sub <span style="color:#f92672">=</span> <span style="color:#e6db74">u</span><span style="color:#e6db74">&#34;备份虚拟机成功&#34;</span>
+</span></span><span style="display:flex;"><span>        content <span style="color:#f92672">=</span> <span style="color:#e6db74">u</span><span style="color:#e6db74">&#34;备份虚拟机成功&#34;</span>
+</span></span><span style="display:flex;"><span>        send<span style="color:#f92672">.</span>send_mail(user_list,sub,content)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        logging<span style="color:#f92672">.</span>error(e)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> e
+</span></span></code></pre></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/kvm/"> kvm </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/libvirt/"> libvirt </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/python/"> python </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

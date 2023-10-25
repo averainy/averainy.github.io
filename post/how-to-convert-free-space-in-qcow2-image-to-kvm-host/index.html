@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="How to Convert Free Space in Qcow2 Image to Kvm Host">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="kvm,command"><meta name="description" content="How do you convert free space within the QCOW2 disk image to free space on the kvm host? I use Virt-sparsify to do this.
+qcow2 image is a …"><meta property="og:title" content="How to Convert Free Space in Qcow2 Image to Kvm Host" />
+<meta property="og:description" content="How do you convert free space within the QCOW2 disk image to free space on the kvm host? I use Virt-sparsify to do this.
+qcow2 image is a very common file format for kvm virtual machine.It can automatically increase space with the increase of files in the virtual machine,but It cannot decrease space with the decrease of files in the virtual machine.So,here we can use Virt-sparsify to do that.
+DESCRIPTION Virt-sparsify is a tool which can make a virtual machine disk (or any disk image) sparse a.k.a. thin-provisioned. This means that free space within the disk image can be converted back to free space on the host.
+Virt-sparsify can locate and sparsify free space in most filesystems (eg. ext2/3/4, btrfs, NTFS, etc.), and also in LVM physical volumes.
+Operation steps shutdown virtual sudo virsh shutdown win10_test use Virt-sparsify,I recommend you to set parameter &lsquo;&ndash;tmp&rsquo;,because virt-sparsify nedd enough tmp space to restore middle files,and the defualt &ldquo;/tmp&rdquo; usually does not hava enough space." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-24T16:35:27+08:00" />
+<meta property="article:modified_time" content="2022-04-24T16:35:27+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to Convert Free Space in Qcow2 Image to Kvm Host"/>
+<meta name="twitter:description" content="How do you convert free space within the QCOW2 disk image to free space on the kvm host? I use Virt-sparsify to do this.
+qcow2 image is a very common file format for kvm virtual machine.It can automatically increase space with the increase of files in the virtual machine,but It cannot decrease space with the decrease of files in the virtual machine.So,here we can use Virt-sparsify to do that.
+DESCRIPTION Virt-sparsify is a tool which can make a virtual machine disk (or any disk image) sparse a.k.a. thin-provisioned. This means that free space within the disk image can be converted back to free space on the host.
+Virt-sparsify can locate and sparsify free space in most filesystems (eg. ext2/3/4, btrfs, NTFS, etc.), and also in LVM physical volumes.
+Operation steps shutdown virtual sudo virsh shutdown win10_test use Virt-sparsify,I recommend you to set parameter &lsquo;&ndash;tmp&rsquo;,because virt-sparsify nedd enough tmp space to restore middle files,and the defualt &ldquo;/tmp&rdquo; usually does not hava enough space."/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>How to Convert Free Space in Qcow2 Image to Kvm Host | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">24</span>
+				<span class="rest">Apr 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">How to Convert Free Space in Qcow2 Image to Kvm Host</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>How do you convert free space within the QCOW2 disk image to  free space on the kvm host?
+I use <a href="https://libguestfs.org/virt-sparsify.1.html#tmpdir" target="_blank">Virt-sparsify</a>  to do this.</p>
+<p>qcow2 image is a very common file format for kvm virtual machine.It can automatically increase space with the increase of files in the virtual machine,but It cannot decrease space with the decrease of files in the virtual machine.So,here we can use Virt-sparsify to do that.</p>
+<h3 id="description">DESCRIPTION</h3>
+<p>Virt-sparsify is a tool which can make a virtual machine disk (or any disk image) sparse a.k.a. thin-provisioned. This means that free space within the disk image can be converted back to free space on the host.</p>
+<p>Virt-sparsify can locate and sparsify free space in most filesystems (eg. ext2/3/4, btrfs, NTFS, etc.), and also in LVM physical volumes.</p>
+<h3 id="operation-steps">Operation steps</h3>
+<ol>
+<li>shutdown virtual</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo virsh shutdown win10_test
+</span></span></code></pre></div><ol start="2">
+<li>use Virt-sparsify,I recommend you to set parameter &lsquo;&ndash;tmp&rsquo;,because virt-sparsify nedd enough tmp space to restore middle files,and the defualt &ldquo;/tmp&rdquo; usually does not hava enough space.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo virt-sparsify win10_test-sda win10_test-sda_new --tmp tmp
+</span></span></code></pre></div><ol start="3">
+<li>back up old qcow2 image file and rename new qcow2 image file</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv win10_test-sda win10_test-sda_old
+</span></span><span style="display:flex;"><span>mv win10_test-sda_new win10_test-sda
+</span></span></code></pre></div><ol start="4">
+<li>now you can start your virtual machine</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo virsh start win10_test
+</span></span></code></pre></div><ol start="5">
+<li>Be caefully check the new virtual machine can boot and work correctly,If ok,delete the old image file .</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm win10_test-sda_old
+</span></span></code></pre></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/command/"> command </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/kvm/"> kvm </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

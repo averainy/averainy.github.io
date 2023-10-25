@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>tplink on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/tplink/</link>
+		<description>Recent content in tplink on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Tue, 06 Dec 2022 11:29:23 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/tplink/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>用python实现自动重启tplink路由器</title>
+			<link>http://www.averainy.com/post/auto-reboot-tplink-router/</link>
+			<pubDate>Tue, 06 Dec 2022 11:29:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/auto-reboot-tplink-router/</guid>
+			<description>
+			
+				原因 自从我的iPhone升级到iOS16之后，总是连不上家里的5G WiFi。开始确实是因为iOS16的bug造成的，升级到最新iOS版本之后稳定了几天，但是之后就又出现了连不上的情况，不过我老婆的手机和iPad倒是挺正常的。最后祭出重启路由大招，完美解决问题。于是想着做个定时 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

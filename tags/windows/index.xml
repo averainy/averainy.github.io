@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>windows on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/windows/</link>
+		<description>Recent content in windows on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 16 Oct 2023 16:48:39 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Get Windows Installed Software by Winreg</title>
+			<link>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</link>
+			<pubDate>Mon, 16 Oct 2023 16:48:39 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</guid>
+			<description>
+			
+				def getInstalledProgramsFromRegistry(): registry_key =r"Software\Microsoft\Windows\CurrentVersion\Uninstall" registry_key_64bit = …
+			
+			</description>
+		</item>
+		<item>
+			<title>Run Wireguard in Windows With No Administrator Permission</title>
+			<link>http://www.averainy.com/post/run-wireguard-in-windows-with-no-administrator-permission/</link>
+			<pubDate>Wed, 20 Apr 2022 08:59:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/run-wireguard-in-windows-with-no-administrator-permission/</guid>
+			<description>
+			
+				原因 在无管理员权限的Windows系统上无法运行wireguard GUI客户端，为此需要通过安装wireguard服务来解决这个问题。
+操作方法 在没有管理权限的Windows系统上安装运行wireguard方法：
+以管理员权限打开powershell窗口，运行： …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

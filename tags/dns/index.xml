@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>dns on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/dns/</link>
+		<description>Recent content in dns on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 02 Sep 2022 11:17:40 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>解决nginx: [emerg] host not found in upstream &#39;xxx.com&#39;</title>
+			<link>http://www.averainy.com/post/nginx-emerg-host-not-found-in-upstream/</link>
+			<pubDate>Fri, 02 Sep 2022 11:17:40 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/nginx-emerg-host-not-found-in-upstream/</guid>
+			<description>
+			
+				我用nginx配置了一个反向代理，每次服务器重启之后，nginx都会报：nginx: [emerg] host not found in upstream 'xxx.com'的错误。这个错误的原因其实很简单，就是nginx无法解析xxx.com。解决方法就是以下流程：
+确 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

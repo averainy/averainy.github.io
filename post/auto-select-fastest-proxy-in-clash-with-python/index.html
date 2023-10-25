@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Auto Select Fastest Proxy in Clash With Python">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="python,clash"><meta name="description" content="起因 为了能够方便家里的电脑，电视盒子以及手机能够方便的使用代理，因此在我的群晖上用docker部署了clash。同时为了能够自动选择响应速度最快的代理，因此，用python写了这个脚本。 将这个脚本加入到定时任务即可实现自动切换最快代理。
+代码 # coding=utf-8 …"><meta property="og:title" content="Auto Select Fastest Proxy in Clash With Python" />
+<meta property="og:description" content="起因 为了能够方便家里的电脑，电视盒子以及手机能够方便的使用代理，因此在我的群晖上用docker部署了clash。同时为了能够自动选择响应速度最快的代理，因此，用python写了这个脚本。 将这个脚本加入到定时任务即可实现自动切换最快代理。 代码 # coding=utf-8 import requests import json import urllib.parse from concurrent.futures import ThreadPoolExecutor,wait,ALL_COMPLETED headers = { &#39;Accept&#39;: &#39;*/*&#39;, &#39;Accept-Language&#39;: &#39;zh,en;q=0.9,zh-CN;q=0.8&#39;, &#39;Cache-Control&#39;:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/auto-select-fastest-proxy-in-clash-with-python/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-23T09:43:35+08:00" />
+<meta property="article:modified_time" content="2022-04-23T09:43:35+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Auto Select Fastest Proxy in Clash With Python"/>
+<meta name="twitter:description" content="起因 为了能够方便家里的电脑，电视盒子以及手机能够方便的使用代理，因此在我的群晖上用docker部署了clash。同时为了能够自动选择响应速度最快的代理，因此，用python写了这个脚本。 将这个脚本加入到定时任务即可实现自动切换最快代理。 代码 # coding=utf-8 import requests import json import urllib.parse from concurrent.futures import ThreadPoolExecutor,wait,ALL_COMPLETED headers = { &#39;Accept&#39;: &#39;*/*&#39;, &#39;Accept-Language&#39;: &#39;zh,en;q=0.9,zh-CN;q=0.8&#39;, &#39;Cache-Control&#39;:"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>Auto Select Fastest Proxy in Clash With Python | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">23</span>
+				<span class="rest">Apr 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Auto Select Fastest Proxy in Clash With Python</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<h2 id="起因">起因</h2>
+<p>为了能够方便家里的电脑，电视盒子以及手机能够方便的使用代理，因此在我的群晖上用docker部署了clash。同时为了能够自动选择响应速度最快的代理，因此，用python写了这个脚本。 将这个脚本加入到定时任务即可实现自动切换最快代理。</p>
+<h2 id="代码">代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># coding=utf-8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> urllib.parse
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> concurrent.futures <span style="color:#f92672">import</span> ThreadPoolExecutor,wait,ALL_COMPLETED
+</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Accept&#39;</span>: <span style="color:#e6db74">&#39;*/*&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Accept-Language&#39;</span>: <span style="color:#e6db74">&#39;zh,en;q=0.9,zh-CN;q=0.8&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Cache-Control&#39;</span>: <span style="color:#e6db74">&#39;no-cache&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Connection&#39;</span>: <span style="color:#e6db74">&#39;keep-alive&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Already added when you pass json=</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># &#39;Content-Type&#39;: &#39;application/json&#39;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Origin&#39;</span>: <span style="color:#e6db74">&#39;http://192.168.0.4:5080&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Pragma&#39;</span>: <span style="color:#e6db74">&#39;no-cache&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Referer&#39;</span>: <span style="color:#e6db74">&#39;http://192.168.0.4:5080/&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36&#39;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>json_data <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;标准|台湾04解锁&#39;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">change_proxy</span>():
+</span></span><span style="display:flex;"><span>    response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>put(<span style="color:#e6db74">&#39;http://192.168.0.4:9090/proxies/</span><span style="color:#e6db74">%F</span><span style="color:#e6db74">0</span><span style="color:#e6db74">%9F%94%</span><span style="color:#e6db74">B0</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">5%9B%BD</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">5%A4</span><span style="color:#e6db74">%96%</span><span style="color:#e6db74">E6%B5</span><span style="color:#e6db74">%81%</span><span style="color:#e6db74">E9</span><span style="color:#e6db74">%87%</span><span style="color:#e6db74">8F&#39;</span>, headers<span style="color:#f92672">=</span>headers, json<span style="color:#f92672">=</span>json_data, verify<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_proxies</span>():
+</span></span><span style="display:flex;"><span>    response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;http://192.168.0.4:9090/proxies/</span><span style="color:#e6db74">%F</span><span style="color:#e6db74">0</span><span style="color:#e6db74">%9F%94%</span><span style="color:#e6db74">B0</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">5%9B%BD</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">5%A4</span><span style="color:#e6db74">%96%</span><span style="color:#e6db74">E6%B5</span><span style="color:#e6db74">%81%</span><span style="color:#e6db74">E9</span><span style="color:#e6db74">%87%</span><span style="color:#e6db74">8F&#39;</span>, headers<span style="color:#f92672">=</span>headers, verify<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>    proxies <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> proxies[<span style="color:#e6db74">&#39;all&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_speed</span>(proxy_name):
+</span></span><span style="display:flex;"><span>    response_time <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    headers <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Accept&#39;</span>: <span style="color:#e6db74">&#39;*/*&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Accept-Language&#39;</span>: <span style="color:#e6db74">&#39;zh,en;q=0.9,zh-CN;q=0.8&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Cache-Control&#39;</span>: <span style="color:#e6db74">&#39;no-cache&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Connection&#39;</span>: <span style="color:#e6db74">&#39;keep-alive&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Content-Type&#39;</span>: <span style="color:#e6db74">&#39;application/json&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Origin&#39;</span>: <span style="color:#e6db74">&#39;http://192.168.0.4:5080&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Pragma&#39;</span>: <span style="color:#e6db74">&#39;no-cache&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;Referer&#39;</span>: <span style="color:#e6db74">&#39;http://192.168.0.4:5080/&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36&#39;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://192.168.0.4:9090/proxies/</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">/delay?timeout=5000&amp;url=http://www.gstatic.com/generate_204&#34;</span><span style="color:#f92672">.</span>format(urllib<span style="color:#f92672">.</span>parse<span style="color:#f92672">.</span>quote(proxy_name))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, headers<span style="color:#f92672">=</span>headers, verify<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>        response_time <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>elapsed<span style="color:#f92672">.</span>total_seconds()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>:
+</span></span><span style="display:flex;"><span>        response_time <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (response_time,proxy_name)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_speedest_proxy</span>():
+</span></span><span style="display:flex;"><span>    proxies <span style="color:#f92672">=</span> get_proxies()
+</span></span><span style="display:flex;"><span>    speedest_proxy<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    speedest_time<span style="color:#f92672">=</span><span style="color:#ae81ff">100000</span>
+</span></span><span style="display:flex;"><span>    pool  <span style="color:#f92672">=</span> ThreadPoolExecutor(max_workers<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>    all_tasks <span style="color:#f92672">=</span> [pool<span style="color:#f92672">.</span>submit(test_speed,(proxy)) <span style="color:#66d9ef">for</span> proxy <span style="color:#f92672">in</span> proxies]
+</span></span><span style="display:flex;"><span>    wait(all_tasks,return_when<span style="color:#f92672">=</span>ALL_COMPLETED)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> task <span style="color:#f92672">in</span> all_tasks:
+</span></span><span style="display:flex;"><span>        response_time,proxy_name <span style="color:#f92672">=</span> task<span style="color:#f92672">.</span>result()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">u</span><span style="color:#e6db74">&#39;直接连&#39;</span> <span style="color:#f92672">in</span> proxy_name:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> response_time <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> response_time <span style="color:#f92672">&lt;</span> speedest_time:
+</span></span><span style="display:flex;"><span>            speedest_time <span style="color:#f92672">=</span> response_time
+</span></span><span style="display:flex;"><span>            speedest_proxy <span style="color:#f92672">=</span> proxy_name
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> speedest_proxy:
+</span></span><span style="display:flex;"><span>        json_data[<span style="color:#e6db74">&#39;name&#39;</span>]<span style="color:#f92672">=</span>speedest_proxy
+</span></span><span style="display:flex;"><span>        print(speedest_proxy)
+</span></span><span style="display:flex;"><span>    change_proxy()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    set_speedest_proxy()
+</span></span></code></pre></div><h2 id="结语">结语</h2>
+<p>请将其中的ip以及端口换成自己。</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/clash/"> clash </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/python/"> python </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

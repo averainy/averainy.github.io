@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="wireguard">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="97,118,101,114,97,105,110,121,44,112,121,116,104,111,110,44,106,97,118,97"><meta name="description" content=""><meta property="og:title" content="wireguard" />
+<meta property="og:description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://www.averainy.com/tags/wireguard/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="wireguard"/>
+<meta name="twitter:description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。"/>
+<link rel="alternate" type="application/rss+xml" href="http://www.averainy.com/tags/wireguard/index.xml" title="averainy's Blog">
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>wireguard | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main>
+<h1 class="page-title">Wireguard</h1>
+
+
+<ul class="posts flat"><li class="post">
+		<div class="post-header">
+			<div class="meta">
+				<div class="date">
+					<span class="day">02</span>
+					<span class="rest">Sep 2022</span>
+				</div>
+			</div>
+			<div class="matter">
+				<h3 class="title small"><a href="/post/firewalld-port-forwarding/">使用firewalld将端口流量转发到另一台服务器</a></h3>
+				<div class="author">
+				
+				</div>
+				<span class="description">
+				
+					目前国内处于新冠动态清零阶段，隔三岔五就会有地方被封控。因此有时候会有在家远程工作的需求。为了能够远程访问公司网络，我们采用了搭建wireguard vpn的解决方案。这样的话，每个人都需要在家里和公司的电脑上安装wireguard客户端，这样虽然也没什么问题。但是操作起来特别麻 …
+				
+				</span>
+			</div>
+		</div>
+	</li><li class="post">
+		<div class="post-header">
+			<div class="meta">
+				<div class="date">
+					<span class="day">17</span>
+					<span class="rest">Aug 2022</span>
+				</div>
+			</div>
+			<div class="matter">
+				<h3 class="title small"><a href="/post/wireguard-exclude-a-single-ip-address/">Wireguard客户端AllowedIPs 配置排除一个ip或者一个ip段</a></h3>
+				<div class="author">
+				
+				</div>
+				<span class="description">
+				
+					Wireguard客户端的配置中只有一个AllowedIPs配置来定义哪些ip或者ip段可以允许通过Wireguard客户端路由，因此如果想排除某个ip或者ip段，就需要将这些ip排除掉。
+由于ip段太多，如果手动写会非常麻烦，幸好python有一个库可以帮我们解决这个问题,代码 …
+				
+				</span>
+			</div>
+		</div>
+	</li><li class="post">
+		<div class="post-header">
+			<div class="meta">
+				<div class="date">
+					<span class="day">01</span>
+					<span class="rest">Aug 2022</span>
+				</div>
+			</div>
+			<div class="matter">
+				<h3 class="title small"><a href="/post/wireguard-install-script/">Wireguard Install Script</a></h3>
+				<div class="author">
+				
+				</div>
+				<span class="description">
+				
+					最近用wireguard安装脚本搭建wireguard服务器，用起来非常方便，推荐使用。 在下载脚本之后，强烈建议修改下生成客户端脚本的代码第313行，加入以下配置：
+PersistentKeepalive = 25 这样每隔25秒就会发送一次心跳包，以保持客户端与服务端的连接。 …
+				
+				</span>
+			</div>
+		</div>
+	</li><li class="post">
+		<div class="post-header">
+			<div class="meta">
+				<div class="date">
+					<span class="day">14</span>
+					<span class="rest">May 2022</span>
+				</div>
+			</div>
+			<div class="matter">
+				<h3 class="title small"><a href="/post/use-wireguard-as-relay-node-to-access-lan--network-in-openwrt/">Use Wireguard as Relay Node to Access Lan  Network in Openwrt</a></h3>
+				<div class="author">
+				
+				</div>
+				<span class="description">
+				
+					背景 平时为了能够在外面随时连接家庭内部网络,通常有以下几种方式:
+1.有公网ip的情况下,做端口映射
+2. 没有公网ip的情况下,可以使用frp类似的技术做反向代理.
+3. 使用vpn技术连接.
+前面两种方式都需要将端口映射到公网,这就带来了被入侵的风险.这就不得不提到新冠病毒 …
+				
+				</span>
+			</div>
+		</div>
+	</li><li class="post">
+		<div class="post-header">
+			<div class="meta">
+				<div class="date">
+					<span class="day">20</span>
+					<span class="rest">Apr 2022</span>
+				</div>
+			</div>
+			<div class="matter">
+				<h3 class="title small"><a href="/post/run-wireguard-in-windows-with-no-administrator-permission/">Run Wireguard in Windows With No Administrator Permission</a></h3>
+				<div class="author">
+				
+				</div>
+				<span class="description">
+				
+					原因 在无管理员权限的Windows系统上无法运行wireguard GUI客户端，为此需要通过安装wireguard服务来解决这个问题。
+操作方法 在没有管理权限的Windows系统上安装运行wireguard方法：
+以管理员权限打开powershell窗口，运行： …
+				
+				</span>
+			</div>
+		</div>
+	</li></ul>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

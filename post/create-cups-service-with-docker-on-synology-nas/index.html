@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="在群晖设备上使用docker搭建cups服务器">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="docker,cups,synology"><meta name="description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。
+起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。
+搭 …"><meta property="og:title" content="在群晖设备上使用docker搭建cups服务器" />
+<meta property="og:description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。 起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。 搭建cups服务 d" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-29T23:03:56+08:00" />
+<meta property="article:modified_time" content="2022-10-29T23:03:56+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在群晖设备上使用docker搭建cups服务器"/>
+<meta name="twitter:description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。 起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。 搭建cups服务 d"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>在群晖设备上使用docker搭建cups服务器 | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">29</span>
+				<span class="rest">Oct 2022</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">在群晖设备上使用docker搭建cups服务器</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>今天终于在群晖ds218+上面配置好了cups打印服务。特地记录一下。</p>
+<h1 id="起因">起因</h1>
+<p>我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218+上面搭建一个docker容器。</p>
+<h1 id="搭建cups服务">搭建cups服务</h1>
+<p>docker镜像用的是<a href="https://hub.docker.com/r/tigerj/cups-airprint" target="_blank">cups-airprint</a>.启动参数没做任何修改，如下：、</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       --name<span style="color:#f92672">=</span>cups <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       --net<span style="color:#f92672">=</span>host <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -v /var/run/dbus:/var/run/dbus <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       --device /dev/bus <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       --device /dev/usb <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -e CUPSADMIN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;admin&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       -e CUPSPASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>       tigerj/cups-airprint
+</span></span></code></pre></div><p>之后就是从brother官网<a href="https://support.brother.com/g/b/downloadtop.aspx?c=cn_ot&amp;lang=en&amp;prod=hl2260d_cn" target="_blank">下载hl-2260d驱动</a>安装程序。要选择deb包，因为cups-airprint是基于debian系打包的。下载Driver Install Tool即可。将下载的文件解压，并将其中的脚本文件上传到docker容器中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker container cp linux-brprinter-installer-2.2.3-1 cups:/root
+</span></span><span style="display:flex;"><span>docker container  exec  -it cups /bin/bash
+</span></span><span style="display:flex;"><span>cd /root
+</span></span><span style="display:flex;"><span>sh linux-brprinter-installer-2.2.3-1
+</span></span></code></pre></div><p>根据说明填写即可。</p>
+<h1 id="关闭群晖自带的cups服务">关闭群晖自带的cups服务</h1>
+<p>ssh登录。执行以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo -i
+</span></span><span style="display:flex;"><span>systemctl  stop cupsd
+</span></span><span style="display:flex;"><span>systemctl  disable cupsd
+</span></span><span style="display:flex;"><span>systemctl  mask cupsd
+</span></span><span style="display:flex;"><span>reboot
+</span></span></code></pre></div><h1 id="访问cups服务">访问cups服务</h1>
+<p>浏览器登陆https://dockerip:631 用户密码是admin password。</p>
+<h1 id="结语">结语</h1>
+<p>以上操作是在DSM7系统上做的。dsm6关闭群晖自带的cups服务命令不一样，根据实际情况修改下。</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/cups/"> cups </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/docker/"> docker </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/synology/"> synology </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

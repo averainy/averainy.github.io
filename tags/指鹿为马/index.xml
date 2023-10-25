@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>指鹿为马 on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/%E6%8C%87%E9%B9%BF%E4%B8%BA%E9%A9%AC/</link>
+		<description>Recent content in 指鹿为马 on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Wed, 07 Jun 2023 23:06:01 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/%E6%8C%87%E9%B9%BF%E4%B8%BA%E9%A9%AC/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>新成语“指鼠为鸭”</title>
+			<link>http://www.averainy.com/post/zhishuweiya/</link>
+			<pubDate>Wed, 07 Jun 2023 23:06:01 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/zhishuweiya/</guid>
+			<description>
+			
+				古有指鹿为马，今有指鼠为鸭。即使赵高在世，也得大呼高，实在是高。
+
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

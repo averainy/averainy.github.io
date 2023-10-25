@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>rxjs on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/rxjs/</link>
+		<description>Recent content in rxjs on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Thu, 15 Jun 2023 21:04:04 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/rxjs/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Angular RxJS: Limiting Concurrent HTTP Requests</title>
+			<link>http://www.averainy.com/post/Angular-RxJS-Limiting-Concurrent-HTTP-Requests/</link>
+			<pubDate>Thu, 15 Jun 2023 21:04:04 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/Angular-RxJS-Limiting-Concurrent-HTTP-Requests/</guid>
+			<description>
+			
+				详细内容青参考Angular/RxJS: Limiting Concurrent HTTP Requests
+其逻辑主要是用到了mergemap的concurrent参数，mergemap会尽可能多的执行请求，加上concurrent参数之后就能够使得一次执行concurrent …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

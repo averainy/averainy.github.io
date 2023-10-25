@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>command on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/command/</link>
+		<description>Recent content in command on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Sun, 24 Apr 2022 16:35:27 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/command/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>How to Convert Free Space in Qcow2 Image to Kvm Host</title>
+			<link>http://www.averainy.com/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/</link>
+			<pubDate>Sun, 24 Apr 2022 16:35:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/</guid>
+			<description>
+			
+				How do you convert free space within the QCOW2 disk image to free space on the kvm host? I use Virt-sparsify to do this.
+qcow2 image is a …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

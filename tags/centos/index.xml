@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>centos on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/centos/</link>
+		<description>Recent content in centos on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Thu, 31 Mar 2022 10:21:21 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/centos/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>免费使用红帽开发者计划的个人红帽开发者订阅</title>
+			<link>http://www.averainy.com/post/no-cost-red-hat-enterprise-linux-individual-developer/</link>
+			<pubDate>Thu, 31 Mar 2022 10:21:21 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/no-cost-red-hat-enterprise-linux-individual-developer/</guid>
+			<description>
+			
+				1.什么是红帽开发者计划的个人红帽开发者订阅？ 红帽开发者个人订阅是红帽开发者计划的免费产品，包括访问红帽企业 Linux 以及其他红帽产品。 它是一个专为个人开发者设计的计划和产品，可通过红帽开发者计划获得。
+2.哪些 Red Hat Enterprise Linux 开发人员 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

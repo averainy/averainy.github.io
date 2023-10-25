@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>cron on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/cron/</link>
+		<description>Recent content in cron on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 02 Sep 2022 10:24:47 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/cron/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>每月的第一个周六运行一个cron job</title>
+			<link>http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/</link>
+			<pubDate>Fri, 02 Sep 2022 10:24:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/</guid>
+			<description>
+			
+				我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是
+0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行， …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

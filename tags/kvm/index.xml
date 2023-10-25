@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>kvm on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/kvm/</link>
+		<description>Recent content in kvm on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 10 Oct 2022 15:04:38 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/kvm/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>在Cockpit中创建新的虚拟机</title>
+			<link>http://www.averainy.com/post/create-new-VM-in-cockpit/</link>
+			<pubDate>Mon, 10 Oct 2022 15:04:38 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-new-VM-in-cockpit/</guid>
+			<description>
+			
+				在KVM里可以通过命令行创建虚拟机，但是对于一个没怎么接触过Linux的人来说创建一个虚拟机就太不友好了。
+如果你在用cockpit web console的话，那么通过点几下鼠标也是可以轻松创建虚拟机的。下面是创建步骤：
+创建存储卷 点击左侧的虚拟机。 然后点击右侧上方的存储 …
+			
+			</description>
+		</item>
+		<item>
+			<title>Backup Kvm Vms With Python Libvirt</title>
+			<link>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</link>
+			<pubDate>Tue, 14 Jun 2022 15:25:35 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/backup-kvm-vms-with-python-libvirt/</guid>
+			<description>
+			
+				we changed the vm platform from esxi to kvm a few months ago,so we need to writ e some scripts to backup vms automatically. we only have a …
+			
+			</description>
+		</item>
+		<item>
+			<title>How to Convert Free Space in Qcow2 Image to Kvm Host</title>
+			<link>http://www.averainy.com/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/</link>
+			<pubDate>Sun, 24 Apr 2022 16:35:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/</guid>
+			<description>
+			
+				How do you convert free space within the QCOW2 disk image to free space on the kvm host? I use Virt-sparsify to do this.
+qcow2 image is a …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用virt-install创建kvm虚拟机</title>
+			<link>http://www.averainy.com/post/create_kvm_virtual_machnine_by_virt_install/</link>
+			<pubDate>Fri, 04 Mar 2022 15:03:21 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create_kvm_virtual_machnine_by_virt_install/</guid>
+			<description>
+			
+				终端命令行使用virt-install 创建win10虚拟机大概流程如下：
+创建虚拟硬盘 qemu-img create -f qcow2 /home/kvm/data/win10_test/win10_test.img 40G 创建虚拟机 virt-install …
+			
+			</description>
+		</item>
+		<item>
+			<title>使用virt-v2v将Esxi虚拟机迁移到kvm</title>
+			<link>http://www.averainy.com/post/esxi2kvm/</link>
+			<pubDate>Fri, 18 Feb 2022 14:38:40 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/esxi2kvm/</guid>
+			<description>
+			
+				鉴于VMware esxi系统支持的网卡型号比较少，第三方网卡驱动的可靠性又比较差，因此将虚拟机到kvm。目前比较方便的方式就是使用ovftool导出ova文件，再用virt-v2v将ova文件转成kvm能够识别的文件。基本语法如下：
+导出虚拟机
+ovftool.exe …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

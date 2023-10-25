@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>openjdk on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/openjdk/</link>
+		<description>Recent content in openjdk on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 13 Mar 2023 10:34:41 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/openjdk/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>在Linux服务器上安装jstack、jmap等命令</title>
+			<link>http://www.averainy.com/post/install-jstack-on-linux/</link>
+			<pubDate>Mon, 13 Mar 2023 10:34:41 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/install-jstack-on-linux/</guid>
+			<description>
+			
+				如果你安装的是oracle jdk的话，应该不会有这样的问题。如果你安装的是openjdk，那么这篇文章会帮到你。
+openjdk是不包含jstack、jmap等命令，你需要安装对应的openjdk-devel。
+查看openjdk版本 yum list installed …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>
