@@ -1,2 +1,0 @@
-# averainy.github.io
-blog
