@@ -6,10 +6,22 @@
 		<description>Recent content in fedora on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Tue, 31 Oct 2023 12:07:36 +0800</lastBuildDate>
+		<lastBuildDate>Tue, 31 Oct 2023 15:59:14 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Fedora38 Use Dnf Remove Old Linux Kernel</title>
+			<link>http://www.averainy.com/post/fedora38-use-dnf-remove-old-linux-kernel/</link>
+			<pubDate>Tue, 31 Oct 2023 15:59:14 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/fedora38-use-dnf-remove-old-linux-kernel/</guid>
+			<description>
+			
+				 fedora38使用dnf查询已安装内核 sudo dnf list installed kernel 使用dnf删除旧kernel sudo dnf autoremove sudo dnf remove --oldinstallonly 
+			
+			</description>
+		</item>
 		<item>
 			<title>fedora38 gnome禁用自动睡眠</title>
 			<link>http://www.averainy.com/post/fedora-gnome3-disallow-auto-sleep/</link>

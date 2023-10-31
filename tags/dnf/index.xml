@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>dnf on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/dnf/</link>
+		<description>Recent content in dnf on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Tue, 31 Oct 2023 15:59:14 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/dnf/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Fedora38 Use Dnf Remove Old Linux Kernel</title>
+			<link>http://www.averainy.com/post/fedora38-use-dnf-remove-old-linux-kernel/</link>
+			<pubDate>Tue, 31 Oct 2023 15:59:14 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/fedora38-use-dnf-remove-old-linux-kernel/</guid>
+			<description>
+			
+				 fedora38使用dnf查询已安装内核 sudo dnf list installed kernel 使用dnf删除旧kernel sudo dnf autoremove sudo dnf remove --oldinstallonly 
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>
