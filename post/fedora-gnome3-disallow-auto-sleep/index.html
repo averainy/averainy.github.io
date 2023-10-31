@@ -6,28 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<meta property="og:title" content="再见2022年">
+	<meta property="og:title" content="fedora38 gnome禁用自动睡眠">
 	
 	
-	<meta name="author" content="averainy"><meta name="keywords" content="年度总结"><meta name="description" content="2022年过去了，在这一年里经历了太多。希望2023年能够正常吧。 既然2022年结束了，那就简单的总结一下，留个纪念好了。
-工作 工作还算稳定，再加上我老婆也开始上班，家庭年收入在我这个二线小城市也不算太低，如果过两年各种负债还清之后应该会过得很自在。
-投资理财 今年A股大盘走 …"><meta property="og:title" content="再见2022年" />
-<meta property="og:description" content="2022年过去了，在这一年里经历了太多。希望2023年能够正常吧。 既然2022年结束了，那就简单的总结一下，留个纪念好了。 工作 工作还算稳定，再加上我老婆也开始上班，家庭年收入在我这个二线小城市也不算太低，如果过两年各种负债还清之后应该会过得很自在。 投资理财 今年A股大盘走势不好，但" />
+	<meta name="author" content="averainy"><meta name="keywords" content="linux,fedora,gnome"><meta name="description" content="前段时间安装了fedora 38，然后想通过ssh远程接入。 我登陆fedora桌面系统之后，在设置里面已经关闭了睡眠，在没有登陆系统之后却依然会自动睡眠，只能通过下面的command命令解决。
+sudo systemctl mask sleep.target …"><meta property="og:title" content="fedora38 gnome禁用自动睡眠" />
+<meta property="og:description" content="前段时间安装了fedora 38，然后想通过ssh远程接入。 我登陆fedora桌面系统之后，在设置里面已经关闭了睡眠，在没有登陆系统之后却依然会自动睡眠，只能通过下面的command命令解决。 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target 吐槽一句，Linux桌面任重道远。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/byebye-2022/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-01-06T10:26:10+08:00" />
-<meta property="article:modified_time" content="2023-01-06T10:26:10+08:00" />
+<meta property="og:url" content="http://www.averainy.com/post/fedora-gnome3-disallow-auto-sleep/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-10-31T12:07:36+08:00" />
+<meta property="article:modified_time" content="2023-10-31T12:07:36+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="再见2022年"/>
-<meta name="twitter:description" content="2022年过去了，在这一年里经历了太多。希望2023年能够正常吧。 既然2022年结束了，那就简单的总结一下，留个纪念好了。 工作 工作还算稳定，再加上我老婆也开始上班，家庭年收入在我这个二线小城市也不算太低，如果过两年各种负债还清之后应该会过得很自在。 投资理财 今年A股大盘走势不好，但"/>
+<meta name="twitter:title" content="fedora38 gnome禁用自动睡眠"/>
+<meta name="twitter:description" content="前段时间安装了fedora 38，然后想通过ssh远程接入。 我登陆fedora桌面系统之后，在设置里面已经关闭了睡眠，在没有登陆系统之后却依然会自动睡眠，只能通过下面的command命令解决。 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target 吐槽一句，Linux桌面任重道远。"/>
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/js/c.js"></script>
-	<title>再见2022年 | averainy&#39;s Blog</title>
+	<title>fedora38 gnome禁用自动睡眠 | averainy&#39;s Blog</title>
 
 
 <meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
@@ -58,28 +57,21 @@
 		<div class="meta">
 			
 			<div class="date">
-				<span class="day">06</span>
-				<span class="rest">Jan 2023</span>
+				<span class="day">31</span>
+				<span class="rest">Oct 2023</span>
 			</div>
 			
 		</div>
 		
 		<div class="matter">
-			<h1 class="title">再见2022年</h1>
+			<h1 class="title">fedora38 gnome禁用自动睡眠</h1>
 		</div>
 	</div>
 	<div class="markdown">
-		<p>2022年过去了，在这一年里经历了太多。希望2023年能够正常吧。
-既然2022年结束了，那就简单的总结一下，留个纪念好了。</p>
-<h2 id="工作">工作</h2>
-<p>工作还算稳定，再加上我老婆也开始上班，家庭年收入在我这个二线小城市也不算太低，如果过两年各种负债还清之后应该会过得很自在。</p>
-<h2 id="投资理财">投资理财</h2>
-<p>今年A股大盘走势不好，但是我一直买的是可转债和ETF，收益率8个点。虽然比上一年差，不过还算满意。没亏就是赚。</p>
-<h2 id="副业">副业</h2>
-<p>工作之余，偶尔跑跑网约车，争取每年跑2万公里。尽量在车子报废之前充分榨取它的价值。</p>
-<h2 id="展望">展望</h2>
-<p>2023年希望是一个有希望的一年。虽然大概率不会。不过还是谋事在人，成不成天知道。
-希望能够独立开发一点有意思的应用程序。别把主业给荒废了。</p>
+		<p>前段时间安装了fedora 38，然后想通过ssh远程接入。
+我登陆fedora桌面系统之后，在设置里面已经关闭了睡眠，在没有登陆系统之后却依然会自动睡眠，只能通过下面的command命令解决。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+</span></span></code></pre></div><p>吐槽一句，Linux桌面任重道远。</p>
 
 	</div>
 	
@@ -102,6 +94,7 @@
 			
 			
 			
+			<a href="/categories/share/"> share </a>
 			
 			
 			
@@ -192,7 +185,6 @@
 			
 			
 			
-			<a href="/categories/%e7%94%9f%e6%b4%bb/"> 生活 </a>
 			
 			
 			
@@ -311,6 +303,7 @@
 			
 			
 			
+			<a href="/tags/fedora/"> fedora </a>
 			
 			
 			
@@ -334,6 +327,7 @@
 			
 			
 			
+			<a href="/tags/gnome/"> gnome </a>
 			
 			
 			
@@ -375,6 +369,7 @@
 			
 			
 			
+			<a href="/tags/linux/"> linux </a>
 			
 			
 			
@@ -547,7 +542,8 @@
 			
 			
 			
-			<a href="/tags/%e5%b9%b4%e5%ba%a6%e6%80%bb%e7%bb%93/"> 年度总结 </a>
+			
+			
 			
 			
 			
