@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>podman on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/podman/</link>
+		<description>Recent content in podman on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Wed, 08 Nov 2023 16:25:17 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/podman/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Use Systemd Auto Start Podman Container</title>
+			<link>http://www.averainy.com/post/use-systemd-auto-start-podman-container/</link>
+			<pubDate>Wed, 08 Nov 2023 16:25:17 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-systemd-auto-start-podman-container/</guid>
+			<description>
+			
+				使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。
+生成system service文件
+podman generate systemd …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

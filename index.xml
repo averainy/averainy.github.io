@@ -6,10 +6,24 @@
 		<description>Recent content on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Tue, 31 Oct 2023 15:59:14 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 08 Nov 2023 16:25:17 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Use Systemd Auto Start Podman Container</title>
+			<link>http://www.averainy.com/post/use-systemd-auto-start-podman-container/</link>
+			<pubDate>Wed, 08 Nov 2023 16:25:17 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/use-systemd-auto-start-podman-container/</guid>
+			<description>
+			
+				使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。
+生成system service文件
+podman generate systemd …
+			
+			</description>
+		</item>
 		<item>
 			<title>Fedora38 Use Dnf Remove Old Linux Kernel</title>
 			<link>http://www.averainy.com/post/fedora38-use-dnf-remove-old-linux-kernel/</link>

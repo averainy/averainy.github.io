@@ -52,6 +52,28 @@
 		<div class="post-header">
 			<div class="meta">
 				<div class="date">
+					<span class="day">08</span>
+					<span class="rest">Nov 2023</span>
+				</div>
+			</div>
+			<div class="matter">
+				<h3 class="title small"><a href="/post/use-systemd-auto-start-podman-container/">Use Systemd Auto Start Podman Container</a></h3>
+				<div class="author">
+				
+				</div>
+				<span class="description">
+				
+					使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。
+生成system service文件
+podman generate systemd …
+				
+				</span>
+			</div>
+		</div>
+	</li><li class="post">
+		<div class="post-header">
+			<div class="meta">
+				<div class="date">
 					<span class="day">23</span>
 					<span class="rest">Oct 2023</span>
 				</div>

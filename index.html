@@ -54,6 +54,30 @@
 			<div class="post-header">
 				<div class="meta">
 					<div class="date">
+						<span class="day">08</span>
+						<span class="rest">Nov 2023</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/post/use-systemd-auto-start-podman-container/">Use Systemd Auto Start Podman Container</a></h3>
+					<div class="author">
+					
+					</div>
+					<span class="description">
+					
+						使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。
+生成system service文件
+podman generate systemd …
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
 						<span class="day">31</span>
 						<span class="rest">Oct 2023</span>
 					</div>
@@ -253,29 +277,6 @@ IP
 					
 						复选框checkbox模拟单选框代码。
 <html> <head> <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script> <script> $(document).ready(function() { $("input[name^='a']").on("click", function() { …</script></head></html>
-					
-					</span>
-				</div>
-			</div>
-		</div>
-	
-		<div class="post">
-			<div class="post-header">
-				<div class="meta">
-					<div class="date">
-						<span class="day">15</span>
-						<span class="rest">Jun 2023</span>
-					</div>
-				</div>
-				<div class="matter">
-					<h3 class="title small"><a href="/post/Angular-RxJS-Limiting-Concurrent-HTTP-Requests/">Angular RxJS: Limiting Concurrent HTTP Requests</a></h3>
-					<div class="author">
-					
-					</div>
-					<span class="description">
-					
-						详细内容青参考Angular/RxJS: Limiting Concurrent HTTP Requests
-其逻辑主要是用到了mergemap的concurrent参数，mergemap会尽可能多的执行请求，加上concurrent参数之后就能够使得一次执行concurrent …
 					
 					</span>
 				</div>
