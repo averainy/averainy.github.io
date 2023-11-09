@@ -3,34 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2023-11-08T16:25:17+08:00</lastmod>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2023-11-08T16:25:17+08:00</lastmod>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/tags/podman/</loc>
-    <lastmod>2023-11-08T16:25:17+08:00</lastmod>
+    <loc>http://www.averainy.com/tags/dnf/</loc>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/fedora/</loc>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/how-to-speed-up-dnf-package-manager-in-fedora/</loc>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2023-11-08T16:25:17+08:00</lastmod>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/share/</loc>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/podman/</loc>
     <lastmod>2023-11-08T16:25:17+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/systemd/</loc>
     <lastmod>2023-11-08T16:25:17+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/tags/</loc>
-    <lastmod>2023-11-08T16:25:17+08:00</lastmod>
-  </url><url>
     <loc>http://www.averainy.com/post/use-systemd-auto-start-podman-container/</loc>
     <lastmod>2023-11-08T16:25:17+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/dnf/</loc>
-    <lastmod>2023-10-31T15:59:14+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/fedora/</loc>
-    <lastmod>2023-10-31T15:59:14+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/fedora38-use-dnf-remove-old-linux-kernel/</loc>
     <lastmod>2023-10-31T15:59:14+08:00</lastmod>
