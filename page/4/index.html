@@ -54,6 +54,29 @@
 			<div class="post-header">
 				<div class="meta">
 					<div class="date">
+						<span class="day">02</span>
+						<span class="rest">Sep 2022</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/post/running-a-cron-job-on-the-first-weekday-of-the-month/">每月的第一个周六运行一个cron job</a></h3>
+					<div class="author">
+					
+					</div>
+					<span class="description">
+					
+						我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是
+0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行， …
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
 						<span class="day">22</span>
 						<span class="rest">Aug 2022</span>
 					</div>
@@ -254,29 +277,6 @@ we can use the following command to test the NTP …
 					
 						I create a kms service for the lan computers in a linux server recently,so record the steps
 download kms source and compile it cd …
-					
-					</span>
-				</div>
-			</div>
-		</div>
-	
-		<div class="post">
-			<div class="post-header">
-				<div class="meta">
-					<div class="date">
-						<span class="day">24</span>
-						<span class="rest">Apr 2022</span>
-					</div>
-				</div>
-				<div class="matter">
-					<h3 class="title small"><a href="/post/how-to-convert-free-space-in-qcow2-image-to-kvm-host/">How to Convert Free Space in Qcow2 Image to Kvm Host</a></h3>
-					<div class="author">
-					
-					</div>
-					<span class="description">
-					
-						How do you convert free space within the QCOW2 disk image to free space on the kvm host? I use Virt-sparsify to do this.
-qcow2 image is a …
 					
 					</span>
 				</div>

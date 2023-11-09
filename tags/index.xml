@@ -6,16 +6,16 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Thu, 09 Nov 2023 12:54:11 +0800</lastBuildDate>
+		<lastBuildDate>Thu, 09 Nov 2023 14:22:50 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>dnf</title>
-			<link>http://www.averainy.com/tags/dnf/</link>
-			<pubDate>Thu, 09 Nov 2023 12:54:11 +0800</pubDate>
+			<title>fedora</title>
+			<link>http://www.averainy.com/tags/fedora/</link>
+			<pubDate>Thu, 09 Nov 2023 14:22:50 +0800</pubDate>
 			
-			<guid>http://www.averainy.com/tags/dnf/</guid>
+			<guid>http://www.averainy.com/tags/fedora/</guid>
 			<description>
 			
 				
@@ -23,11 +23,11 @@
 			</description>
 		</item>
 		<item>
-			<title>fedora</title>
-			<link>http://www.averainy.com/tags/fedora/</link>
+			<title>dnf</title>
+			<link>http://www.averainy.com/tags/dnf/</link>
 			<pubDate>Thu, 09 Nov 2023 12:54:11 +0800</pubDate>
 			
-			<guid>http://www.averainy.com/tags/fedora/</guid>
+			<guid>http://www.averainy.com/tags/dnf/</guid>
 			<description>
 			
 				
