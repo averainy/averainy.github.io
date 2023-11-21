@@ -6,10 +6,23 @@
 		<description>Recent content in share on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Thu, 09 Nov 2023 14:22:50 +0800</lastBuildDate>
+		<lastBuildDate>Tue, 21 Nov 2023 13:22:50 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/categories/share/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>How to Upgrade from Fedora 38 to Fedora 39</title>
+			<link>http://www.averainy.com/post/how-to-upgrade-fedora-38-to-fedora-39/</link>
+			<pubDate>Tue, 21 Nov 2023 13:22:50 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-upgrade-fedora-38-to-fedora-39/</guid>
+			<description>
+			
+				升级Fedora39前准备 在升级Fedora39之前务必做好以下准备：
+备份数据。 确保电源稳定。 确保网络正常。 升级Fedora39步骤 更新Fedora38 将Fedora38的所有软件包升级到最新版本 sudo dnf upgrade --refresh 安 …
+			
+			</description>
+		</item>
 		<item>
 			<title>How to Upgrade from Fedora 36 to Fedora 38</title>
 			<link>http://www.averainy.com/post/how-to-upgrade-fedora-36-to-fedora-38/</link>
