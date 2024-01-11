@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Linux Dmidecode Usage">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="dmidecode,linux"><meta name="description" content="dmidecode命令主要是通过DMI获取主机的硬件信息，通常是在不打开计算机机箱的情况下使用该命令来查找硬件详细信息。其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。 什么是DMI？DMI (Desktop Management Interface, DMI)的主 …"><meta property="og:title" content="Linux Dmidecode Usage" />
+<meta property="og:description" content="dmidecode命令主要是通过DMI获取主机的硬件信息，通常是在不打开计算机机箱的情况下使用该命令来查找硬件详细信息。其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。 什么是DMI？DMI (Desktop Management Interface, DMI)的主要组成部分是Management InformationFormat (MIF)数据库，这个数据" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/linux-dmidecode-usage/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-11T13:33:05+08:00" />
+<meta property="article:modified_time" content="2024-01-11T13:33:05+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Dmidecode Usage"/>
+<meta name="twitter:description" content="dmidecode命令主要是通过DMI获取主机的硬件信息，通常是在不打开计算机机箱的情况下使用该命令来查找硬件详细信息。其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。 什么是DMI？DMI (Desktop Management Interface, DMI)的主要组成部分是Management InformationFormat (MIF)数据库，这个数据"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>Linux Dmidecode Usage | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">11</span>
+				<span class="rest">Jan 2024</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Linux Dmidecode Usage</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>dmidecode命令主要是通过DMI获取主机的硬件信息，通常是在不打开计算机机箱的情况下使用该命令来查找硬件详细信息。其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。
+什么是DMI？DMI (Desktop Management Interface, DMI)的主要组成部分是Management InformationFormat (MIF)数据库，这个数据库包括了所有有关电脑系统和配件的信息。</p>
+<ol>
+<li>
+<h3 id="常用用法如下需要root权限">常用用法如下（需要root权限）：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode                          <span style="color:#75715e"># 打印所有硬件信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -q                       <span style="color:#75715e"># 打印所有硬件信息，比较简洁</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -h                       <span style="color:#75715e"># 获取帮助</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode | grep <span style="color:#e6db74">&#39;Product Name&#39;</span>    <span style="color:#75715e"># 以过滤的方式来查看指定的硬件信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode --type bios        <span style="color:#75715e"># 查看BIOS相关的硬件信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode --type system      <span style="color:#75715e"># 查看系统相关的硬件信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode --type baseboard   <span style="color:#75715e"># 查看主板相关的硬件信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode --type chassis     <span style="color:#75715e"># 查看机箱相关的硬件信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode --type processor   <span style="color:#75715e"># 查看处理器相关的硬件信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode --type memory      <span style="color:#75715e"># 查看内存相关的硬件信息</span>
+</span></span></code></pre></div></li>
+<li>
+<h3 id="查看具体细项信息以system为例需root用户">查看具体细项信息（以system为例，需root用户）:</h3>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -t <span style="color:#ae81ff">1</span>   <span style="color:#75715e">#查看system基本信息，-t等价于--type</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -t <span style="color:#ae81ff">15</span>  <span style="color:#75715e">#查看system Event信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -t <span style="color:#ae81ff">23</span>  <span style="color:#75715e">#查看system Reset信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -t <span style="color:#ae81ff">32</span>  <span style="color:#75715e">#查看system Boot信息</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -t 1,15,23,32  <span style="color:#75715e">#查看system所有信息,等价于dmidecode -t system</span>
+</span></span></code></pre></div><p>dmidecode支持的数字参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>BIOS</td>
+</tr>
+<tr>
+<td>1</td>
+<td>System</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Baseboard</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Chassis</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Processor</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Memory Controller</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Memory Module</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Cache</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Port Connector</td>
+</tr>
+<tr>
+<td>9</td>
+<td>System Slots</td>
+</tr>
+<tr>
+<td>10</td>
+<td>On Board Devices</td>
+</tr>
+<tr>
+<td>11</td>
+<td>OEM Strings</td>
+</tr>
+<tr>
+<td>12</td>
+<td>System Configuration Options</td>
+</tr>
+<tr>
+<td>13</td>
+<td>BIOS Language</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Group Associations</td>
+</tr>
+<tr>
+<td>15</td>
+<td>System Event Log</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Physical Memory Array</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Memory Device</td>
+</tr>
+<tr>
+<td>18</td>
+<td>32-bit Memory Error</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Memory Array Mapped Address</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Memory Device Mapped Address</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Built-in Pointing Device</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Portable Battery</td>
+</tr>
+<tr>
+<td>23</td>
+<td>System Reset</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Hardware Security</td>
+</tr>
+<tr>
+<td>25</td>
+<td>System Power Controls</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Voltage Probe</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Cooling Device</td>
+</tr>
+<tr>
+<td>28</td>
+<td>Temperature Probe</td>
+</tr>
+<tr>
+<td>29</td>
+<td>Electrical Current Probe</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Out-of-band Remote Access</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Boot Integrity Services</td>
+</tr>
+<tr>
+<td>32</td>
+<td>System Boot</td>
+</tr>
+<tr>
+<td>33</td>
+<td>64-bit Memory Error</td>
+</tr>
+<tr>
+<td>34</td>
+<td>Management Device</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Management Device Component</td>
+</tr>
+<tr>
+<td>36</td>
+<td>Management Device Threshold Data</td>
+</tr>
+<tr>
+<td>37</td>
+<td>Memory Channel</td>
+</tr>
+<tr>
+<td>38</td>
+<td>IPMI Device</td>
+</tr>
+<tr>
+<td>39</td>
+<td>Power Supply</td>
+</tr>
+<tr>
+<td>40</td>
+<td>Additional Information</td>
+</tr>
+<tr>
+<td>41</td>
+<td>Onboard Devices Extended Information</td>
+</tr>
+<tr>
+<td>42</td>
+<td>Management Controller Host Interface</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>
+<h3 id="打印所以硬件信息简洁示例如下">打印所以硬件信息（简洁）示例如下:</h3>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost ~<span style="color:#f92672">]</span>$ dmidecode -q
+</span></span><span style="display:flex;"><span>//BIOS相关的硬件信息
+</span></span><span style="display:flex;"><span>BIOS Information
+</span></span><span style="display:flex;"><span>        Vendor: Bochs
+</span></span><span style="display:flex;"><span>        Version: Bochs
+</span></span><span style="display:flex;"><span>        Release Date: 01/01/2011
+</span></span><span style="display:flex;"><span>        Address: 0xE8000
+</span></span><span style="display:flex;"><span>        Runtime Size: <span style="color:#ae81ff">96</span> kB
+</span></span><span style="display:flex;"><span>        ROM Size: <span style="color:#ae81ff">64</span> kB
+</span></span><span style="display:flex;"><span>        Characteristics:
+</span></span><span style="display:flex;"><span>                BIOS characteristics not supported
+</span></span><span style="display:flex;"><span>                Targeted content distribution is supported
+</span></span><span style="display:flex;"><span>        BIOS Revision: 1.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//系统相关的硬件信息
+</span></span><span style="display:flex;"><span>System Information
+</span></span><span style="display:flex;"><span>        Manufacturer: Bochs                                    <span style="color:#75715e"># 厂商</span>
+</span></span><span style="display:flex;"><span>        Product Name: Bochs                                    <span style="color:#75715e"># 服务器型号</span>
+</span></span><span style="display:flex;"><span>        Version: Not Specified                                 <span style="color:#75715e"># 版本号</span>
+</span></span><span style="display:flex;"><span>        Serial Number: 641ab5b5-f6c0-431f-864c-4e750d27de04    <span style="color:#75715e"># 主板序列号</span>
+</span></span><span style="display:flex;"><span>        UUID: 641AB5B5-F6C0-431F-864C-4E750D27DE04             <span style="color:#75715e"># UUID</span>
+</span></span><span style="display:flex;"><span>        Wake-up Type: Power Switch
+</span></span><span style="display:flex;"><span>        SKU Number: Not Specified
+</span></span><span style="display:flex;"><span>        Family: Not Specified
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//机箱相关的硬件信息
+</span></span><span style="display:flex;"><span>Chassis Information
+</span></span><span style="display:flex;"><span>        Manufacturer: Bochs
+</span></span><span style="display:flex;"><span>        Type: Other
+</span></span><span style="display:flex;"><span>        Lock: Not Present
+</span></span><span style="display:flex;"><span>        Version: Not Specified
+</span></span><span style="display:flex;"><span>        Serial Number: Not Specified
+</span></span><span style="display:flex;"><span>        Asset Tag: Not Specified
+</span></span><span style="display:flex;"><span>        Boot-up State: Safe
+</span></span><span style="display:flex;"><span>        Power Supply State: Safe
+</span></span><span style="display:flex;"><span>        Thermal State: Safe
+</span></span><span style="display:flex;"><span>        Security Status: Unknown
+</span></span><span style="display:flex;"><span>        OEM Information: 0x00000000
+</span></span><span style="display:flex;"><span>        Height: Unspecified
+</span></span><span style="display:flex;"><span>        Number Of Power Cords: Unspecified
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//处理器相关的硬件信息
+</span></span><span style="display:flex;"><span>Processor Information
+</span></span><span style="display:flex;"><span>        Socket Designation: CPU <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        Type: Central Processor
+</span></span><span style="display:flex;"><span>        Family: Other
+</span></span><span style="display:flex;"><span>        Manufacturer: Bochs
+</span></span><span style="display:flex;"><span>        ID: F1 <span style="color:#ae81ff">06</span> <span style="color:#ae81ff">04</span> <span style="color:#ae81ff">00</span> FF FB 8B 1F
+</span></span><span style="display:flex;"><span>        Version: Not Specified
+</span></span><span style="display:flex;"><span>        Voltage: Unknown
+</span></span><span style="display:flex;"><span>        External Clock: Unknown
+</span></span><span style="display:flex;"><span>        Max Speed: <span style="color:#ae81ff">2000</span> MHz
+</span></span><span style="display:flex;"><span>        Current Speed: <span style="color:#ae81ff">2000</span> MHz
+</span></span><span style="display:flex;"><span>        Status: Populated, Enabled
+</span></span><span style="display:flex;"><span>        Upgrade: Other
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//物理内存阵列
+</span></span><span style="display:flex;"><span>Physical Memory Array
+</span></span><span style="display:flex;"><span>        Location: Other
+</span></span><span style="display:flex;"><span>        Use: System Memory
+</span></span><span style="display:flex;"><span>        Error Correction Type: Multi-bit ECC
+</span></span><span style="display:flex;"><span>        Maximum Capacity: <span style="color:#ae81ff">2</span> GB
+</span></span><span style="display:flex;"><span>        Number Of Devices: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//内存设备
+</span></span><span style="display:flex;"><span>Memory Device
+</span></span><span style="display:flex;"><span>        Total Width: <span style="color:#ae81ff">64</span> bits
+</span></span><span style="display:flex;"><span>        Data Width: <span style="color:#ae81ff">64</span> bits
+</span></span><span style="display:flex;"><span>        Size: <span style="color:#ae81ff">2048</span> MB
+</span></span><span style="display:flex;"><span>        Form Factor: DIMM
+</span></span><span style="display:flex;"><span>        Set: None
+</span></span><span style="display:flex;"><span>        Locator: DIMM <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        Bank Locator: Not Specified
+</span></span><span style="display:flex;"><span>        Type: RAM
+</span></span><span style="display:flex;"><span>        Type Detail: None
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//内存阵列映射地址
+</span></span><span style="display:flex;"><span>Memory Array Mapped Address
+</span></span><span style="display:flex;"><span>        Starting Address: 0x00000000000
+</span></span><span style="display:flex;"><span>        Ending Address: 0x0007FFFFFFF
+</span></span><span style="display:flex;"><span>        Range Size: <span style="color:#ae81ff">2</span> GB
+</span></span><span style="display:flex;"><span>        Partition Width: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//内存设备映射地址
+</span></span><span style="display:flex;"><span>Memory Device Mapped Address
+</span></span><span style="display:flex;"><span>        Starting Address: 0x00000000000
+</span></span><span style="display:flex;"><span>        Ending Address: 0x0007FFFFFFF
+</span></span><span style="display:flex;"><span>        Range Size: <span style="color:#ae81ff">2</span> GB
+</span></span><span style="display:flex;"><span>        Partition Row Position: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>//系统引导
+</span></span><span style="display:flex;"><span>System Boot Information
+</span></span><span style="display:flex;"><span>        Status: No errors detected
+</span></span></code></pre></div><p>来源：<a href="https://www.cnblogs.com/badboy200800/p/12294029.html" target="_blank">【Linux命令】dmidecode命令详解</a></p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/dmidecode/"> dmidecode </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

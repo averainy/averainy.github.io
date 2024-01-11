@@ -6,10 +6,22 @@
 		<description>Recent content in share on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Wed, 06 Dec 2023 17:44:40 +0800</lastBuildDate>
+		<lastBuildDate>Thu, 11 Jan 2024 13:33:05 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/categories/share/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Linux Dmidecode Usage</title>
+			<link>http://www.averainy.com/post/linux-dmidecode-usage/</link>
+			<pubDate>Thu, 11 Jan 2024 13:33:05 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/linux-dmidecode-usage/</guid>
+			<description>
+			
+				dmidecode命令主要是通过DMI获取主机的硬件信息，通常是在不打开计算机机箱的情况下使用该命令来查找硬件详细信息。其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。 什么是DMI？DMI (Desktop Management Interface, DMI)的主 …
+			
+			</description>
+		</item>
 		<item>
 			<title>Implementing String Format Method with TypeScript</title>
 			<link>http://www.averainy.com/post/typescript-string-format/</link>

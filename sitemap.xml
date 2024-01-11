@@ -3,21 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2023-12-06T17:44:40+08:00</lastmod>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2023-12-06T17:44:40+08:00</lastmod>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/post/typescript-string-format/</loc>
-    <lastmod>2023-12-06T17:44:40+08:00</lastmod>
+    <loc>http://www.averainy.com/tags/dmidecode/</loc>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/linux/</loc>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/linux-dmidecode-usage/</loc>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2023-12-06T17:44:40+08:00</lastmod>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2023-12-06T17:44:40+08:00</lastmod>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/typescript-string-format/</loc>
     <lastmod>2023-12-06T17:44:40+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/typescript/</loc>
@@ -66,9 +75,6 @@
     <lastmod>2023-11-08T16:25:17+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/fedora38-use-dnf-remove-old-linux-kernel/</loc>
-    <lastmod>2023-10-31T15:59:14+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/linux/</loc>
     <lastmod>2023-10-31T15:59:14+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/fedora-gnome3-disallow-auto-sleep/</loc>
