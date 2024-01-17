@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="kvm虚拟机迁移操作手册(从Fedora39到Redhat9)">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="kvm,fedora,redhat"><meta name="description" content="kvm虚拟机迁移操作手册(从Fedora39到Redhat9) 查看要迁移的虚拟机名 [root@kvm-179 ~]# virsh list --all Id Name State ----------------------------------- 1 a running …"><meta property="og:title" content="kvm虚拟机迁移操作手册(从Fedora39到Redhat9)" />
+<meta property="og:description" content="kvm虚拟机迁移操作手册(从Fedora39到Redhat9) 查看要迁移的虚拟机名 [root@kvm-179 ~]# virsh list --all Id Name State ----------------------------------- 1 a running 3 b running 4 c running 5 d running 6 e running 7 f running 8 g running 9 g running 10 d running 12 f running 13 d running 14 f running - a shut off - b shut off - test shut off - a shut off 导出 xml文件 [root@kvm-179 ~]# virsh dumpxml test &gt; test.xml 将xml复制到目标服务器 scp test.xml root@192.168.11.150:~/ 查看需要迁移的虚拟" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-17T14:37:48+08:00" />
+<meta property="article:modified_time" content="2024-01-17T14:37:48+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="kvm虚拟机迁移操作手册(从Fedora39到Redhat9)"/>
+<meta name="twitter:description" content="kvm虚拟机迁移操作手册(从Fedora39到Redhat9) 查看要迁移的虚拟机名 [root@kvm-179 ~]# virsh list --all Id Name State ----------------------------------- 1 a running 3 b running 4 c running 5 d running 6 e running 7 f running 8 g running 9 g running 10 d running 12 f running 13 d running 14 f running - a shut off - b shut off - test shut off - a shut off 导出 xml文件 [root@kvm-179 ~]# virsh dumpxml test &gt; test.xml 将xml复制到目标服务器 scp test.xml root@192.168.11.150:~/ 查看需要迁移的虚拟"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>kvm虚拟机迁移操作手册(从Fedora39到Redhat9) | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">17</span>
+				<span class="rest">Jan 2024</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">kvm虚拟机迁移操作手册(从Fedora39到Redhat9)</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<h1 id="kvm虚拟机迁移操作手册从fedora39到redhat9">kvm虚拟机迁移操作手册(从Fedora39到Redhat9)</h1>
+<h3 id="查看要迁移的虚拟机名">查看要迁移的虚拟机名</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@kvm-179 ~<span style="color:#f92672">]</span><span style="color:#75715e"># virsh list --all</span>
+</span></span><span style="display:flex;"><span> Id   Name               State
+</span></span><span style="display:flex;"><span>-----------------------------------
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">1</span>    a            running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">3</span>    b       running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">4</span>    c     running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">5</span>    d       running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">6</span>    e                running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">7</span>    f            running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">8</span>    g            running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">9</span>    g     running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">10</span>   d     running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">12</span>   f         running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">13</span>   d            running
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">14</span>   f     running
+</span></span><span style="display:flex;"><span> -    a              shut off
+</span></span><span style="display:flex;"><span> -    b              shut off
+</span></span><span style="display:flex;"><span> -    test   shut off
+</span></span><span style="display:flex;"><span> -    a             shut off
+</span></span></code></pre></div><h3 id="导出-xml文件">导出 xml文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@kvm-179 ~<span style="color:#f92672">]</span><span style="color:#75715e"># virsh dumpxml test &gt; test.xml</span>
+</span></span></code></pre></div><h3 id="将xml复制到目标服务器">将xml复制到目标服务器</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scp test.xml root@192.168.11.150:~/
+</span></span></code></pre></div><h3 id="查看需要迁移的虚拟机硬盘文件">查看需要迁移的虚拟机硬盘文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@kvm-179 ~<span style="color:#f92672">]</span><span style="color:#75715e"># virsh domblklist test</span>
+</span></span><span style="display:flex;"><span> Target   Source
+</span></span><span style="display:flex;"><span>----------------------------------------------------------------
+</span></span><span style="display:flex;"><span> vda      /home/kvm/data/test/test-sda
+</span></span><span style="display:flex;"><span> sda      -
+</span></span></code></pre></div><h3 id="将虚拟机硬盘文件复制到目标机器">将虚拟机硬盘文件复制到目标机器</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scp /home/kvm/data/test/test-sda root@192.168.11.150:/home/kvm/data_store2/
+</span></span></code></pre></div><h3 id="修改xml文件">修改xml文件</h3>
+<ul>
+<li>修改domain-&gt;devices-&gt;emulator
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>修改前：
+</span></span><span style="display:flex;"><span>&lt;emulator&gt;/usr/bin/qemu-system-x86_64&lt;/emulator&gt;
+</span></span><span style="display:flex;"><span>修改后：
+</span></span><span style="display:flex;"><span>&lt;emulator&gt;/usr/libexec/qemu-kvm&lt;/emulator&gt;
+</span></span></code></pre></div></li>
+<li>修改domain-&gt;os-&gt;type
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>修改前：
+</span></span><span style="display:flex;"><span>&lt;type arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x86_64&#39;</span> machine<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pc-q35-6.1&#39;</span>&gt;hvm&lt;/type&gt;
+</span></span><span style="display:flex;"><span>修改后：
+</span></span><span style="display:flex;"><span>&lt;type arch<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x86_64&#39;</span> machine<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pc-q35-rhel9.0.0&#39;</span>&gt;hvm&lt;/type&gt;
+</span></span></code></pre></div></li>
+<li>修改domain-&gt;os-&gt;loader（如果有这个标签的话）
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>修改前：
+</span></span><span style="display:flex;"><span>&lt;loader readonly<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;yes&#39;</span> type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pflash&#39;</span>&gt;/usr/share/OVMF/OVMF_CODE.fd&lt;/loader&gt;
+</span></span><span style="display:flex;"><span>修改后：
+</span></span><span style="display:flex;"><span>&lt;loader readonly<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;yes&#39;</span> type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pflash&#39;</span>&gt;/usr/share/edk2/ovmf/OVMF_CODE.fd&lt;/loader&gt;
+</span></span></code></pre></div></li>
+<li>修改domain-&gt;devices-&gt;disk-&gt;source
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>修改前：
+</span></span><span style="display:flex;"><span>&lt;source file<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/home/kvm/data/test/test-sda&#39;</span>/&gt;
+</span></span><span style="display:flex;"><span>修改后：
+</span></span><span style="display:flex;"><span>&lt;source file<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/home/kvm/data_store2/test-sda&#39;</span>/&gt;
+</span></span></code></pre></div></li>
+<li>注册虚拟机
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@kvm-150 ~<span style="color:#f92672">]</span><span style="color:#75715e"># virsh define test.xml</span>
+</span></span><span style="display:flex;"><span>Domain <span style="color:#e6db74">&#39;test&#39;</span> defined from test.xml
+</span></span></code></pre></div></li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/fedora/"> fedora </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/kvm/"> kvm </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/redhat/"> redhat </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

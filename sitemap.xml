@@ -3,10 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/fedora/</loc>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/kvm/</loc>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</loc>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/</loc>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/redhat/</loc>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/categories/share/</loc>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/dmidecode/</loc>
     <lastmod>2024-01-11T13:33:05+08:00</lastmod>
@@ -17,23 +38,11 @@
     <loc>http://www.averainy.com/post/linux-dmidecode-usage/</loc>
     <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/</loc>
-    <lastmod>2024-01-11T13:33:05+08:00</lastmod>
-  </url><url>
     <loc>http://www.averainy.com/post/typescript-string-format/</loc>
     <lastmod>2023-12-06T17:44:40+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/typescript/</loc>
     <lastmod>2023-12-06T17:44:40+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/fedora/</loc>
-    <lastmod>2023-11-21T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/how-to-upgrade-fedora-38-to-fedora-39/</loc>
     <lastmod>2023-11-21T13:22:50+08:00</lastmod>
@@ -255,9 +264,6 @@
     <lastmod>2022-10-29T23:03:56+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/Cockpit/</loc>
-    <lastmod>2022-10-10T15:04:38+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/kvm/</loc>
     <lastmod>2022-10-10T15:04:38+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/create-new-VM-in-cockpit/</loc>

@@ -6,10 +6,22 @@
 		<description>Recent content in fedora on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Tue, 21 Nov 2023 13:22:50 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 17 Jan 2024 14:37:48 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>kvm虚拟机迁移操作手册(从Fedora39到Redhat9)</title>
+			<link>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</link>
+			<pubDate>Wed, 17 Jan 2024 14:37:48 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</guid>
+			<description>
+			
+				kvm虚拟机迁移操作手册(从Fedora39到Redhat9) 查看要迁移的虚拟机名 [root@kvm-179 ~]# virsh list --all Id Name State ----------------------------------- 1 a running …
+			
+			</description>
+		</item>
 		<item>
 			<title>How to Upgrade from Fedora 38 to Fedora 39</title>
 			<link>http://www.averainy.com/post/how-to-upgrade-fedora-38-to-fedora-39/</link>

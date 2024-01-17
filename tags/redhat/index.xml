@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>redhat on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/redhat/</link>
+		<description>Recent content in redhat on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Wed, 17 Jan 2024 14:37:48 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/redhat/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>kvm虚拟机迁移操作手册(从Fedora39到Redhat9)</title>
+			<link>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</link>
+			<pubDate>Wed, 17 Jan 2024 14:37:48 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</guid>
+			<description>
+			
+				kvm虚拟机迁移操作手册(从Fedora39到Redhat9) 查看要迁移的虚拟机名 [root@kvm-179 ~]# virsh list --all Id Name State ----------------------------------- 1 a running …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

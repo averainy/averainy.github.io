@@ -6,10 +6,22 @@
 		<description>Recent content in kvm on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Mon, 10 Oct 2022 15:04:38 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 17 Jan 2024 14:37:48 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/kvm/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>kvm虚拟机迁移操作手册(从Fedora39到Redhat9)</title>
+			<link>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</link>
+			<pubDate>Wed, 17 Jan 2024 14:37:48 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</guid>
+			<description>
+			
+				kvm虚拟机迁移操作手册(从Fedora39到Redhat9) 查看要迁移的虚拟机名 [root@kvm-179 ~]# virsh list --all Id Name State ----------------------------------- 1 a running …
+			
+			</description>
+		</item>
 		<item>
 			<title>在Cockpit中创建新的虚拟机</title>
 			<link>http://www.averainy.com/post/create-new-VM-in-cockpit/</link>
