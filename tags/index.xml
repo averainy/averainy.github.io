@@ -6,10 +6,58 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Wed, 17 Jan 2024 14:37:48 +0800</lastBuildDate>
+		<lastBuildDate>Tue, 05 Mar 2024 17:09:23 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>dhcp</title>
+			<link>http://www.averainy.com/tags/dhcp/</link>
+			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/dhcp/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>wds</title>
+			<link>http://www.averainy.com/tags/wds/</link>
+			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/wds/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>windows</title>
+			<link>http://www.averainy.com/tags/windows/</link>
+			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/windows/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>微软</title>
+			<link>http://www.averainy.com/tags/%E5%BE%AE%E8%BD%AF/</link>
+			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/%E5%BE%AE%E8%BD%AF/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>fedora</title>
 			<link>http://www.averainy.com/tags/fedora/</link>
@@ -172,18 +220,6 @@
 			<pubDate>Mon, 16 Oct 2023 16:48:39 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/tags/python/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>windows</title>
-			<link>http://www.averainy.com/tags/windows/</link>
-			<pubDate>Mon, 16 Oct 2023 16:48:39 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/windows/</guid>
 			<description>
 			
 				

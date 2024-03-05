@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>wds on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/wds/</link>
+		<description>Recent content in wds on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Tue, 05 Mar 2024 17:09:23 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/wds/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Windows Wds Note</title>
+			<link>http://www.averainy.com/post/windows-wds-note/</link>
+			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/windows-wds-note/</guid>
+			<description>
+			
+				由于手头没有U盘启动盘，所以想着部署一个Windows WDS服务，遂照着这个链接做了一遍，搞完发现DHCP服务和WDS服务没起作用，即使关了防火墙也不行。后来误打误撞发现把DHCP服务重启下就好了。接着解决WDS服务的问题，结果发现是需要手动启用一下才行。真是巨坑无比。
+
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

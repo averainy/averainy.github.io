@@ -5,10 +5,34 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/dhcp/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/categories/share/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/wds/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/windows/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/windows-wds-note/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/%E5%BE%AE%E8%BD%AF/</loc>
+    <lastmod>2024-03-05T17:09:23+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/fedora/</loc>
     <lastmod>2024-01-17T14:37:48+08:00</lastmod>
@@ -19,16 +43,7 @@
     <loc>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</loc>
     <lastmod>2024-01-17T14:37:48+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
-  </url><url>
     <loc>http://www.averainy.com/tags/redhat/</loc>
-    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/</loc>
     <lastmod>2024-01-17T14:37:48+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/dmidecode/</loc>
@@ -101,9 +116,6 @@
     <lastmod>2023-10-16T16:48:39+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/python/</loc>
-    <lastmod>2023-10-16T16:48:39+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/windows/</loc>
     <lastmod>2023-10-16T16:48:39+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/winreg/</loc>

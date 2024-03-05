@@ -64,6 +64,29 @@
 			<div class="post-header">
 				<div class="meta">
 					<div class="date">
+						<span class="day">05</span>
+						<span class="rest">Mar 2024</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/post/windows-wds-note/">Windows Wds Note</a></h3>
+					<div class="author">
+					
+					</div>
+					<span class="description">
+					
+						由于手头没有U盘启动盘，所以想着部署一个Windows WDS服务，遂照着这个链接做了一遍，搞完发现DHCP服务和WDS服务没起作用，即使关了防火墙也不行。后来误打误撞发现把DHCP服务重启下就好了。接着解决WDS服务的问题，结果发现是需要手动启用一下才行。真是巨坑无比。
+
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
 						<span class="day">17</span>
 						<span class="rest">Jan 2024</span>
 					</div>
@@ -258,28 +281,6 @@ const format = (msg: string, parames?: Object): string => { if (!parames) { retu
 						使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。
 生成system service文件
 podman generate systemd …
-					
-					</span>
-				</div>
-			</div>
-		</div>
-	
-		<div class="post">
-			<div class="post-header">
-				<div class="meta">
-					<div class="date">
-						<span class="day">31</span>
-						<span class="rest">Oct 2023</span>
-					</div>
-				</div>
-				<div class="matter">
-					<h3 class="title small"><a href="/post/fedora38-use-dnf-remove-old-linux-kernel/">Fedora38 Use Dnf Remove Old Linux Kernel</a></h3>
-					<div class="author">
-					
-					</div>
-					<span class="description">
-					
-						 fedora38使用dnf查询已安装内核 sudo dnf list installed kernel 使用dnf删除旧kernel sudo dnf autoremove sudo dnf remove --oldinstallonly 
 					
 					</span>
 				</div>
