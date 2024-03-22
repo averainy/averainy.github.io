@@ -6,10 +6,25 @@
 		<description>Recent content in share on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Tue, 05 Mar 2024 17:09:23 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 22 Mar 2024 09:19:22 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/categories/share/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Svn Cleanup Failed to Run the WC Db Work Queue Associated With</title>
+			<link>http://www.averainy.com/post/svn-cleanup-failed-to-run-the-WC-Db-work-queue-associated-with/</link>
+			<pubDate>Fri, 22 Mar 2024 09:19:22 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/svn-cleanup-failed-to-run-the-WC-Db-work-queue-associated-with/</guid>
+			<description>
+			
+				 go to https://www.sqlite.org/download.html and download sqlite-tools，
+copy sqlite3.exe to /.svn/.
+run cmd or powershell in /.svn/.
+access …
+			
+			</description>
+		</item>
 		<item>
 			<title>Windows Wds Note</title>
 			<link>http://www.averainy.com/post/windows-wds-note/</link>

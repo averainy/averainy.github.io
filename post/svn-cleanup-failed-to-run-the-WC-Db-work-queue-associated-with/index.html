@@ -6,33 +6,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<meta property="og:title" content="Use Chrony Test Ntp Server">
+	<meta property="og:title" content="Svn Cleanup Failed to Run the WC Db Work Queue Associated With">
 	
 	
-	<meta name="author" content="averainy"><meta name="keywords" content="chrony,linux,NTP"><meta name="description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
-we can use the following command to test the NTP …"><meta property="og:title" content="Use Chrony Test Ntp Server" />
-<meta property="og:description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
-we can use the following command to test the NTP service
-chronyd -q &#39;server 192.168.11.145 iburst&#39; if the NTP service works well the console will ouput the following content
-[root@fedora ~]# chronyd -q &#39;server 192.168.11.145 iburst&#39; 2022-07-08T06:37:35Z chronyd version 4.2 starting (&#43;CMDMON &#43;NTP &#43;REFCLOCK &#43;RTC &#43;PRIVDROP &#43;SCFILTER &#43;SIGND &#43;ASYNCDNS &#43;NTS &#43;SECHASH &#43;IPV6 &#43;DEBUG) 2022-07-08T06:37:35Z Initial frequency -2.216 ppm 2022-07-08T06:37:39Z System clock wrong by -0.063491 seconds (step) 2022-07-08T06:37:39Z chronyd exiting it&rsquo;s over" />
+	<meta name="author" content="averainy"><meta name="keywords" content="svn"><meta name="description" content=" go to https://www.sqlite.org/download.html and download sqlite-tools，
+copy sqlite3.exe to /.svn/.
+run cmd or powershell in /.svn/.
+access …"><meta property="og:title" content="Svn Cleanup Failed to Run the WC Db Work Queue Associated With" />
+<meta property="og:description" content=" go to https://www.sqlite.org/download.html and download sqlite-tools，
+copy sqlite3.exe to /.svn/.
+run cmd or powershell in /.svn/.
+access wc.db:
+sqlite3 wc.db find error message: select * from work_queue; delete error message： delete from work_queue; run svn cleanup command again. " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/use-chrony-test-ntp-server/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-07-08T14:57:43+08:00" />
-<meta property="article:modified_time" content="2022-07-08T14:57:43+08:00" />
+<meta property="og:url" content="http://www.averainy.com/post/svn-cleanup-failed-to-run-the-WC-Db-work-queue-associated-with/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-03-22T09:19:22+08:00" />
+<meta property="article:modified_time" content="2024-03-22T09:19:22+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Use Chrony Test Ntp Server"/>
-<meta name="twitter:description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
-we can use the following command to test the NTP service
-chronyd -q &#39;server 192.168.11.145 iburst&#39; if the NTP service works well the console will ouput the following content
-[root@fedora ~]# chronyd -q &#39;server 192.168.11.145 iburst&#39; 2022-07-08T06:37:35Z chronyd version 4.2 starting (&#43;CMDMON &#43;NTP &#43;REFCLOCK &#43;RTC &#43;PRIVDROP &#43;SCFILTER &#43;SIGND &#43;ASYNCDNS &#43;NTS &#43;SECHASH &#43;IPV6 &#43;DEBUG) 2022-07-08T06:37:35Z Initial frequency -2.216 ppm 2022-07-08T06:37:39Z System clock wrong by -0.063491 seconds (step) 2022-07-08T06:37:39Z chronyd exiting it&rsquo;s over"/>
+<meta name="twitter:title" content="Svn Cleanup Failed to Run the WC Db Work Queue Associated With"/>
+<meta name="twitter:description" content=" go to https://www.sqlite.org/download.html and download sqlite-tools，
+copy sqlite3.exe to /.svn/.
+run cmd or powershell in /.svn/.
+access wc.db:
+sqlite3 wc.db find error message: select * from work_queue; delete error message： delete from work_queue; run svn cleanup command again. "/>
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/js/c.js"></script>
-	<title>Use Chrony Test Ntp Server | averainy&#39;s Blog</title>
+	<title>Svn Cleanup Failed to Run the WC Db Work Queue Associated With | averainy&#39;s Blog</title>
 
 
 <meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
@@ -73,27 +77,43 @@ chronyd -q &#39;server 192.168.11.145 iburst&#39; if the NTP service works well 
 		<div class="meta">
 			
 			<div class="date">
-				<span class="day">08</span>
-				<span class="rest">Jul 2022</span>
+				<span class="day">22</span>
+				<span class="rest">Mar 2024</span>
 			</div>
 			
 		</div>
 		
 		<div class="matter">
-			<h1 class="title">Use Chrony Test Ntp Server</h1>
+			<h1 class="title">Svn Cleanup Failed to Run the WC Db Work Queue Associated With</h1>
 		</div>
 	</div>
 	<div class="markdown">
-		<p>when we have setuped a ntp service ,we need to test the ntp service if it work well.<br>
-we can use  the following command to test the NTP service</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>chronyd -q <span style="color:#e6db74">&#39;server 192.168.11.145 iburst&#39;</span>
-</span></span></code></pre></div><p>if the NTP service works well the console will ouput the following content</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@fedora ~<span style="color:#f92672">]</span><span style="color:#75715e"># chronyd -q &#39;server 192.168.11.145 iburst&#39;</span>
-</span></span><span style="display:flex;"><span>2022-07-08T06:37:35Z chronyd version 4.2 starting <span style="color:#f92672">(</span>+CMDMON +NTP +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +ASYNCDNS +NTS +SECHASH +IPV6 +DEBUG<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>2022-07-08T06:37:35Z Initial frequency -2.216 ppm
-</span></span><span style="display:flex;"><span>2022-07-08T06:37:39Z System clock wrong by -0.063491 seconds <span style="color:#f92672">(</span>step<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>2022-07-08T06:37:39Z chronyd exiting
-</span></span></code></pre></div><p>it&rsquo;s over</p>
+		<ol>
+<li>
+<p>go to <a href="https://www.sqlite.org/download.html" target="_blank">https://www.sqlite.org/download.html</a> and download sqlite-tools，</p>
+</li>
+<li>
+<p>copy sqlite3.exe to <svn repo>/.svn/.</p>
+</li>
+<li>
+<p>run cmd or powershell in <svn repo>/.svn/.</p>
+</li>
+<li>
+<p>access wc.db:</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlite3 wc.db
+</span></span></code></pre></div><ol start="5">
+<li>find error message:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">select</span> * from work_queue;
+</span></span></code></pre></div><ol start="6">
+<li>delete error message：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>delete from work_queue;
+</span></span></code></pre></div><ol start="7">
+<li>run svn cleanup command again.</li>
+</ol>
 
 	</div>
 	
@@ -116,73 +136,73 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -301,7 +321,6 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
-			<a href="/tags/NTP/"> NTP </a>
 			
 			
 			
@@ -335,7 +354,6 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
-			<a href="/tags/chrony/"> chrony </a>
 			
 			
 			
@@ -473,7 +491,6 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
-			<a href="/tags/linux/"> linux </a>
 			
 			
 			
@@ -562,8 +579,7 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
-			
-			
+			<a href="/tags/svn/"> svn </a>
 			
 			
 			
