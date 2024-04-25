@@ -6,7 +6,7 @@
 		<description>Recent content on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Fri, 22 Mar 2024 09:19:22 +0800</lastBuildDate>
+		<lastBuildDate>Thu, 25 Apr 2024 13:22:50 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/index.xml" rel="self" type="application/rss+xml" />
 		
@@ -19,6 +19,19 @@
 			<description>
 			
 				 password-generator 
+			
+			</description>
+		</item>
+		<item>
+			<title>How to Upgrade from Fedora 39 to Fedora 40</title>
+			<link>http://www.averainy.com/post/how-to-upgrade-fedora-39-to-fedora-40/</link>
+			<pubDate>Thu, 25 Apr 2024 13:22:50 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-upgrade-fedora-39-to-fedora-40/</guid>
+			<description>
+			
+				升级Fedora40前准备 在升级Fedora40之前务必做好以下准备：
+备份数据。 确保电源稳定。 确保网络正常。 升级Fedora40步骤 更新Fedora39 将Fedora39的所有软件包升级到最新版本 sudo dnf upgrade --refresh 安 …
 			
 			</description>
 		</item>

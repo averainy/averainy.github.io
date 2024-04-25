@@ -5,24 +5,30 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-03-22T09:19:22+08:00</lastmod>
+    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-03-22T09:19:22+08:00</lastmod>
+    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/fedora/</loc>
+    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/how-to-upgrade-fedora-39-to-fedora-40/</loc>
+    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-03-22T09:19:22+08:00</lastmod>
+    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2024-03-22T09:19:22+08:00</lastmod>
+    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/svn/</loc>
     <lastmod>2024-03-22T09:19:22+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/svn-cleanup-failed-to-run-the-WC-Db-work-queue-associated-with/</loc>
-    <lastmod>2024-03-22T09:19:22+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/</loc>
     <lastmod>2024-03-22T09:19:22+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/%E5%81%A5%E5%BA%B7/</loc>
@@ -54,9 +60,6 @@
   </url><url>
     <loc>http://www.averainy.com/tags/%E5%BE%AE%E8%BD%AF/</loc>
     <lastmod>2024-03-05T17:09:23+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/fedora/</loc>
-    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/kvm/</loc>
     <lastmod>2024-01-17T14:37:48+08:00</lastmod>

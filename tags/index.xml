@@ -6,10 +6,22 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Fri, 22 Mar 2024 09:19:22 +0800</lastBuildDate>
+		<lastBuildDate>Thu, 25 Apr 2024 13:22:50 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>fedora</title>
+			<link>http://www.averainy.com/tags/fedora/</link>
+			<pubDate>Thu, 25 Apr 2024 13:22:50 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/fedora/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>svn</title>
 			<link>http://www.averainy.com/tags/svn/</link>
@@ -100,18 +112,6 @@
 			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/tags/%E5%BE%AE%E8%BD%AF/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>fedora</title>
-			<link>http://www.averainy.com/tags/fedora/</link>
-			<pubDate>Wed, 17 Jan 2024 14:37:48 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/fedora/</guid>
 			<description>
 			
 				
