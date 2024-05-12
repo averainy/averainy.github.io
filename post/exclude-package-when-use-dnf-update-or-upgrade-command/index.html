@@ -6,27 +6,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<meta property="og:title" content="How to Upgrade from Fedora 39 to Fedora 40">
+	<meta property="og:title" content="Exclude Package When Use Dnf Update or Upgrade Command">
 	
 	
-	<meta name="author" content="averainy"><meta name="keywords" content="Fedora"><meta name="description" content="升级Fedora40前准备 在升级Fedora40之前务必做好以下准备：
-备份数据。 确保电源稳定。 确保网络正常。 升级Fedora40步骤 更新Fedora39 将Fedora39的所有软件包升级到最新版本 sudo dnf upgrade --refresh 安 …"><meta property="og:title" content="How to Upgrade from Fedora 39 to Fedora 40" />
-<meta property="og:description" content="升级Fedora40前准备 在升级Fedora40之前务必做好以下准备： 备份数据。 确保电源稳定。 确保网络正常。 升级Fedora40步骤 更新Fedora39 将Fedora39的所有软件包升级到最新版本 sudo dnf upgrade --refresh 安装dnf-plugin-system-upgrade 一般情况下dnf-pl" />
+	<meta name="author" content="averainy"><meta name="keywords" content="dnf,redhat"><meta name="description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an …"><meta property="og:title" content="Exclude Package When Use Dnf Update or Upgrade Command" />
+<meta property="og:description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an update includes a regression or a bug. DNF allows you to exclude a package from the transaction:
+using the command line sudo dnf upgrade --exclude=packagename using its configuration files You can add a line to /etc/dnf/dnf.conf to exclude packages: excludepkgs=packagename Using the DNF Versionlock plugin # install versionlock sudo dnf install &#39;dnf-command(versionlock)&#39; # lock the currently installed version of a package sudo dnf versionlock add package # remove the version lock sudo dnf versionlock delete package # list all locked packages sudo dnf versionlock list " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/how-to-upgrade-fedora-39-to-fedora-40/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2024-04-25T13:22:50+08:00" />
-<meta property="article:modified_time" content="2024-04-25T13:22:50+08:00" />
+<meta property="og:url" content="http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-05-12T18:05:26+08:00" />
+<meta property="article:modified_time" content="2024-05-12T18:05:26+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="How to Upgrade from Fedora 39 to Fedora 40"/>
-<meta name="twitter:description" content="升级Fedora40前准备 在升级Fedora40之前务必做好以下准备： 备份数据。 确保电源稳定。 确保网络正常。 升级Fedora40步骤 更新Fedora39 将Fedora39的所有软件包升级到最新版本 sudo dnf upgrade --refresh 安装dnf-plugin-system-upgrade 一般情况下dnf-pl"/>
+<meta name="twitter:title" content="Exclude Package When Use Dnf Update or Upgrade Command"/>
+<meta name="twitter:description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an update includes a regression or a bug. DNF allows you to exclude a package from the transaction:
+using the command line sudo dnf upgrade --exclude=packagename using its configuration files You can add a line to /etc/dnf/dnf.conf to exclude packages: excludepkgs=packagename Using the DNF Versionlock plugin # install versionlock sudo dnf install &#39;dnf-command(versionlock)&#39; # lock the currently installed version of a package sudo dnf versionlock add package # remove the version lock sudo dnf versionlock delete package # list all locked packages sudo dnf versionlock list "/>
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/js/c.js"></script>
-	<title>How to Upgrade from Fedora 39 to Fedora 40 | averainy&#39;s Blog</title>
+	<title>Exclude Package When Use Dnf Update or Upgrade Command | averainy&#39;s Blog</title>
 
 
 <meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
@@ -67,49 +68,39 @@
 		<div class="meta">
 			
 			<div class="date">
-				<span class="day">25</span>
-				<span class="rest">Apr 2024</span>
+				<span class="day">12</span>
+				<span class="rest">May 2024</span>
 			</div>
 			
 		</div>
 		
 		<div class="matter">
-			<h1 class="title">How to Upgrade from Fedora 39 to Fedora 40</h1>
+			<h1 class="title">Exclude Package When Use Dnf Update or Upgrade Command</h1>
 		</div>
 	</div>
 	<div class="markdown">
-		<h2 id="升级fedora40前准备">升级Fedora40前准备</h2>
-<p>在升级Fedora40之前务必做好以下准备：</p>
+		<p>Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an update includes a regression or a bug. DNF allows you to exclude a package from the transaction:</p>
 <ol>
-<li>备份数据。</li>
-<li>确保电源稳定。</li>
-<li>确保网络正常。</li>
+<li>using the command line</li>
 </ol>
-<h2 id="升级fedora40步骤">升级Fedora40步骤</h2>
-<ol>
-<li>更新Fedora39
-将Fedora39的所有软件包升级到最新版本
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf upgrade --refresh
-</span></span></code></pre></div></li>
-<li>安装dnf-plugin-system-upgrade
-一般情况下dnf-plugin-system-upgrade已经安装了，如果未安装可以执行以下命令安装
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install dnf-plugin-system-upgrade -y
-</span></span></code></pre></div></li>
-<li>升级到Fedora40
-执行以下命令升级到Fedora40
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf system-upgrade download --releasever<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>
-</span></span></code></pre></div>如果执行上个命令中出现包不兼容，导致升级失败的情况下，可以使用以下命令
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf system-upgrade download --releasever<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span> --allowerasing.
-</span></span></code></pre></div>上个命令执行成功的情况下执行以下命令升级
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf system-upgrade reboot
-</span></span></code></pre></div>系统重启后，开始执行升级。大约30分钟左右即可升级完成。</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf upgrade --exclude<span style="color:#f92672">=</span>packagename
+</span></span></code></pre></div><ol start="2">
+<li>using its configuration files
+You can add a line to /etc/dnf/dnf.conf to exclude packages:</li>
 </ol>
-<h2 id="升级fedora40成功后的操作">升级Fedora40成功后的操作</h2>
-<p>确认升级Fedora39成功之后执行以下操作删除用不到的包和linux内核</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf autoremove -y
-</span></span><span style="display:flex;"><span>sudo dnf remove --oldinstallonly -y
-</span></span></code></pre></div><p>上述操作执行完之后，你将得到一个全新的升级成功的Fedora40系统。</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>excludepkgs<span style="color:#f92672">=</span>packagename
+</span></span></code></pre></div><ol start="3">
+<li>Using the DNF Versionlock plugin</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># install versionlock</span>
+</span></span><span style="display:flex;"><span>sudo dnf install <span style="color:#e6db74">&#39;dnf-command(versionlock)&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># lock the currently installed version of a package</span>
+</span></span><span style="display:flex;"><span>sudo dnf versionlock add package
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># remove the version lock</span>
+</span></span><span style="display:flex;"><span>sudo dnf versionlock delete package
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># list all locked packages</span>
+</span></span><span style="display:flex;"><span>sudo dnf versionlock list
+</span></span></code></pre></div>
 	</div>
 	
 	
@@ -131,9 +122,9 @@
 			
 			
 			
-			
-			
 			<a href="/categories/share/"> share </a>
+			
+			
 			
 			
 			
@@ -312,7 +303,6 @@
 			
 			
 			
-			<a href="/tags/Fedora/"> Fedora </a>
 			
 			
 			
@@ -383,6 +373,7 @@
 			
 			
 			
+			<a href="/tags/dnf/"> dnf </a>
 			
 			
 			
@@ -545,6 +536,8 @@
 			
 			
 			
+			
+			<a href="/tags/redhat/"> redhat </a>
 			
 			
 			

@@ -5,24 +5,33 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/dnf/</loc>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/</loc>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/</loc>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/redhat/</loc>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/categories/share/</loc>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/fedora/</loc>
     <lastmod>2024-04-25T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/how-to-upgrade-fedora-39-to-fedora-40/</loc>
-    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/</loc>
     <lastmod>2024-04-25T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/svn/</loc>
@@ -67,9 +76,6 @@
     <loc>http://www.averainy.com/post/migrate-kvm-from-fedora39-to-redhat9/</loc>
     <lastmod>2024-01-17T14:37:48+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/tags/redhat/</loc>
-    <lastmod>2024-01-17T14:37:48+08:00</lastmod>
-  </url><url>
     <loc>http://www.averainy.com/tags/dmidecode/</loc>
     <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
@@ -108,9 +114,6 @@
   </url><url>
     <loc>http://www.averainy.com/post/how-to-upgrade-fedora-36-to-fedora-38/</loc>
     <lastmod>2023-11-09T14:22:50+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/dnf/</loc>
-    <lastmod>2023-11-09T12:54:11+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/how-to-speed-up-dnf-package-manager-in-fedora/</loc>
     <lastmod>2023-11-09T12:54:11+08:00</lastmod>

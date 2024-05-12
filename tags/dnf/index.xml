@@ -6,10 +6,22 @@
 		<description>Recent content in dnf on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Thu, 09 Nov 2023 12:54:11 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 12 May 2024 18:05:26 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/dnf/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Exclude Package When Use Dnf Update or Upgrade Command</title>
+			<link>http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/</link>
+			<pubDate>Sun, 12 May 2024 18:05:26 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/</guid>
+			<description>
+			
+				Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an …
+			
+			</description>
+		</item>
 		<item>
 			<title>How To Speed Up DNF Package Manager In Fedora, RHEL, CentOS, AlmaLinux, Rocky Linux And All RHEL-based systems</title>
 			<link>http://www.averainy.com/post/how-to-speed-up-dnf-package-manager-in-fedora/</link>
