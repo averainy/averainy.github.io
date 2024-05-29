@@ -5,10 +5,28 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/decorator/</loc>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-typescript/</loc>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/</loc>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/categories/share/</loc>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/typescript/</loc>
+    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/dnf/</loc>
     <lastmod>2024-05-12T18:05:26+08:00</lastmod>
@@ -16,16 +34,7 @@
     <loc>http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/</loc>
     <lastmod>2024-05-12T18:05:26+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
-  </url><url>
     <loc>http://www.averainy.com/tags/redhat/</loc>
-    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2024-05-12T18:05:26+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/</loc>
     <lastmod>2024-05-12T18:05:26+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/fedora/</loc>
@@ -86,9 +95,6 @@
     <lastmod>2024-01-11T13:33:05+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/typescript-string-format/</loc>
-    <lastmod>2023-12-06T17:44:40+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/typescript/</loc>
     <lastmod>2023-12-06T17:44:40+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/how-to-upgrade-fedora-38-to-fedora-39/</loc>

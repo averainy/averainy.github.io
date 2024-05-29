@@ -6,10 +6,22 @@
 		<description>Recent content in Posts on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Sun, 12 May 2024 18:05:26 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 29 May 2024 12:39:18 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/post/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>How to Use Decorators to Print Log in Typescript</title>
+			<link>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-typescript/</link>
+			<pubDate>Wed, 29 May 2024 12:39:18 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-typescript/</guid>
+			<description>
+			
+				 creat a decorator: function logDecorator(target: any, propertyName: string, descriptor: PropertyDescriptor) { const originalMethod = …
+			
+			</description>
+		</item>
 		<item>
 			<title>Exclude Package When Use Dnf Update or Upgrade Command</title>
 			<link>http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/</link>
