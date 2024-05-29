@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.102.2" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="How to Use Decorators to Print Log in Python">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="python,decorator"><meta name="description" content=" creat a decorator: def logDecorator(func): def wrapper(*args, **kwargs): print(f&#34;Call function {func.__name__} with args {args} and kwargs …"><meta property="og:title" content="How to Use Decorators to Print Log in Python" />
+<meta property="og:description" content=" creat a decorator: def logDecorator(func): def wrapper(*args, **kwargs): print(f&#34;Call function {func.__name__} with args {args} and kwargs {kwargs}&#34;) result = func(*args, **kwargs) print(f&#34;Function {func.__name__} returned {result}&#34;) return result return wrapper use this decorator @logDecorator def add(x, y): return x &#43; y full code:
+def logDecorator(func): def wrapper(*args, **kwargs): print(f&#34;Call function {func.__name__} with args {args} and kwargs {kwargs}&#34;) result = func(*args, **kwargs) print(f&#34;Function {func.__name__} returned {result}&#34;) return result return wrapper @logDecorator def add(x, y): return x &#43; y console print log:
+Call function add with args (3, 5) and kwargs {} Function add returned 8 8 " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-05-29T17:00:18+08:00" />
+<meta property="article:modified_time" content="2024-05-29T17:00:18+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to Use Decorators to Print Log in Python"/>
+<meta name="twitter:description" content=" creat a decorator: def logDecorator(func): def wrapper(*args, **kwargs): print(f&#34;Call function {func.__name__} with args {args} and kwargs {kwargs}&#34;) result = func(*args, **kwargs) print(f&#34;Function {func.__name__} returned {result}&#34;) return result return wrapper use this decorator @logDecorator def add(x, y): return x &#43; y full code:
+def logDecorator(func): def wrapper(*args, **kwargs): print(f&#34;Call function {func.__name__} with args {args} and kwargs {kwargs}&#34;) result = func(*args, **kwargs) print(f&#34;Function {func.__name__} returned {result}&#34;) return result return wrapper @logDecorator def add(x, y): return x &#43; y console print log:
+Call function add with args (3, 5) and kwargs {} Function add returned 8 8 "/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>How to Use Decorators to Print Log in Python | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/links/">Links</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">29</span>
+				<span class="rest">May 2024</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">How to Use Decorators to Print Log in Python</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<ol>
+<li>creat a decorator:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>def logDecorator<span style="color:#f92672">(</span>func<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    def wrapper<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;Call function {func.__name__} with args {args} and kwargs {kwargs}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> func<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;Function {func.__name__} returned {result}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper
+</span></span></code></pre></div><ol start="2">
+<li>use this decorator</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>@logDecorator
+</span></span><span style="display:flex;"><span>def add<span style="color:#f92672">(</span>x, y<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x + y
+</span></span></code></pre></div><p>full code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>def logDecorator<span style="color:#f92672">(</span>func<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    def wrapper<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;Call function {func.__name__} with args {args} and kwargs {kwargs}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> func<span style="color:#f92672">(</span>*args, **kwargs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;Function {func.__name__} returned {result}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper
+</span></span><span style="display:flex;"><span>@logDecorator
+</span></span><span style="display:flex;"><span>def add<span style="color:#f92672">(</span>x, y<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x + y
+</span></span></code></pre></div><p>console print log:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Call <span style="color:#66d9ef">function</span> add with args <span style="color:#f92672">(</span>3, 5<span style="color:#f92672">)</span> and kwargs <span style="color:#f92672">{}</span>
+</span></span><span style="display:flex;"><span>Function add returned <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>
+</span></span></code></pre></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/decorator/"> decorator </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/python/"> python </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+
+</body>
+</html>

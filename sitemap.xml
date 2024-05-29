@@ -5,24 +5,30 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/decorator/</loc>
-    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-typescript/</loc>
-    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+    <loc>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/</loc>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/python/</loc>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2024-05-29T12:39:18+08:00</lastmod>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-typescript/</loc>
     <lastmod>2024-05-29T12:39:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/typescript/</loc>
@@ -146,9 +152,6 @@
     <lastmod>2023-10-23T17:20:33+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</loc>
-    <lastmod>2023-10-16T16:48:39+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/python/</loc>
     <lastmod>2023-10-16T16:48:39+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/winreg/</loc>

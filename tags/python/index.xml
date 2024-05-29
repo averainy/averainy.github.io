@@ -6,10 +6,22 @@
 		<description>Recent content in python on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Mon, 16 Oct 2023 16:48:39 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 29 May 2024 17:00:18 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>How to Use Decorators to Print Log in Python</title>
+			<link>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/</link>
+			<pubDate>Wed, 29 May 2024 17:00:18 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/</guid>
+			<description>
+			
+				 creat a decorator: def logDecorator(func): def wrapper(*args, **kwargs): print(f"Call function {func.__name__} with args {args} and kwargs …
+			
+			</description>
+		</item>
 		<item>
 			<title>Get Windows Installed Software by Winreg</title>
 			<link>http://www.averainy.com/post/get-windows-installed-software-by-winreg/</link>

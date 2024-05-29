@@ -6,10 +6,22 @@
 		<description>Recent content in Posts on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Wed, 29 May 2024 12:39:18 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 29 May 2024 17:00:18 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/post/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>How to Use Decorators to Print Log in Python</title>
+			<link>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/</link>
+			<pubDate>Wed, 29 May 2024 17:00:18 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/</guid>
+			<description>
+			
+				 creat a decorator: def logDecorator(func): def wrapper(*args, **kwargs): print(f"Call function {func.__name__} with args {args} and kwargs …
+			
+			</description>
+		</item>
 		<item>
 			<title>How to Use Decorators to Print Log in Typescript</title>
 			<link>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-typescript/</link>
