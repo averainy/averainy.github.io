@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>bash on averainy&#39;s Blog</title>
+		<title>Bash on averainy&#39;s Blog</title>
 		<link>http://www.averainy.com/tags/bash/</link>
-		<description>Recent content in bash on www.averainy.com</description>
+		<description>Recent content in Bash on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<lastBuildDate>Fri, 02 Sep 2022 10:24:47 +0800</lastBuildDate>

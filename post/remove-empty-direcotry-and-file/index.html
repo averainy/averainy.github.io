@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,16 +10,21 @@
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="python,script"><meta name="description" content="背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。
-代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import …"><meta property="og:title" content="自动删除空文件以及空文件夹" />
-<meta property="og:description" content="背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。 代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import os root_dir=&#34;/volume2/d/pt&#34; def deldir(path): &#34;&#34;&#34; 清理空文件夹和空文件 param path: 文件路径，检查此文件路径下的子文件 &#34;&#34;&#34; try: files = os.listdir(path) # 获取路径下的子文件(夹)列表 for file in files: if os.path.isdir(os.path.join(path,file)):" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/remove-empty-direcotry-and-file/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-10-09T11:02:42+08:00" />
-<meta property="article:modified_time" content="2022-10-09T11:02:42+08:00" />
+代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import …"><meta property="og:url" content="http://www.averainy.com/post/remove-empty-direcotry-and-file/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="自动删除空文件以及空文件夹">
+  <meta property="og:description" content="背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。 代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import os root_dir=&#34;/volume2/d/pt&#34; def deldir(path): &#34;&#34;&#34; 清理空文件夹和空文件 param path: 文件路径，检查此文件路径下的子文件 &#34;&#34;&#34; try: files = os.listdir(path) # 获取路径下的子文件(夹)列表 for file in files: if os.path.isdir(os.path.join(path,file)):">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-10-09T11:02:42+08:00">
+    <meta property="article:modified_time" content="2022-10-09T11:02:42+08:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Script">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="自动删除空文件以及空文件夹"/>
-<meta name="twitter:description" content="背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。 代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import os root_dir=&#34;/volume2/d/pt&#34; def deldir(path): &#34;&#34;&#34; 清理空文件夹和空文件 param path: 文件路径，检查此文件路径下的子文件 &#34;&#34;&#34; try: files = os.listdir(path) # 获取路径下的子文件(夹)列表 for file in files: if os.path.isdir(os.path.join(path,file)):"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="自动删除空文件以及空文件夹">
+  <meta name="twitter:description" content="背景 最近在整理nas上的文件，发现有很多的空目录没有删除。为了删除这些空文件和空文件夹，所以用python写了一个脚本来执行这些操作。 代码 #!/bin/python # -*- coding: utf-8 -*- import time import sys import os root_dir=&#34;/volume2/d/pt&#34; def deldir(path): &#34;&#34;&#34; 清理空文件夹和空文件 param path: 文件路径，检查此文件路径下的子文件 &#34;&#34;&#34; try: files = os.listdir(path) # 获取路径下的子文件(夹)列表 for file in files: if os.path.isdir(os.path.join(path,file)):">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -286,6 +291,8 @@
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -302,14 +309,6 @@
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -787,6 +786,12 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -798,7 +803,6 @@
 	</div></div>
 
   </main>
-
 
 
 

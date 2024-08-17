@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +11,22 @@
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="python,linux,systemd"><meta name="description" content="systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。
 代码如下
-# -*- coding: utf-8 …"><meta property="og:title" content="Monitor Systemd Services With Python" />
-<meta property="og:description" content="systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。 代码如下 # -*- coding: utf-8 -*- import subprocess from subprocess import check_output,run def get_process_id(service): &#34;&#34;&#34; 返回服务的主进程 PID &#34;&#34;&#34; cmd = &#39;systemctl show" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/monitor-systemd-services-with-python/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-04-02T09:00:25+08:00" />
-<meta property="article:modified_time" content="2022-04-02T09:00:25+08:00" />
+# -*- coding: utf-8 …"><meta property="og:url" content="http://www.averainy.com/post/monitor-systemd-services-with-python/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Monitor Systemd Services With Python">
+  <meta property="og:description" content="systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。 代码如下 # -*- coding: utf-8 -*- import subprocess from subprocess import check_output,run def get_process_id(service): &#34;&#34;&#34; 返回服务的主进程 PID &#34;&#34;&#34; cmd = &#39;systemctl show">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-04-02T09:00:25+08:00">
+    <meta property="article:modified_time" content="2022-04-02T09:00:25+08:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Systemd">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Monitor Systemd Services With Python"/>
-<meta name="twitter:description" content="systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。 代码如下 # -*- coding: utf-8 -*- import subprocess from subprocess import check_output,run def get_process_id(service): &#34;&#34;&#34; 返回服务的主进程 PID &#34;&#34;&#34; cmd = &#39;systemctl show"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Monitor Systemd Services With Python">
+  <meta name="twitter:description" content="systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。 代码如下 # -*- coding: utf-8 -*- import subprocess from subprocess import check_output,run def get_process_id(service): &#34;&#34;&#34; 返回服务的主进程 PID &#34;&#34;&#34; cmd = &#39;systemctl show">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -220,6 +226,8 @@
 			
 			
 			<a href="/categories/share/"> share </a>
+			
+			
 			
 			
 			
@@ -494,19 +502,11 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
 			
 			
 			
@@ -784,6 +784,12 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -795,7 +801,6 @@
 	</div></div>
 
   </main>
-
 
 
 

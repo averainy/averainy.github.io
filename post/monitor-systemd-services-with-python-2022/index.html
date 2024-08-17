@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,16 +10,22 @@
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="python,linux,systemd"><meta name="description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下：
-# -*- …"><meta property="og:title" content="使用python监控systemd服务修改版" />
-<meta property="og:description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下： # -*- coding: utf-8 -*- import logging import subprocess from subprocess import check_output,run logger = logging.getLogger() logger.setLevel(logging.DEBUG) # 设置全局日志level，" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/monitor-systemd-services-with-python-2022/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-11-08T09:40:18+08:00" />
-<meta property="article:modified_time" content="2022-11-08T09:40:18+08:00" />
+# -*- …"><meta property="og:url" content="http://www.averainy.com/post/monitor-systemd-services-with-python-2022/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="使用python监控systemd服务修改版">
+  <meta property="og:description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下： # -*- coding: utf-8 -*- import logging import subprocess from subprocess import check_output,run logger = logging.getLogger() logger.setLevel(logging.DEBUG) # 设置全局日志level，">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-11-08T09:40:18+08:00">
+    <meta property="article:modified_time" content="2022-11-08T09:40:18+08:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Systemd">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="使用python监控systemd服务修改版"/>
-<meta name="twitter:description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下： # -*- coding: utf-8 -*- import logging import subprocess from subprocess import check_output,run logger = logging.getLogger() logger.setLevel(logging.DEBUG) # 设置全局日志level，"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="使用python监控systemd服务修改版">
+  <meta name="twitter:description" content="以前写过一个监控systemd service的脚本，在使用过程中发现了一些问题，比如service不存在时，或者service状态是 **Active: active (exited)**的时候会误认为service未启动，因此做了一下修正。 代码如下： # -*- coding: utf-8 -*- import logging import subprocess from subprocess import check_output,run logger = logging.getLogger() logger.setLevel(logging.DEBUG) # 设置全局日志level，">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -205,6 +211,8 @@
 			
 			
 			<a href="/categories/share/"> share </a>
+			
+			
 			
 			
 			
@@ -499,19 +507,11 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
 			
 			
 			
@@ -805,6 +805,12 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -816,7 +822,6 @@
 	</div></div>
 
   </main>
-
 
 
 

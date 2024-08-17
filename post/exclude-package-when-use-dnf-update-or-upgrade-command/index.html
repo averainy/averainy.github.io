@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,18 +9,23 @@
 	<meta property="og:title" content="Exclude Package When Use Dnf Update or Upgrade Command">
 	
 	
-	<meta name="author" content="averainy"><meta name="keywords" content="dnf,redhat"><meta name="description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an …"><meta property="og:title" content="Exclude Package When Use Dnf Update or Upgrade Command" />
-<meta property="og:description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an update includes a regression or a bug. DNF allows you to exclude a package from the transaction:
-using the command line sudo dnf upgrade --exclude=packagename using its configuration files You can add a line to /etc/dnf/dnf.conf to exclude packages: excludepkgs=packagename Using the DNF Versionlock plugin # install versionlock sudo dnf install &#39;dnf-command(versionlock)&#39; # lock the currently installed version of a package sudo dnf versionlock add package # remove the version lock sudo dnf versionlock delete package # list all locked packages sudo dnf versionlock list " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2024-05-12T18:05:26+08:00" />
-<meta property="article:modified_time" content="2024-05-12T18:05:26+08:00" />
+	<meta name="author" content="averainy"><meta name="keywords" content="dnf,redhat"><meta name="description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an …"><meta property="og:url" content="http://www.averainy.com/post/exclude-package-when-use-dnf-update-or-upgrade-command/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Exclude Package When Use Dnf Update or Upgrade Command">
+  <meta property="og:description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an update includes a regression or a bug. DNF allows you to exclude a package from the transaction:
+using the command line sudo dnf upgrade --exclude=packagename using its configuration files You can add a line to /etc/dnf/dnf.conf to exclude packages: excludepkgs=packagename Using the DNF Versionlock plugin # install versionlock sudo dnf install &#39;dnf-command(versionlock)&#39; # lock the currently installed version of a package sudo dnf versionlock add package # remove the version lock sudo dnf versionlock delete package # list all locked packages sudo dnf versionlock list ">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-05-12T18:05:26+08:00">
+    <meta property="article:modified_time" content="2024-05-12T18:05:26+08:00">
+    <meta property="article:tag" content="DNF">
+    <meta property="article:tag" content="Redhat">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Exclude Package When Use Dnf Update or Upgrade Command"/>
-<meta name="twitter:description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an update includes a regression or a bug. DNF allows you to exclude a package from the transaction:
-using the command line sudo dnf upgrade --exclude=packagename using its configuration files You can add a line to /etc/dnf/dnf.conf to exclude packages: excludepkgs=packagename Using the DNF Versionlock plugin # install versionlock sudo dnf install &#39;dnf-command(versionlock)&#39; # lock the currently installed version of a package sudo dnf versionlock add package # remove the version lock sudo dnf versionlock delete package # list all locked packages sudo dnf versionlock list "/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Exclude Package When Use Dnf Update or Upgrade Command">
+  <meta name="twitter:description" content="Sometimes it is useful to ignore specific packages from transactions, such as updates,upgrade. One such case, for example, could be when an update includes a regression or a bug. DNF allows you to exclude a package from the transaction:
+using the command line sudo dnf upgrade --exclude=packagename using its configuration files You can add a line to /etc/dnf/dnf.conf to exclude packages: excludepkgs=packagename Using the DNF Versionlock plugin # install versionlock sudo dnf install &#39;dnf-command(versionlock)&#39; # lock the currently installed version of a package sudo dnf versionlock add package # remove the version lock sudo dnf versionlock delete package # list all locked packages sudo dnf versionlock list ">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -272,6 +277,8 @@ You can add a line to /etc/dnf/dnf.conf to exclude packages:</li>
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -361,29 +368,21 @@ You can add a line to /etc/dnf/dnf.conf to exclude packages:</li>
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			<a href="/tags/dnf/"> dnf </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -773,6 +772,12 @@ You can add a line to /etc/dnf/dnf.conf to exclude packages:</li>
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -784,7 +789,6 @@ You can add a line to /etc/dnf/dnf.conf to exclude packages:</li>
 	</div></div>
 
   </main>
-
 
 
 

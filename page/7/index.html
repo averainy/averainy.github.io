@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +9,16 @@
 	<meta property="og:title" content="averainy&#39;s Blog">
 	
 	
-	<meta name="author" content="averainy"><meta name="keywords" content="97,118,101,114,97,105,110,121,44,112,121,116,104,111,110,44,106,97,118,97"><meta name="description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。"><meta property="og:title" content="averainy&#39;s Blog" />
-<meta property="og:description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://www.averainy.com/" />
+	<meta name="author" content="averainy"><meta name="keywords" content="97,118,101,114,97,105,110,121,44,112,121,116,104,111,110,44,106,97,118,97"><meta name="description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。"><meta property="og:url" content="http://www.averainy.com/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="averainy&#39;s Blog">
+  <meta property="og:description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="averainy&#39;s Blog"/>
-<meta name="twitter:description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="averainy&#39;s Blog">
+  <meta name="twitter:description" content="averainy&#39;s Blog,记录生活和工作，私人领地，随意吐槽。啥都可能写。">
 <link rel="alternate" type="application/rss+xml" href="http://www.averainy.com/index.xml" title="averainy's Blog">
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -59,6 +61,30 @@
 	<div class="posts">
 	
 	
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">01</span>
+						<span class="rest">Mar 2022</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/post/get_self_pid_in_java/">获取当前Java程序PID</a></h3>
+					<div class="author">
+					
+					</div>
+					<span class="description">
+					
+						获取当前Java程序PID
+jvm1.8以上通用方式：
+String pid = ManagementFactory.getRuntimeMXBean().getName(); pid = pid.substring(0, pid.indexOf("@")); 
+					
+					</span>
+				</div>
+			</div>
+		</div>
 	
 		<div class="post">
 			<div class="post-header">
@@ -265,29 +291,6 @@ sudo apt-get install …
 			</div>
 		</div>
 	
-		<div class="post">
-			<div class="post-header">
-				<div class="meta">
-					<div class="date">
-						<span class="day">07</span>
-						<span class="rest">Apr 2021</span>
-					</div>
-				</div>
-				<div class="matter">
-					<h3 class="title small"><a href="/post/auto_backup_svn_server/">使用rsync自动备份svn仓库</a></h3>
-					<div class="author">
-					
-					</div>
-					<span class="description">
-					
-						配置密钥登录 这里不做说明，想知道如何配置可以参照菜鸟教程
-自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo "is running" exit 1 fi …
-					
-					</span>
-				</div>
-			</div>
-		</div>
-	
 	
 
 <ul class="pagination">
@@ -298,6 +301,8 @@ sudo apt-get install …
 	</li>
 	<li>
 		
+		<a href="/page/8/" class="page-link" aria-label="Next"><span aria-hidden="true">Next page →</span></a>
+		
 	</li>
 </ul>
 
@@ -307,7 +312,6 @@ sudo apt-get install …
 
 
   </main>
-
 
 
 

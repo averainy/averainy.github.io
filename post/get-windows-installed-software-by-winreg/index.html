@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +9,22 @@
 	<meta property="og:title" content="Get Windows Installed Software by Winreg">
 	
 	
-	<meta name="author" content="averainy"><meta name="keywords" content="winreg,windows,python"><meta name="description" content="def getInstalledProgramsFromRegistry(): registry_key =r&#34;Software\Microsoft\Windows\CurrentVersion\Uninstall&#34; registry_key_64bit = …"><meta property="og:title" content="Get Windows Installed Software by Winreg" />
-<meta property="og:description" content="def getInstalledProgramsFromRegistry(): registry_key =r&#34;Software\Microsoft\Windows\CurrentVersion\Uninstall&#34; registry_key_64bit = r&#34;Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall&#34; key_list=[] key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key)) key_list.append(winreg.OpenKey(winreg.HKEY_CURRENT_USER, registry_key)) is_64bit = platform.architecture()[0].startswith(&#39;64&#39;) if(is_64bit): key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key_64bit)) for key in key_list: i = 0 while True: try: key_name = winreg.EnumKey(key, i) sub_key = winreg.OpenKey(key, key_name) try: value = winreg.QueryValueEx(sub_key, &#34;DisplayName&#34;)[0] except Exception as e: value = &#34;&#34; print(&#34;{0}:{1}&#34;.format(key_name, value)) i = i &#43; 1 except Exception as e: print(e) break " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/get-windows-installed-software-by-winreg/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-10-16T16:48:39+08:00" />
-<meta property="article:modified_time" content="2023-10-16T16:48:39+08:00" />
+	<meta name="author" content="averainy"><meta name="keywords" content="winreg,windows,python"><meta name="description" content="def getInstalledProgramsFromRegistry(): registry_key =r&#34;Software\Microsoft\Windows\CurrentVersion\Uninstall&#34; registry_key_64bit = …"><meta property="og:url" content="http://www.averainy.com/post/get-windows-installed-software-by-winreg/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Get Windows Installed Software by Winreg">
+  <meta property="og:description" content="def getInstalledProgramsFromRegistry(): registry_key =r&#34;Software\Microsoft\Windows\CurrentVersion\Uninstall&#34; registry_key_64bit = r&#34;Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall&#34; key_list=[] key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key)) key_list.append(winreg.OpenKey(winreg.HKEY_CURRENT_USER, registry_key)) is_64bit = platform.architecture()[0].startswith(&#39;64&#39;) if(is_64bit): key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key_64bit)) for key in key_list: i = 0 while True: try: key_name = winreg.EnumKey(key, i) sub_key = winreg.OpenKey(key, key_name) try: value = winreg.QueryValueEx(sub_key, &#34;DisplayName&#34;)[0] except Exception as e: value = &#34;&#34; print(&#34;{0}:{1}&#34;.format(key_name, value)) i = i &#43; 1 except Exception as e: print(e) break ">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-10-16T16:48:39+08:00">
+    <meta property="article:modified_time" content="2023-10-16T16:48:39+08:00">
+    <meta property="article:tag" content="Winreg">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="Python">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Get Windows Installed Software by Winreg"/>
-<meta name="twitter:description" content="def getInstalledProgramsFromRegistry(): registry_key =r&#34;Software\Microsoft\Windows\CurrentVersion\Uninstall&#34; registry_key_64bit = r&#34;Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall&#34; key_list=[] key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key)) key_list.append(winreg.OpenKey(winreg.HKEY_CURRENT_USER, registry_key)) is_64bit = platform.architecture()[0].startswith(&#39;64&#39;) if(is_64bit): key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key_64bit)) for key in key_list: i = 0 while True: try: key_name = winreg.EnumKey(key, i) sub_key = winreg.OpenKey(key, key_name) try: value = winreg.QueryValueEx(sub_key, &#34;DisplayName&#34;)[0] except Exception as e: value = &#34;&#34; print(&#34;{0}:{1}&#34;.format(key_name, value)) i = i &#43; 1 except Exception as e: print(e) break "/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Get Windows Installed Software by Winreg">
+  <meta name="twitter:description" content="def getInstalledProgramsFromRegistry(): registry_key =r&#34;Software\Microsoft\Windows\CurrentVersion\Uninstall&#34; registry_key_64bit = r&#34;Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall&#34; key_list=[] key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key)) key_list.append(winreg.OpenKey(winreg.HKEY_CURRENT_USER, registry_key)) is_64bit = platform.architecture()[0].startswith(&#39;64&#39;) if(is_64bit): key_list.append(winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, registry_key_64bit)) for key in key_list: i = 0 while True: try: key_name = winreg.EnumKey(key, i) sub_key = winreg.OpenKey(key, key_name) try: value = winreg.QueryValueEx(sub_key, &#34;DisplayName&#34;)[0] except Exception as e: value = &#34;&#34; print(&#34;{0}:{1}&#34;.format(key_name, value)) i = i &#43; 1 except Exception as e: print(e) break ">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -157,6 +163,8 @@
 			
 			
 			<a href="/categories/share/"> share </a>
+			
+			
 			
 			
 			
@@ -523,15 +531,9 @@
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
 			<a href="/tags/python/"> python </a>
+			
+			
 			
 			
 			
@@ -777,6 +779,10 @@
 			
 			
 			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -788,7 +794,6 @@
 	</div></div>
 
   </main>
-
 
 
 

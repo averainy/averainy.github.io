@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,16 +10,22 @@
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="bash,cron,linux"><meta name="description" content="我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是
-0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行， …"><meta property="og:title" content="每月的第一个周六运行一个cron job" />
-<meta property="og:description" content="我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是 0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行，周六可能也会执行。 继续检索，发现有人也碰到了同样的问题How to run a cron job on the first weekday of the month。参照他的" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-09-02T10:24:47+08:00" />
-<meta property="article:modified_time" content="2022-09-02T10:24:47+08:00" />
+0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行， …"><meta property="og:url" content="http://www.averainy.com/post/running-a-cron-job-on-the-first-weekday-of-the-month/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="每月的第一个周六运行一个cron job">
+  <meta property="og:description" content="我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是 0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行，周六可能也会执行。 继续检索，发现有人也碰到了同样的问题How to run a cron job on the first weekday of the month。参照他的">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-09-02T10:24:47+08:00">
+    <meta property="article:modified_time" content="2022-09-02T10:24:47+08:00">
+    <meta property="article:tag" content="Bash">
+    <meta property="article:tag" content="Cron">
+    <meta property="article:tag" content="Linux">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="每月的第一个周六运行一个cron job"/>
-<meta name="twitter:description" content="我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是 0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行，周六可能也会执行。 继续检索，发现有人也碰到了同样的问题How to run a cron job on the first weekday of the month。参照他的"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="每月的第一个周六运行一个cron job">
+  <meta name="twitter:description" content="我这里有一个需求，需要每月的第一个周六晚上22点运行一个脚本。Google了半天发现有人给的解决方案是 0 22 1-7 * 6 /usr/bin/sh /root/py3env/src/auto_backup.sh 事实证明这样的写法是错误的，这样写的话每月的1到7号都会执行，周六可能也会执行。 继续检索，发现有人也碰到了同样的问题How to run a cron job on the first weekday of the month。参照他的">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -256,6 +262,8 @@
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -272,32 +280,6 @@
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -347,7 +329,21 @@
 			
 			
 			
+			
+			
+			
+			
 			<a href="/tags/cron/"> cron </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -759,6 +755,16 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -770,7 +776,6 @@
 	</div></div>
 
   </main>
-
 
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +10,24 @@
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="kms,systemd,linux"><meta name="description" content="I create a kms service for the lan computers in a linux server recently,so record the steps
-download kms source and compile it cd …"><meta property="og:title" content="Create Kms Service in Linux" />
-<meta property="og:description" content="I create a kms service for the lan computers in a linux server recently,so record the steps
-download kms source and compile it cd vlmcsd-master make create a systemd service file /usr/lib/systemd/system/kms.service [Unit] Description=KMS Service. After=network-online.target firewalld.service Wants=network-online.target [Service] Type=forking PIDFile=/var/run/kms.pid ExecStart=/home/admin/kms/vlmcsd-master/bin/vlmcsd -p /var/run/kms.pid ExecReload=/bin/kill -s HUP ${MAINPID} ExecStop=/bin/kill -s TERM ${MAINPID} Restart=always [Install] WantedBy=multi-user.target start kms service systemctl start kms systemctl enable kms " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/create-kms-service-in-linux/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-05-05T10:15:03+08:00" />
-<meta property="article:modified_time" content="2022-05-05T10:15:03+08:00" />
+download kms source and compile it cd …"><meta property="og:url" content="http://www.averainy.com/post/create-kms-service-in-linux/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Create Kms Service in Linux">
+  <meta property="og:description" content="I create a kms service for the lan computers in a linux server recently,so record the steps
+download kms source and compile it cd vlmcsd-master make create a systemd service file /usr/lib/systemd/system/kms.service [Unit] Description=KMS Service. After=network-online.target firewalld.service Wants=network-online.target [Service] Type=forking PIDFile=/var/run/kms.pid ExecStart=/home/admin/kms/vlmcsd-master/bin/vlmcsd -p /var/run/kms.pid ExecReload=/bin/kill -s HUP ${MAINPID} ExecStop=/bin/kill -s TERM ${MAINPID} Restart=always [Install] WantedBy=multi-user.target start kms service systemctl start kms systemctl enable kms ">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-05-05T10:15:03+08:00">
+    <meta property="article:modified_time" content="2022-05-05T10:15:03+08:00">
+    <meta property="article:tag" content="Kms">
+    <meta property="article:tag" content="Systemd">
+    <meta property="article:tag" content="Linux">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Create Kms Service in Linux"/>
-<meta name="twitter:description" content="I create a kms service for the lan computers in a linux server recently,so record the steps
-download kms source and compile it cd vlmcsd-master make create a systemd service file /usr/lib/systemd/system/kms.service [Unit] Description=KMS Service. After=network-online.target firewalld.service Wants=network-online.target [Service] Type=forking PIDFile=/var/run/kms.pid ExecStart=/home/admin/kms/vlmcsd-master/bin/vlmcsd -p /var/run/kms.pid ExecReload=/bin/kill -s HUP ${MAINPID} ExecStop=/bin/kill -s TERM ${MAINPID} Restart=always [Install] WantedBy=multi-user.target start kms service systemctl start kms systemctl enable kms "/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Create Kms Service in Linux">
+  <meta name="twitter:description" content="I create a kms service for the lan computers in a linux server recently,so record the steps
+download kms source and compile it cd vlmcsd-master make create a systemd service file /usr/lib/systemd/system/kms.service [Unit] Description=KMS Service. After=network-online.target firewalld.service Wants=network-online.target [Service] Type=forking PIDFile=/var/run/kms.pid ExecStart=/home/admin/kms/vlmcsd-master/bin/vlmcsd -p /var/run/kms.pid ExecReload=/bin/kill -s HUP ${MAINPID} ExecStop=/bin/kill -s TERM ${MAINPID} Restart=always [Install] WantedBy=multi-user.target start kms service systemctl start kms systemctl enable kms ">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -279,6 +285,8 @@ download kms source and compile it cd vlmcsd-master make create a systemd servic
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -295,18 +303,6 @@ download kms source and compile it cd vlmcsd-master make create a systemd servic
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -616,7 +612,17 @@ download kms source and compile it cd vlmcsd-master make create a systemd servic
 			
 			
 			
+			
+			
+			
+			
 			<a href="/tags/systemd/"> systemd </a>
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -793,7 +799,6 @@ download kms source and compile it cd vlmcsd-master make create a systemd servic
 	</div></div>
 
   </main>
-
 
 
 

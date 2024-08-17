@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>python on averainy&#39;s Blog</title>
+		<title>Python on averainy&#39;s Blog</title>
 		<link>http://www.averainy.com/tags/python/</link>
-		<description>Recent content in python on www.averainy.com</description>
+		<description>Recent content in Python on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
 		<lastBuildDate>Wed, 29 May 2024 17:00:18 +0800</lastBuildDate>

@@ -6,10 +6,28 @@
 		<description>Recent content in Posts on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Wed, 29 May 2024 17:00:18 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 18 Aug 2024 00:43:32 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/post/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>唐多令·芦叶满汀洲</title>
+			<link>http://www.averainy.com/post/yu-mai-gui-hua-tong-zai-jiu/</link>
+			<pubDate>Sun, 18 Aug 2024 00:43:32 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/yu-mai-gui-hua-tong-zai-jiu/</guid>
+			<description>
+			
+				唐多令·芦叶满汀洲 宋·刘过
+安远楼小集，侑觞歌板之姬黄其姓者，乞词于龙洲道人，为赋此《唐多令》。同柳阜之、刘去非、石民瞻、周嘉仲、陈孟参、孟容。时八月五日也。
+芦叶满汀洲，寒沙带浅流。
+二十年重过南楼。
+柳下系船犹未稳，能几日，又中秋。
+黄鹤断矶头，故人今在否？
+旧江山浑是新 …
+			
+			</description>
+		</item>
 		<item>
 			<title>How to Use Decorators to Print Log in Python</title>
 			<link>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/</link>

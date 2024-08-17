@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,16 +10,21 @@
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="shell,svn"><meta name="description" content="配置密钥登录 这里不做说明，想知道如何配置可以参照菜鸟教程
-自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo &#34;is running&#34; exit 1 fi …"><meta property="og:title" content="使用rsync自动备份svn仓库" />
-<meta property="og:description" content="配置密钥登录 这里不做说明，想知道如何配置可以参照菜鸟教程 自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo &#34;is running&#34; exit 1 fi rsync -avz --delete --progress admin@192.168.1.15:~/svn /home/admin/svn rsync_code=$? MSG=&#34;&#34; if [ $rsync_code -eq 0 ]; then MSG=&#34;svn 备份成功!&#34; else MSG=&#34;svn备份失败!&#34; fi /home/admin/py/bin/python /home/admin/py/src/youjian.py &#34;svn备份状态&#34; &#34;${MSG}&#34; 备份结束之后发送邮件通知。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/auto_backup_svn_server/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-04-07T08:37:00+08:00" />
-<meta property="article:modified_time" content="2021-04-07T08:37:00+08:00" />
+自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo &#34;is running&#34; exit 1 fi …"><meta property="og:url" content="http://www.averainy.com/post/auto_backup_svn_server/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="使用rsync自动备份svn仓库">
+  <meta property="og:description" content="配置密钥登录 这里不做说明，想知道如何配置可以参照菜鸟教程 自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo &#34;is running&#34; exit 1 fi rsync -avz --delete --progress admin@192.168.1.15:~/svn /home/admin/svn rsync_code=$? MSG=&#34;&#34; if [ $rsync_code -eq 0 ]; then MSG=&#34;svn 备份成功!&#34; else MSG=&#34;svn备份失败!&#34; fi /home/admin/py/bin/python /home/admin/py/src/youjian.py &#34;svn备份状态&#34; &#34;${MSG}&#34; 备份结束之后发送邮件通知。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-04-07T08:37:00+08:00">
+    <meta property="article:modified_time" content="2021-04-07T08:37:00+08:00">
+    <meta property="article:tag" content="Shell">
+    <meta property="article:tag" content="Svn">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="使用rsync自动备份svn仓库"/>
-<meta name="twitter:description" content="配置密钥登录 这里不做说明，想知道如何配置可以参照菜鸟教程 自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo &#34;is running&#34; exit 1 fi rsync -avz --delete --progress admin@192.168.1.15:~/svn /home/admin/svn rsync_code=$? MSG=&#34;&#34; if [ $rsync_code -eq 0 ]; then MSG=&#34;svn 备份成功!&#34; else MSG=&#34;svn备份失败!&#34; fi /home/admin/py/bin/python /home/admin/py/src/youjian.py &#34;svn备份状态&#34; &#34;${MSG}&#34; 备份结束之后发送邮件通知。"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="使用rsync自动备份svn仓库">
+  <meta name="twitter:description" content="配置密钥登录 这里不做说明，想知道如何配置可以参照菜鸟教程 自动备份脚本 #!/bin/sh CHK=$(ps -ef |grep rsync |wc -l) echo $CHK if [ $CHK -gt 1 ] then echo &#34;is running&#34; exit 1 fi rsync -avz --delete --progress admin@192.168.1.15:~/svn /home/admin/svn rsync_code=$? MSG=&#34;&#34; if [ $rsync_code -eq 0 ]; then MSG=&#34;svn 备份成功!&#34; else MSG=&#34;svn备份失败!&#34; fi /home/admin/py/bin/python /home/admin/py/src/youjian.py &#34;svn备份状态&#34; &#34;${MSG}&#34; 备份结束之后发送邮件通知。">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -257,6 +262,8 @@
 			
 			
 			
+			
+			
 			<a href="/categories/%e8%84%9a%e6%9c%ac/"> 脚本 </a>
 			
 			
@@ -287,14 +294,6 @@
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -772,6 +771,12 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -783,7 +788,6 @@
 	</div></div>
 
   </main>
-
 
 
 

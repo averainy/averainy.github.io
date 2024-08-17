@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,22 +10,28 @@
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="chrony,linux,NTP"><meta name="description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
-we can use the following command to test the NTP …"><meta property="og:title" content="Use Chrony Test Ntp Server" />
-<meta property="og:description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
+we can use the following command to test the NTP …"><meta property="og:url" content="http://www.averainy.com/post/use-chrony-test-ntp-server/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Use Chrony Test Ntp Server">
+  <meta property="og:description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
 we can use the following command to test the NTP service
 chronyd -q &#39;server 192.168.11.145 iburst&#39; if the NTP service works well the console will ouput the following content
-[root@fedora ~]# chronyd -q &#39;server 192.168.11.145 iburst&#39; 2022-07-08T06:37:35Z chronyd version 4.2 starting (&#43;CMDMON &#43;NTP &#43;REFCLOCK &#43;RTC &#43;PRIVDROP &#43;SCFILTER &#43;SIGND &#43;ASYNCDNS &#43;NTS &#43;SECHASH &#43;IPV6 &#43;DEBUG) 2022-07-08T06:37:35Z Initial frequency -2.216 ppm 2022-07-08T06:37:39Z System clock wrong by -0.063491 seconds (step) 2022-07-08T06:37:39Z chronyd exiting it&rsquo;s over" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/use-chrony-test-ntp-server/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-07-08T14:57:43+08:00" />
-<meta property="article:modified_time" content="2022-07-08T14:57:43+08:00" />
+[root@fedora ~]# chronyd -q &#39;server 192.168.11.145 iburst&#39; 2022-07-08T06:37:35Z chronyd version 4.2 starting (&#43;CMDMON &#43;NTP &#43;REFCLOCK &#43;RTC &#43;PRIVDROP &#43;SCFILTER &#43;SIGND &#43;ASYNCDNS &#43;NTS &#43;SECHASH &#43;IPV6 &#43;DEBUG) 2022-07-08T06:37:35Z Initial frequency -2.216 ppm 2022-07-08T06:37:39Z System clock wrong by -0.063491 seconds (step) 2022-07-08T06:37:39Z chronyd exiting it’s over">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-07-08T14:57:43+08:00">
+    <meta property="article:modified_time" content="2022-07-08T14:57:43+08:00">
+    <meta property="article:tag" content="Chrony">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="NTP">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Use Chrony Test Ntp Server"/>
-<meta name="twitter:description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Use Chrony Test Ntp Server">
+  <meta name="twitter:description" content="when we have setuped a ntp service ,we need to test the ntp service if it work well.
 we can use the following command to test the NTP service
 chronyd -q &#39;server 192.168.11.145 iburst&#39; if the NTP service works well the console will ouput the following content
-[root@fedora ~]# chronyd -q &#39;server 192.168.11.145 iburst&#39; 2022-07-08T06:37:35Z chronyd version 4.2 starting (&#43;CMDMON &#43;NTP &#43;REFCLOCK &#43;RTC &#43;PRIVDROP &#43;SCFILTER &#43;SIGND &#43;ASYNCDNS &#43;NTS &#43;SECHASH &#43;IPV6 &#43;DEBUG) 2022-07-08T06:37:35Z Initial frequency -2.216 ppm 2022-07-08T06:37:39Z System clock wrong by -0.063491 seconds (step) 2022-07-08T06:37:39Z chronyd exiting it&rsquo;s over"/>
+[root@fedora ~]# chronyd -q &#39;server 192.168.11.145 iburst&#39; 2022-07-08T06:37:35Z chronyd version 4.2 starting (&#43;CMDMON &#43;NTP &#43;REFCLOCK &#43;RTC &#43;PRIVDROP &#43;SCFILTER &#43;SIGND &#43;ASYNCDNS &#43;NTS &#43;SECHASH &#43;IPV6 &#43;DEBUG) 2022-07-08T06:37:35Z Initial frequency -2.216 ppm 2022-07-08T06:37:39Z System clock wrong by -0.063491 seconds (step) 2022-07-08T06:37:39Z chronyd exiting it’s over">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -266,6 +272,8 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -284,34 +292,6 @@ we can use  the following command to test the NTP service</p>
 			<p>
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/NTP/"> NTP </a>
 			
 			
 			
@@ -491,6 +471,20 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a href="/tags/linux/"> linux </a>
 			
 			
@@ -504,6 +498,18 @@ we can use  the following command to test the NTP service</p>
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/ntp/"> ntp </a>
 			
 			
 			
@@ -780,7 +786,6 @@ we can use  the following command to test the NTP service</p>
 	</div></div>
 
   </main>
-
 
 
 

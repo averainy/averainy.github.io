@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +11,22 @@
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="docker,cups,synology"><meta name="description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。
 起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。
-搭 …"><meta property="og:title" content="在群晖设备上使用docker搭建cups服务器" />
-<meta property="og:description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。 起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。 搭建cups服务 d" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-10-29T23:03:56+08:00" />
-<meta property="article:modified_time" content="2022-10-29T23:03:56+08:00" />
+搭 …"><meta property="og:url" content="http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="在群晖设备上使用docker搭建cups服务器">
+  <meta property="og:description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。 起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。 搭建cups服务 d">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2022-10-29T23:03:56+08:00">
+    <meta property="article:modified_time" content="2022-10-29T23:03:56+08:00">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Cups">
+    <meta property="article:tag" content="Synology">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="在群晖设备上使用docker搭建cups服务器"/>
-<meta name="twitter:description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。 起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。 搭建cups服务 d"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="在群晖设备上使用docker搭建cups服务器">
+  <meta name="twitter:description" content="今天终于在群晖ds218&#43;上面配置好了cups打印服务。特地记录一下。 起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218&#43;上面搭建一个docker容器。 搭建cups服务 d">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -283,6 +289,8 @@
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -299,28 +307,6 @@
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -406,7 +392,21 @@
 			
 			
 			
+			
+			
 			<a href="/tags/docker/"> docker </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -786,6 +786,12 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -797,7 +803,6 @@
 	</div></div>
 
   </main>
-
 
 
 

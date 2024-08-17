@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +11,21 @@
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="podman,systemd"><meta name="description" content="使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。
 生成system service文件
-podman generate systemd …"><meta property="og:title" content="Use Systemd Auto Start Podman Container" />
-<meta property="og:description" content="使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。 生成system service文件 podman generate systemd --restart-policy=always -t 1 --name -f &lt;container_name&gt; 创建本用户systemd目录 并将上面创" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/use-systemd-auto-start-podman-container/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-11-08T16:25:17+08:00" />
-<meta property="article:modified_time" content="2023-11-08T16:25:17+08:00" />
+podman generate systemd …"><meta property="og:url" content="http://www.averainy.com/post/use-systemd-auto-start-podman-container/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Use Systemd Auto Start Podman Container">
+  <meta property="og:description" content="使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。 生成system service文件 podman generate systemd --restart-policy=always -t 1 --name -f &lt;container_name&gt; 创建本用户systemd目录 并将上面创">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-11-08T16:25:17+08:00">
+    <meta property="article:modified_time" content="2023-11-08T16:25:17+08:00">
+    <meta property="article:tag" content="Podman">
+    <meta property="article:tag" content="Systemd">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Use Systemd Auto Start Podman Container"/>
-<meta name="twitter:description" content="使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。 生成system service文件 podman generate systemd --restart-policy=always -t 1 --name -f &lt;container_name&gt; 创建本用户systemd目录 并将上面创"/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Use Systemd Auto Start Podman Container">
+  <meta name="twitter:description" content="使用docker的时候，只要将容器设置成restart:always就能使容器自启动，但是在podman里这样做是无效的。因为它使用systemd来管理服务。通过以下步骤即可创建自启动服务。 生成system service文件 podman generate systemd --restart-policy=always -t 1 --name -f &lt;container_name&gt; 创建本用户systemd目录 并将上面创">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -268,6 +273,8 @@ podman generate systemd …"><meta property="og:title" content="Use Systemd Auto
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -284,14 +291,6 @@ podman generate systemd …"><meta property="og:title" content="Use Systemd Auto
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -769,6 +768,12 @@ podman generate systemd …"><meta property="og:title" content="Use Systemd Auto
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -780,7 +785,6 @@ podman generate systemd …"><meta property="og:title" content="Use Systemd Auto
 	</div></div>
 
   </main>
-
 
 
 

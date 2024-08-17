@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.102.2" />
+	<meta name="generator" content="Hugo 0.132.2">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +10,22 @@
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="typescript"><meta name="description" content="Implementing String Format Method with TypeScript
-const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { return msg; } …"><meta property="og:title" content="Implementing String Format Method with TypeScript" />
-<meta property="og:description" content="Implementing String Format Method with TypeScript
-const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { return msg; } (Object.keys(parames) as (keyof typeof parames)[]).forEach((key, index) =&gt; { const regExp = new RegExp(`\\{${key}\\}`, &#39;g&#39;); msg = msg.replace(regExp, parames[key] as unknown as string); }); return msg; } let msg = &#34;{0} {1}&#34;; const params = { &#39;0&#39;: &#34;hello&#34;, &#39;1&#39;: &#34;world&#34; } console.log(format(msg, params)); " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.averainy.com/post/typescript-string-format/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2023-12-06T17:44:40+08:00" />
-<meta property="article:modified_time" content="2023-12-06T17:44:40+08:00" />
+const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { return msg; } …"><meta property="og:url" content="http://www.averainy.com/post/typescript-string-format/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Implementing String Format Method with TypeScript">
+  <meta property="og:description" content="Implementing String Format Method with TypeScript
+const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { return msg; } (Object.keys(parames) as (keyof typeof parames)[]).forEach((key, index) =&gt; { const regExp = new RegExp(`\\{${key}\\}`, &#39;g&#39;); msg = msg.replace(regExp, parames[key] as unknown as string); }); return msg; } let msg = &#34;{0} {1}&#34;; const params = { &#39;0&#39;: &#34;hello&#34;, &#39;1&#39;: &#34;world&#34; } console.log(format(msg, params)); ">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2023-12-06T17:44:40+08:00">
+    <meta property="article:modified_time" content="2023-12-06T17:44:40+08:00">
+    <meta property="article:tag" content="Typescript">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Implementing String Format Method with TypeScript"/>
-<meta name="twitter:description" content="Implementing String Format Method with TypeScript
-const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { return msg; } (Object.keys(parames) as (keyof typeof parames)[]).forEach((key, index) =&gt; { const regExp = new RegExp(`\\{${key}\\}`, &#39;g&#39;); msg = msg.replace(regExp, parames[key] as unknown as string); }); return msg; } let msg = &#34;{0} {1}&#34;; const params = { &#39;0&#39;: &#34;hello&#34;, &#39;1&#39;: &#34;world&#34; } console.log(format(msg, params)); "/>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Implementing String Format Method with TypeScript">
+  <meta name="twitter:description" content="Implementing String Format Method with TypeScript
+const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { return msg; } (Object.keys(parames) as (keyof typeof parames)[]).forEach((key, index) =&gt; { const regExp = new RegExp(`\\{${key}\\}`, &#39;g&#39;); msg = msg.replace(regExp, parames[key] as unknown as string); }); return msg; } let msg = &#34;{0} {1}&#34;; const params = { &#39;0&#39;: &#34;hello&#34;, &#39;1&#39;: &#34;world&#34; } console.log(format(msg, params)); ">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
@@ -271,6 +275,8 @@ const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { r
 			
 			
 			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -287,14 +293,6 @@ const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { r
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -770,6 +768,12 @@ const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { r
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -781,7 +785,6 @@ const format = (msg: string, parames?: Object): string =&gt; { if (!parames) { r
 	</div></div>
 
   </main>
-
 
 
 
