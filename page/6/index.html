@@ -66,6 +66,29 @@
 			<div class="post-header">
 				<div class="meta">
 					<div class="date">
+						<span class="day">01</span>
+						<span class="rest">Aug 2022</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/post/wireguard-install-script/">Wireguard Install Script</a></h3>
+					<div class="author">
+					
+					</div>
+					<span class="description">
+					
+						最近用wireguard安装脚本搭建wireguard服务器，用起来非常方便，推荐使用。 在下载脚本之后，强烈建议修改下生成客户端脚本的代码第313行，加入以下配置：
+PersistentKeepalive = 25 这样每隔25秒就会发送一次心跳包，以保持客户端与服务端的连接。 …
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
 						<span class="day">19</span>
 						<span class="rest">Jul 2022</span>
 					</div>
@@ -267,30 +290,6 @@ qcow2 image is a …
 						原因 在无管理员权限的Windows系统上无法运行wireguard GUI客户端，为此需要通过安装wireguard服务来解决这个问题。
 操作方法 在没有管理权限的Windows系统上安装运行wireguard方法：
 以管理员权限打开powershell窗口，运行： …
-					
-					</span>
-				</div>
-			</div>
-		</div>
-	
-		<div class="post">
-			<div class="post-header">
-				<div class="meta">
-					<div class="date">
-						<span class="day">02</span>
-						<span class="rest">Apr 2022</span>
-					</div>
-				</div>
-				<div class="matter">
-					<h3 class="title small"><a href="/post/monitor-systemd-services-with-python/">Monitor Systemd Services With Python</a></h3>
-					<div class="author">
-					
-					</div>
-					<span class="description">
-					
-						systemd service有时会自动退出。在这种情况下，为了保证服务能够24*7运行，需要额外做一些监控，当服务挂掉之后能够自动重启。这里我使用python写了一个监控脚本，将这个脚本放到定时任务中，就能够做到自动重启的效果。
-代码如下
-# -*- coding: utf-8 …
 					
 					</span>
 				</div>

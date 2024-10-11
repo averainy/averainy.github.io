@@ -6,10 +6,24 @@
 		<description>Recent content in Share on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Wed, 29 May 2024 17:00:18 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 11 Oct 2024 14:38:09 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/categories/share/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>使用wg-easy管理Wireguard</title>
+			<link>http://www.averainy.com/post/wg-easy-setup/</link>
+			<pubDate>Fri, 11 Oct 2024 14:38:09 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/wg-easy-setup/</guid>
+			<description>
+			
+				最近为了开源节流，准备更换宽带运营商，大概率将不会有公网ip，所以在阿里云买了一台云服务器。为了连到家里得nas，决定选Wireguard。
+docker-compose.yml配置如下：
+services: wg-easy: image: weejewel/wg-easy …
+			
+			</description>
+		</item>
 		<item>
 			<title>How to Use Decorators to Print Log in Python</title>
 			<link>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-python/</link>

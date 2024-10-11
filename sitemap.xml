@@ -5,16 +5,28 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-10-05T18:19:52+08:00</lastmod>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-10-05T18:19:52+08:00</lastmod>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/docker/</loc>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-10-05T18:19:52+08:00</lastmod>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/categories/share/</loc>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/</loc>
-    <lastmod>2024-10-05T18:19:52+08:00</lastmod>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/wireguard/</loc>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/wg-easy-setup/</loc>
+    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/%E5%90%90%E6%A7%BD/</loc>
     <lastmod>2024-10-05T18:19:52+08:00</lastmod>
@@ -50,9 +62,6 @@
     <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/python/</loc>
-    <lastmod>2024-05-29T17:00:18+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/categories/share/</loc>
     <lastmod>2024-05-29T17:00:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/how-to-use-decorators-to-print-log-in-typescript/</loc>
@@ -319,9 +328,6 @@
     <loc>http://www.averainy.com/tags/cups/</loc>
     <lastmod>2022-10-29T23:03:56+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/tags/docker/</loc>
-    <lastmod>2022-10-29T23:03:56+08:00</lastmod>
-  </url><url>
     <loc>http://www.averainy.com/tags/synology/</loc>
     <lastmod>2022-10-29T23:03:56+08:00</lastmod>
   </url><url>
@@ -341,9 +347,6 @@
     <lastmod>2022-10-09T11:02:42+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/firewalld/</loc>
-    <lastmod>2022-09-02T16:38:43+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/wireguard/</loc>
     <lastmod>2022-09-02T16:38:43+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/firewalld-port-forwarding/</loc>

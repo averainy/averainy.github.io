@@ -6,10 +6,22 @@
 		<description>Recent content in Categories on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Sat, 05 Oct 2024 18:19:52 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 11 Oct 2024 14:38:09 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/categories/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Share</title>
+			<link>http://www.averainy.com/categories/share/</link>
+			<pubDate>Fri, 11 Oct 2024 14:38:09 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/categories/share/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>吐槽</title>
 			<link>http://www.averainy.com/categories/%E5%90%90%E6%A7%BD/</link>
@@ -28,18 +40,6 @@
 			<pubDate>Sun, 18 Aug 2024 00:43:32 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/categories/%E7%94%9F%E6%B4%BB/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>Share</title>
-			<link>http://www.averainy.com/categories/share/</link>
-			<pubDate>Wed, 29 May 2024 17:00:18 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/categories/share/</guid>
 			<description>
 			
 				
