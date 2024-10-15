@@ -11,7 +11,7 @@
 		<atom:link href="http://www.averainy.com/categories/share/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>Configuring Bind as a Caching Dns Server in Fedora40</title>
+			<title>在Fedora40上配置bind为缓存服务器</title>
 			<link>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</link>
 			<pubDate>Tue, 15 Oct 2024 14:38:21 +0800</pubDate>
 			

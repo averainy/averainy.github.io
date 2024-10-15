@@ -6,14 +6,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<meta property="og:title" content="Configuring Bind as a Caching Dns Server in Fedora40">
+	<meta property="og:title" content="在Fedora40上配置bind为缓存服务器">
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="bind,fedora"><meta name="description" content="前提条件 服务器的 IP 地址是静态的,假设服务器的ip为192.0.2.1
 安装软件 dnf install bind bind-utils 编辑 /etc/named.conf 文件 在options字段中进行以下修改：
 更新 listen-on 和 listen-on-v6 …"><meta property="og:url" content="http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/">
   <meta property="og:site_name" content="averainy&#39;s Blog">
-  <meta property="og:title" content="Configuring Bind as a Caching Dns Server in Fedora40">
+  <meta property="og:title" content="在Fedora40上配置bind为缓存服务器">
   <meta property="og:description" content="前提条件 服务器的 IP 地址是静态的,假设服务器的ip为192.0.2.1 安装软件 dnf install bind bind-utils 编辑 /etc/named.conf 文件 在options字段中进行以下修改： 更新 listen-on 和 listen-on-v6 语句，以指定 BIND 应该侦听的 IPv4 和 IPv6 接口： listen-on port 53 { 127.0.0.1; 192.0.2.1; }; listen-on-v6 port 53 { ::1; 2001:db8:1::1; }; 更新 allow-query 语句，以配置哪些 IP 地址和范围客户端可以查询此 DNS 服务器： allow-query { localhost; 192.0.2.0/24; 2001:db8:1::/64; }; 添加">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
@@ -24,7 +24,7 @@
     <meta property="article:tag" content="Fedora">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Configuring Bind as a Caching Dns Server in Fedora40">
+  <meta name="twitter:title" content="在Fedora40上配置bind为缓存服务器">
   <meta name="twitter:description" content="前提条件 服务器的 IP 地址是静态的,假设服务器的ip为192.0.2.1 安装软件 dnf install bind bind-utils 编辑 /etc/named.conf 文件 在options字段中进行以下修改： 更新 listen-on 和 listen-on-v6 语句，以指定 BIND 应该侦听的 IPv4 和 IPv6 接口： listen-on port 53 { 127.0.0.1; 192.0.2.1; }; listen-on-v6 port 53 { ::1; 2001:db8:1::1; }; 更新 allow-query 语句，以配置哪些 IP 地址和范围客户端可以查询此 DNS 服务器： allow-query { localhost; 192.0.2.0/24; 2001:db8:1::/64; }; 添加">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
@@ -32,7 +32,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/js/c.js"></script>
-	<title>Configuring Bind as a Caching Dns Server in Fedora40 | averainy&#39;s Blog</title>
+	<title>在Fedora40上配置bind为缓存服务器 | averainy&#39;s Blog</title>
 
 
 <meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
@@ -80,7 +80,7 @@
 		</div>
 		
 		<div class="matter">
-			<h1 class="title">Configuring Bind as a Caching Dns Server in Fedora40</h1>
+			<h1 class="title">在Fedora40上配置bind为缓存服务器</h1>
 		</div>
 	</div>
 	<div class="markdown">

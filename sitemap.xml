@@ -13,9 +13,6 @@
     <loc>http://www.averainy.com/categories/</loc>
     <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</loc>
-    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
-  </url><url>
     <loc>http://www.averainy.com/tags/fedora/</loc>
     <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
@@ -26,6 +23,9 @@
     <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</loc>
     <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/docker/</loc>
