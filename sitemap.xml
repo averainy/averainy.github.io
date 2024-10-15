@@ -5,21 +5,30 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/bind/</loc>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/tags/docker/</loc>
-    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+    <loc>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</loc>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/fedora/</loc>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2024-10-15T14:38:21+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/docker/</loc>
     <lastmod>2024-10-11T14:38:09+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/wireguard/</loc>
@@ -78,9 +87,6 @@
   </url><url>
     <loc>http://www.averainy.com/tags/redhat/</loc>
     <lastmod>2024-05-12T18:05:26+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/fedora/</loc>
-    <lastmod>2024-04-25T13:22:50+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/how-to-upgrade-fedora-39-to-fedora-40/</loc>
     <lastmod>2024-04-25T13:22:50+08:00</lastmod>

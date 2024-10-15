@@ -6,10 +6,24 @@
 		<description>Recent content in Fedora on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Thu, 25 Apr 2024 13:22:50 +0800</lastBuildDate>
+		<lastBuildDate>Tue, 15 Oct 2024 14:38:21 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Configuring Bind as a Caching Dns Server in Fedora40</title>
+			<link>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</link>
+			<pubDate>Tue, 15 Oct 2024 14:38:21 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</guid>
+			<description>
+			
+				前提条件 服务器的 IP 地址是静态的,假设服务器的ip为192.0.2.1
+安装软件 dnf install bind bind-utils 编辑 /etc/named.conf 文件 在options字段中进行以下修改：
+更新 listen-on 和 listen-on-v6 …
+			
+			</description>
+		</item>
 		<item>
 			<title>How to Upgrade from Fedora 39 to Fedora 40</title>
 			<link>http://www.averainy.com/post/how-to-upgrade-fedora-39-to-fedora-40/</link>
