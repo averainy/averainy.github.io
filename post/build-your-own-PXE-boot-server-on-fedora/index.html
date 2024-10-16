@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.132.2">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Build Your Own PXE Boot Server on Fedora">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="ipxe,linux"><meta name="description" content="Build your own PXE boot server on Fedora Background 通过这篇文章设置可以从BIOS和UEFI启动PXE网络安装操作系统。
+安装前提 假设PXE服务器的ip地址是10.0.0.1 安装步骤 安装软件 更新PXE …"><meta property="og:url" content="http://www.averainy.com/post/build-your-own-PXE-boot-server-on-fedora/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="Build Your Own PXE Boot Server on Fedora">
+  <meta property="og:description" content="Build your own PXE boot server on Fedora Background 通过这篇文章设置可以从BIOS和UEFI启动PXE网络安装操作系统。 安装前提 假设PXE服务器的ip地址是10.0.0.1 安装步骤 安装软件 更新PXE启动服务器到最新版本 [sysadmin@pxeboot-server ~]$ sudo dnf update -y 安装必要软件包 [sysadmin@pxeboot-server ~]$ dnf install -y ipxe-bootimgs dnsmasq 创建 TFTP root 目录 [sysadmin@pxeboot-server ~]$ mkdir /tftpboot (可选项) 如果SELinux启动的话">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-10-16T16:05:34+08:00">
+    <meta property="article:modified_time" content="2024-10-16T16:05:34+08:00">
+    <meta property="article:tag" content="Ipxe">
+    <meta property="article:tag" content="Linux">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Build Your Own PXE Boot Server on Fedora">
+  <meta name="twitter:description" content="Build your own PXE boot server on Fedora Background 通过这篇文章设置可以从BIOS和UEFI启动PXE网络安装操作系统。 安装前提 假设PXE服务器的ip地址是10.0.0.1 安装步骤 安装软件 更新PXE启动服务器到最新版本 [sysadmin@pxeboot-server ~]$ sudo dnf update -y 安装必要软件包 [sysadmin@pxeboot-server ~]$ dnf install -y ipxe-bootimgs dnsmasq 创建 TFTP root 目录 [sysadmin@pxeboot-server ~]$ mkdir /tftpboot (可选项) 如果SELinux启动的话">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>Build Your Own PXE Boot Server on Fedora | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/links/">Links</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">16</span>
+				<span class="rest">Oct 2024</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Build Your Own PXE Boot Server on Fedora</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<h1 id="build-your-own-pxe-boot-server-on-fedora">Build your own PXE boot server on Fedora</h1>
+<h2 id="background">Background</h2>
+<p>通过这篇文章设置可以从BIOS和UEFI启动PXE网络安装操作系统。</p>
+<h2 id="安装前提">安装前提</h2>
+<ol>
+<li>假设PXE服务器的ip地址是10.0.0.1</li>
+</ol>
+<h2 id="安装步骤">安装步骤</h2>
+<h3 id="安装软件">安装软件</h3>
+<ol>
+<li>
+<p>更新PXE启动服务器到最新版本</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>sysadmin@pxeboot-server ~<span style="color:#f92672">]</span>$ sudo dnf update -y
+</span></span></code></pre></div></li>
+<li>
+<p>安装必要软件包</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>sysadmin@pxeboot-server ~<span style="color:#f92672">]</span>$ dnf install -y ipxe-bootimgs dnsmasq 
+</span></span></code></pre></div></li>
+<li>
+<p>创建 TFTP root 目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>sysadmin@pxeboot-server ~<span style="color:#f92672">]</span>$ mkdir /tftpboot
+</span></span></code></pre></div><p>(可选项) 如果SELinux启动的话，设置安全标签</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>sysadmin@pxeboot-server ~<span style="color:#f92672">]</span>$ sudo chcon -t tftpdir_t /tftpboot
+</span></span></code></pre></div></li>
+<li>
+<p>拷贝iPXE启动镜像到TFTP目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>sysadmin@pxeboot-server ~<span style="color:#f92672">]</span>$ sudo cp /usr/share/ipxe/<span style="color:#f92672">{</span>undionly.kpxe,ipxe*.efi<span style="color:#f92672">}</span> /tftpboot/
+</span></span></code></pre></div></li>
+<li>
+<p>创建iPXE菜单目录和启动菜单</p>
+<pre tabindex="0"><code>$ sudo mkdir /tftpboot/menu
+</code></pre><p>创建一个启动到IPXE shell的菜单</p>
+<pre tabindex="0"><code>sudo vi /tftpboot/menu/boot.ipxe
+</code></pre><p>内容 :</p>
+<pre tabindex="0"><code>#!ipxe
+
+menu PXE Boot Options
+
+item shell iPXE shell
+item exit  Exit to BIOS
+
+choose --default exit --timeout 10000 option &amp;&amp; goto ${option}
+
+:shell
+shell
+
+:exit
+exit
+</code></pre></li>
+<li>
+<p>创建dnsmasq配置文件 /etc/dnsmasq.conf.
+编辑前删除此文件中的原有内容.</p>
+<pre tabindex="0"><code># enable logs if required
+#log-queries
+#log-dhcp
+
+# disable DNS server
+port=0
+
+# listen on PXEBOOT vlan (vlan110) only
+listen-address=10.0.0.1
+interface=eth1
+
+# enable built-in tftp server
+enable-tftp
+tftp-root=/tftpboot
+
+
+# DHCP range 10.0.0.200 ~ 10.0.0.250
+dhcp-range=10.0.0.200,10.0.0.250,255.255.255.0,24h
+
+# Default gateway
+dhcp-option=3,10.0.0.1
+
+# Domain name - homelab.net
+dhcp-option=15,homelab.net
+
+# Broadcast address
+dhcp-option=28,10.0.0.255
+
+# Set interface MTU to 9000 bytes (jumbo frame)
+# Enable only when your network supports it
+# dhcp-option=26,9000
+
+# Tag dhcp request from iPXE
+dhcp-match=set:ipxe,175
+
+# inspect the vendor class string and tag BIOS client
+dhcp-vendorclass=BIOS,PXEClient:Arch:00000
+
+# 1st boot file - Legacy BIOS client
+dhcp-boot=tag:!ipxe,tag:BIOS,undionly.kpxe,10.1.0.1
+
+# 1st boot file - EFI client
+# at the moment all non-BIOS clients are considered
+# EFI client
+dhcp-boot=tag:!ipxe,tag:!BIOS,ipxe.efi,10.1.0.1
+
+# 2nd boot file
+dhcp-boot=tag:ipxe,menu/boot.ipxe
+</code></pre></li>
+<li>
+<p>添加防火墙规则</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo firewall-cmd --add-service<span style="color:#f92672">=</span>dhcp --permanent
+</span></span><span style="display:flex;"><span>$ sudo firewall-cmd --add-service<span style="color:#f92672">=</span>tftp --permanent
+</span></span><span style="display:flex;"><span>$ sudo firewall-cmd --add-service<span style="color:#f92672">=</span>dns --permanent
+</span></span><span style="display:flex;"><span>$ sudo firewall-cmd --reload
+</span></span></code></pre></div></li>
+<li>
+<p>启动 <strong>dnsmasq</strong> 并确保其运行</p>
+<pre tabindex="0"><code>$ sudo systemctl start dnsmasq
+$ sudo systemctl status dnsmasq
+● dnsmasq.service - DNS caching server.
+   Loaded: loaded (/usr/lib/systemd/system/dnsmasq.service; disabled; vendor preset: disabled)
+   Active: active (running) since Sat 2018-06-09 12:01:23 AWST; 6min ago
+ Main PID: 24141 (dnsmasq)
+   CGroup: /system.slice/dnsmasq.service
+           └─24141 /usr/sbin/dnsmasq -k
+</code></pre></li>
+<li>
+<p>现在你可以启动客户端，选择从网络启动应该能看到启动菜单</p>
+</li>
+</ol>
+<h3 id="添加centos-7-网络安装选项">添加CentOS 7 网络安装选项</h3>
+<ol>
+<li>
+<p>安装Apache或其他你想需要的web服务.</p>
+<pre tabindex="0"><code>$ yum install -y httpd
+</code></pre></li>
+<li>
+<p>再Apache的默认文档目录创建media子目录并挂载CentOS 7 ISO镜像.</p>
+<pre tabindex="0"><code>$ sudo mkdir -p /var/www/html/media/centos7
+</code></pre><pre tabindex="0"><code>$ sudo mount -t iso9660 -o ro,loop \
+/tmp/CentOS-7-x86_64-Minimal-1804.iso /var/www/html/media/centos7
+</code></pre></li>
+<li>
+<p>更新防火墙规则并启动web 服务</p>
+<pre tabindex="0"><code>$ sudo firewall-cmd --add-service=http --permanent
+$ sudo firewall-cmd --reload
+
+$ sudo systemctl start httpd
+</code></pre><pre tabindex="0"><code>$ sudo systemctl status httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sat 2018-06-09 14:31:20 AWST; 3h 47min ago
+     Docs: man:httpd(8)
+           man:apachectl(8)
+ Main PID: 1434 (httpd)
+   Status: &#34;Total requests: 660; Current requests/sec: 0; Current traffic:   0 B/sec&#34;
+   CGroup: /system.slice/httpd.service
+           ├─1434 /usr/sbin/httpd -DFOREGROUND
+           ├─1435 /usr/sbin/httpd -DFOREGROUND
+           ├─1436 /usr/sbin/httpd -DFOREGROUND
+           ├─1437 /usr/sbin/httpd -DFOREGROUND
+           ├─1438 /usr/sbin/httpd -DFOREGROUND
+           ├─1439 /usr/sbin/httpd -DFOREGROUND
+           ├─1489 /usr/sbin/httpd -DFOREGROUND
+           ├─1731 /usr/sbin/httpd -DFOREGROUND
+           ├─1732 /usr/sbin/httpd -DFOREGROUND
+           └─1878 /usr/sbin/httpd -DFOREGROUND
+</code></pre></li>
+<li>
+<p>添加CentOS安装选项到 <code>/tftpboot/menu/boot.ipxe</code> 文件:</p>
+<pre tabindex="0"><code>#!ipxe
+
+:start
+menu PXE Boot Options
+item shell iPXE shell
+item centos7-net CentOS 7 installation
+item exit  Exit to BIOS
+
+choose --default centos7-net --timeout 10000 option &amp;&amp; goto ${option}
+
+:shell
+shell
+
+:centos7-net
+set server_root http://10.0.0.1/media/centos7
+initrd ${server_root}/images/pxeboot/initrd.img
+kernel ${server_root}/images/pxeboot/vmlinuz inst.repo=${server_root}/ ip=dhcp ipv6.disable initrd=initrd.img inst.geoloc=0 devfs=nomount
+boot
+
+:exit
+exit
+</code></pre></li>
+<li>
+<p>现在重启客户端机器，你应该能看到Centos的选项。</p>
+</li>
+</ol>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/ipxe/"> ipxe </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+</body>
+</html>
