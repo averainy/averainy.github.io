@@ -6,10 +6,23 @@
 		<description>Recent content in Share on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Tue, 15 Oct 2024 14:38:21 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 16 Oct 2024 16:16:27 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/categories/share/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Chainloading to WDS From IPXE With UEFI</title>
+			<link>http://www.averainy.com/post/Chainloading-to-WDS-from-iPXE-with-UEFI/</link>
+			<pubDate>Wed, 16 Oct 2024 16:16:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/Chainloading-to-WDS-from-iPXE-with-UEFI/</guid>
+			<description>
+			
+				edit ipxe config file like boot.ipxe:
+item win-wds Windows Deployment Services :win-wds set wdsserver:ipv4 192.168.11.xxx #your wds server …
+			
+			</description>
+		</item>
 		<item>
 			<title>在Fedora40上配置bind为缓存服务器</title>
 			<link>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</link>

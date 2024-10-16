@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Ipxe on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/ipxe/</link>
+		<description>Recent content in Ipxe on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Wed, 16 Oct 2024 16:16:27 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/ipxe/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Chainloading to WDS From IPXE With UEFI</title>
+			<link>http://www.averainy.com/post/Chainloading-to-WDS-from-iPXE-with-UEFI/</link>
+			<pubDate>Wed, 16 Oct 2024 16:16:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/Chainloading-to-WDS-from-iPXE-with-UEFI/</guid>
+			<description>
+			
+				edit ipxe config file like boot.ipxe:
+item win-wds Windows Deployment Services :win-wds set wdsserver:ipv4 192.168.11.xxx #your wds server …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>

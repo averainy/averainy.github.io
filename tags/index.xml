@@ -6,10 +6,46 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Tue, 15 Oct 2024 14:38:21 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 16 Oct 2024 16:16:27 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Ipxe</title>
+			<link>http://www.averainy.com/tags/ipxe/</link>
+			<pubDate>Wed, 16 Oct 2024 16:16:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/ipxe/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>Linux</title>
+			<link>http://www.averainy.com/tags/linux/</link>
+			<pubDate>Wed, 16 Oct 2024 16:16:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/linux/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>Wds</title>
+			<link>http://www.averainy.com/tags/WDS/</link>
+			<pubDate>Wed, 16 Oct 2024 16:16:27 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/WDS/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>Bind</title>
 			<link>http://www.averainy.com/tags/bind/</link>
@@ -227,18 +263,6 @@
 			</description>
 		</item>
 		<item>
-			<title>Wds</title>
-			<link>http://www.averainy.com/tags/wds/</link>
-			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/wds/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
 			<title>Windows</title>
 			<link>http://www.averainy.com/tags/windows/</link>
 			<pubDate>Tue, 05 Mar 2024 17:09:23 +0800</pubDate>
@@ -280,18 +304,6 @@
 			<pubDate>Thu, 11 Jan 2024 13:33:05 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/tags/dmidecode/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>Linux</title>
-			<link>http://www.averainy.com/tags/linux/</link>
-			<pubDate>Thu, 11 Jan 2024 13:33:05 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/linux/</guid>
 			<description>
 			
 				
