@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Ipv6 on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/ipv6/</link>
+		<description>Recent content in Ipv6 on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Mon, 07 Apr 2025 21:08:23 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/ipv6/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>TP-LINK企业路由器IPv6上网配置指导</title>
+			<link>http://www.averainy.com/post/tplink-ipv6-setup/</link>
+			<pubDate>Mon, 07 Apr 2025 21:08:23 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/tplink-ipv6-setup/</guid>
+			<description>
+			
+				这两天按照TP-LINK企业路由器IPv6上网配置指导文档配置TL-R488GPM-AC型号路由器，局域网客户端一直无法自动获取公网ipv6地址，开始一直以为是电信运营商做了限制，直到今天无意中修改了一下路由器的配置，终于局域网中的所有设备都能够分配到公网ipv6地址啦。 出错的 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>
