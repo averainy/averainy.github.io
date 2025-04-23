@@ -6,10 +6,34 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Mon, 07 Apr 2025 21:08:23 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 23 Apr 2025 20:13:47 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Os</title>
+			<link>http://www.averainy.com/tags/os/</link>
+			<pubDate>Wed, 23 Apr 2025 20:13:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/os/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>Python</title>
+			<link>http://www.averainy.com/tags/python/</link>
+			<pubDate>Wed, 23 Apr 2025 20:13:47 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/python/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>Ipv6</title>
 			<link>http://www.averainy.com/tags/ipv6/</link>
@@ -172,18 +196,6 @@
 			<pubDate>Wed, 29 May 2024 17:00:18 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/tags/decorator/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>Python</title>
-			<link>http://www.averainy.com/tags/python/</link>
-			<pubDate>Wed, 29 May 2024 17:00:18 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/python/</guid>
 			<description>
 			
 				
