@@ -6,10 +6,23 @@
 		<description>Recent content in Python on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Wed, 23 Apr 2025 20:13:47 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 25 May 2025 21:07:04 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Python Decorators Sample</title>
+			<link>http://www.averainy.com/post/python-decorators-sample/</link>
+			<pubDate>Sun, 25 May 2025 21:07:04 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/python-decorators-sample/</guid>
+			<description>
+			
+				Print a log of the start and end of method execution using python’s decorator
+import logging logging.basicConfig(level=logging.INFO) def …
+			
+			</description>
+		</item>
 		<item>
 			<title>利用python的os包删除文件和目录</title>
 			<link>http://www.averainy.com/post/delete-file-and-directory-by-python/</link>

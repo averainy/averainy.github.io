@@ -6,7 +6,7 @@
 		<description>Recent content on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Wed, 23 Apr 2025 20:13:47 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 25 May 2025 21:07:04 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/index.xml" rel="self" type="application/rss+xml" />
 		
@@ -19,6 +19,19 @@
 			<description>
 			
 				 password-generator 
+			
+			</description>
+		</item>
+		<item>
+			<title>Python Decorators Sample</title>
+			<link>http://www.averainy.com/post/python-decorators-sample/</link>
+			<pubDate>Sun, 25 May 2025 21:07:04 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/python-decorators-sample/</guid>
+			<description>
+			
+				Print a log of the start and end of method execution using python’s decorator
+import logging logging.basicConfig(level=logging.INFO) def …
 			
 			</description>
 		</item>
