@@ -6,10 +6,34 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Sun, 20 Jul 2025 21:35:48 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 05 Sep 2025 10:39:24 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Linux</title>
+			<link>http://www.averainy.com/tags/linux/</link>
+			<pubDate>Fri, 05 Sep 2025 10:39:24 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/linux/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>Python</title>
+			<link>http://www.averainy.com/tags/python/</link>
+			<pubDate>Fri, 05 Sep 2025 10:39:24 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/python/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>杭州</title>
 			<link>http://www.averainy.com/tags/%E6%9D%AD%E5%B7%9E/</link>
@@ -71,18 +95,6 @@
 			</description>
 		</item>
 		<item>
-			<title>Python</title>
-			<link>http://www.averainy.com/tags/python/</link>
-			<pubDate>Sun, 25 May 2025 21:07:04 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/python/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
 			<title>Os</title>
 			<link>http://www.averainy.com/tags/os/</link>
 			<pubDate>Wed, 23 Apr 2025 20:13:47 +0800</pubDate>
@@ -124,18 +136,6 @@
 			<pubDate>Wed, 16 Oct 2024 16:16:27 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/tags/ipxe/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>Linux</title>
-			<link>http://www.averainy.com/tags/linux/</link>
-			<pubDate>Wed, 16 Oct 2024 16:16:27 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/linux/</guid>
 			<description>
 			
 				

@@ -6,10 +6,22 @@
 		<description>Recent content in Posts on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Sun, 20 Jul 2025 21:35:48 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 05 Sep 2025 10:39:24 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/post/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Check Linux Reboot by Python</title>
+			<link>http://www.averainy.com/post/check-linux-reboot-by-python/</link>
+			<pubDate>Fri, 05 Sep 2025 10:39:24 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/check-linux-reboot-by-python/</guid>
+			<description>
+			
+				当使用dnf update更新完之后，可以通过dnf needs-restarting -r检测下Linux系统是否需要重启。当有多台服务器的时候会比较麻烦。因此，可以利用python写一个脚本进行检测。下面是一个参考例子。更好的办法是可以做成一个配置文件，通过python读取配 …
+			
+			</description>
+		</item>
 		<item>
 			<title>2025年杭州自来水污染原因分析</title>
 			<link>http://www.averainy.com/post/hangzhou-zilaishui-wuran-2025/</link>
