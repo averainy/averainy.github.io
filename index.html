@@ -66,6 +66,29 @@
 			<div class="post-header">
 				<div class="meta">
 					<div class="date">
+						<span class="day">12</span>
+						<span class="rest">Sep 2025</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/post/when-the-server-starts-dnsmasq-service-fail-to-starts/">When the Server Starts Dnsmasq Service Fail to Starts</a></h3>
+					<div class="author">
+					
+					</div>
+					<span class="description">
+					
+						背景 刚在服务器上用dnsmasq搭建了一个dns服务。希望能够监听所有ip。配置好之后，用systemctl start dnsmasq启动。看起来一切正常。但是在服务器重启之后，dnsmasq服务没有启动。只能手动运行systemctl start dnsmasq启动。
+调查 …
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
 						<span class="day">05</span>
 						<span class="rest">Sep 2025</span>
 					</div>
@@ -260,30 +283,6 @@ item win-wds Windows Deployment Services :win-wds set wdsserver:ipv4 192.168.11.
 						前提条件 服务器的 IP 地址是静态的,假设服务器的ip为192.0.2.1
 安装软件 dnf install bind bind-utils 编辑 /etc/named.conf 文件 在options字段中进行以下修改：
 更新 listen-on 和 listen-on-v6 …
-					
-					</span>
-				</div>
-			</div>
-		</div>
-	
-		<div class="post">
-			<div class="post-header">
-				<div class="meta">
-					<div class="date">
-						<span class="day">11</span>
-						<span class="rest">Oct 2024</span>
-					</div>
-				</div>
-				<div class="matter">
-					<h3 class="title small"><a href="/post/wg-easy-setup/">使用wg-easy管理Wireguard</a></h3>
-					<div class="author">
-					
-					</div>
-					<span class="description">
-					
-						最近为了开源节流，准备更换宽带运营商，大概率将不会有公网ip，所以在阿里云买了一台云服务器。为了连到家里得nas，决定选Wireguard。
-docker-compose.yml配置如下：
-services: wg-easy: image: weejewel/wg-easy …
 					
 					</span>
 				</div>

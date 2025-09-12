@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.132.2">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="When the Server Starts Dnsmasq Service Fail to Starts">
+	
+	
+	<meta name="author" content="averainy"><meta name="keywords" content="linux,dnsmasq"><meta name="description" content="背景 刚在服务器上用dnsmasq搭建了一个dns服务。希望能够监听所有ip。配置好之后，用systemctl start dnsmasq启动。看起来一切正常。但是在服务器重启之后，dnsmasq服务没有启动。只能手动运行systemctl start dnsmasq启动。
+调查 …"><meta property="og:url" content="http://www.averainy.com/post/when-the-server-starts-dnsmasq-service-fail-to-starts/">
+  <meta property="og:site_name" content="averainy&#39;s Blog">
+  <meta property="og:title" content="When the Server Starts Dnsmasq Service Fail to Starts">
+  <meta property="og:description" content="背景 刚在服务器上用dnsmasq搭建了一个dns服务。希望能够监听所有ip。配置好之后，用systemctl start dnsmasq启动。看起来一切正常。但是在服务器重启之后，dnsmasq服务没有启动。只能手动运行systemctl start dnsmasq启动。 调查和解决方案 通过journal">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2025-09-12T10:36:04+08:00">
+    <meta property="article:modified_time" content="2025-09-12T10:36:04+08:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Dnsmasq">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="When the Server Starts Dnsmasq Service Fail to Starts">
+  <meta name="twitter:description" content="背景 刚在服务器上用dnsmasq搭建了一个dns服务。希望能够监听所有ip。配置好之后，用systemctl start dnsmasq启动。看起来一切正常。但是在服务器重启之后，dnsmasq服务没有启动。只能手动运行systemctl start dnsmasq启动。 调查和解决方案 通过journal">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/c.js"></script>
+	<title>When the Server Starts Dnsmasq Service Fail to Starts | averainy&#39;s Blog</title>
+
+
+<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+	 <script>
+!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JtwZqnmrWWr6nBhV",ck:"JtwZqnmrWWr6nBhV"});
+</script>
+</head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://www.averainy.com/">averainy&#39;s Blog</a></h2></div>
+	<div id="title-description"><p id="subtitle">averainy</p><div id="social">
+			<nav>
+				<ul></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/links/">Links</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">12</span>
+				<span class="rest">Sep 2025</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">When the Server Starts Dnsmasq Service Fail to Starts</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<h2 id="背景">背景</h2>
+<p>刚在服务器上用dnsmasq搭建了一个dns服务。希望能够监听所有ip。配置好之后，用<code>systemctl start dnsmasq</code>启动。看起来一切正常。但是在服务器重启之后，dnsmasq服务没有启动。只能手动运行<code>systemctl start dnsmasq</code>启动。</p>
+<h2 id="调查和解决方案">调查和解决方案</h2>
+<p>通过<code>journalctl -u dnsmasq</code>命令发现以下异常信息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Sep <span style="color:#ae81ff">11</span> 17:47:22 fedora systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Starting dnsmasq.service - DNS caching server....
+</span></span><span style="display:flex;"><span>Sep <span style="color:#ae81ff">11</span> 17:47:22 fedora dnsmasq<span style="color:#f92672">[</span>902<span style="color:#f92672">]</span>: dnsmasq: failed to create listening socket <span style="color:#66d9ef">for</span> 192.168.11.180: Cannot assign requested address
+</span></span><span style="display:flex;"><span>Sep <span style="color:#ae81ff">11</span> 17:47:22 fedora dnsmasq<span style="color:#f92672">[</span>902<span style="color:#f92672">]</span>: failed to create listening socket <span style="color:#66d9ef">for</span> 192.168.11.180: Cannot assign requested address
+</span></span><span style="display:flex;"><span>Sep <span style="color:#ae81ff">11</span> 17:47:22 fedora dnsmasq<span style="color:#f92672">[</span>902<span style="color:#f92672">]</span>: FAILED to start up
+</span></span><span style="display:flex;"><span>Sep <span style="color:#ae81ff">11</span> 17:47:22 fedora systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: dnsmasq.service: Control process exited, code<span style="color:#f92672">=</span>exited, status<span style="color:#f92672">=</span>2/INVALIDARGUMENT
+</span></span><span style="display:flex;"><span>Sep <span style="color:#ae81ff">11</span> 17:47:22 fedora systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: dnsmasq.service: Failed with result <span style="color:#e6db74">&#39;exit-code&#39;</span>.
+</span></span><span style="display:flex;"><span>Sep <span style="color:#ae81ff">11</span> 17:47:22 fedora systemd<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Failed to start dnsmasq.service - DNS caching server..
+</span></span></code></pre></div><p>从以上信息可以看出是原因是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>“Cannot assign requested address.”是由于linux分配的客户端连接端口用尽，无法建立socket连接所致，虽然socket正常关闭，但是端口不是立即释放，而是处于TIME_WAIT状态，默认等待60s后才释放。
+</span></span></code></pre></div><p>检查dnsmasq的配置文件以及通过测试发现是以下两个参数可能会造成这种情况：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>listen-address<span style="color:#f92672">=</span>127.0.0.1,192.168.11.180
+</span></span><span style="display:flex;"><span>bind-interfaces
+</span></span></code></pre></div><p>将bind-interfaces注释掉之后，再次启动linux服务器，dnsmasq服务就能正常启动。</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/share/"> share </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/dnsmasq/"> dnsmasq </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+
+
+
+
+</body>
+</html>

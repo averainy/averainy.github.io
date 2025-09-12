@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Dnsmasq on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/dnsmasq/</link>
+		<description>Recent content in Dnsmasq on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 12 Sep 2025 10:36:04 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/dnsmasq/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>When the Server Starts Dnsmasq Service Fail to Starts</title>
+			<link>http://www.averainy.com/post/when-the-server-starts-dnsmasq-service-fail-to-starts/</link>
+			<pubDate>Fri, 12 Sep 2025 10:36:04 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/when-the-server-starts-dnsmasq-service-fail-to-starts/</guid>
+			<description>
+			
+				背景 刚在服务器上用dnsmasq搭建了一个dns服务。希望能够监听所有ip。配置好之后，用systemctl start dnsmasq启动。看起来一切正常。但是在服务器重启之后，dnsmasq服务没有启动。只能手动运行systemctl start dnsmasq启动。
+调查 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>
