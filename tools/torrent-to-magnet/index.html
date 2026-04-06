@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Torrent 转磁力链接工具</title>
+    <title>Torrent 转磁力链接工具 - 支持 v2 及智能 Tracker</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -46,6 +46,15 @@
         .header p {
             opacity: 0.9;
             font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
         }
 
         .content {
@@ -87,6 +96,38 @@
             color: #a0aec0;
             font-size: 12px;
             margin-top: 8px;
+        }
+
+        .tracker-status {
+            background: #ebf8ff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #2c5282;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tracker-status .status-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tracker-status .refresh-btn {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .tracker-status .refresh-btn:hover {
+            background: #3182ce;
         }
 
         input[type="file"] {
@@ -212,6 +253,35 @@
             border-bottom: none;
         }
 
+        .v2-badge {
+            background: #48bb78;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 8px;
+        }
+
+        .hash-type {
+            font-size: 11px;
+            color: #718096;
+            margin-top: 4px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 640px) {
             .content {
                 padding: 20px;
@@ -228,13 +298,22 @@
         <div class="card">
             <div class="header">
                 <h1>🔗 Torrent 转磁力链接</h1>
-                <p>上传 .torrent 文件，自动生成磁力链接</p>
+                <p>支持 BitTorrent v1 & v2 混合格式 | 智能添加公共 Tracker</p>
+                <div class="badge">✨ 完全本地运行 · Tracker 自动缓存</div>
             </div>
             <div class="content">
+                <div class="tracker-status" id="trackerStatus">
+                    <div class="status-text">
+                        <span>📡 公共 Tracker 状态：</span>
+                        <span id="trackerCount">加载中...</span>
+                    </div>
+                    <button class="refresh-btn" id="refreshTrackerBtn">🔄 手动更新</button>
+                </div>
+
                 <div class="upload-area" id="uploadArea">
                     <div class="upload-icon">📁</div>
                     <div class="upload-text">点击或拖拽上传 torrent 文件</div>
-                    <div class="upload-hint">支持 .torrent 格式，最大 10MB</div>
+                    <div class="upload-hint">支持 .torrent 格式，最大 10MB | 支持 v1、v2 及混合格式</div>
                     <input type="file" id="fileInput" accept=".torrent">
                 </div>
 
@@ -247,13 +326,19 @@
                         <div class="info-label">📦 文件大小</div>
                         <div class="info-value" id="fileSize"></div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">🔗 磁力链接</div>
-                        <div class="info-value" id="magnetLink" style="font-size: 12px;"></div>
+                    <div class="info-item" id="v1Info">
+                        <div class="info-label">🔗 v1 磁力链接 (BTIH)</div>
+                        <div class="info-value" id="v1MagnetLink" style="font-size: 12px;"></div>
+                        <div class="hash-type">使用 SHA-1 哈希，兼容旧版客户端</div>
+                    </div>
+                    <div class="info-item" id="v2Info" style="display: none;">
+                        <div class="info-label">🔗 v2 磁力链接 (BTIHv2) <span class="v2-badge">新版</span></div>
+                        <div class="info-value" id="v2MagnetLink" style="font-size: 12px;"></div>
+                        <div class="hash-type">使用 SHA-256 哈希，支持混合模式</div>
                     </div>
                     <div class="btn-group">
-                        <button class="magnet-link" id="openMagnet">🔗 打开磁力链接</button>
-                        <button class="magnet-link copy-btn" id="copyMagnet">📋 复制链接</button>
+                        <button class="magnet-link" id="openMagnet">🔗 打开推荐链接</button>
+                        <button class="magnet-link copy-btn" id="copyMagnet">📋 复制推荐链接</button>
                     </div>
                     <div class="info-item" id="filesInfo" style="display: none;">
                         <div class="info-label">📄 包含文件</div>
@@ -266,47 +351,49 @@
                 </div>
 
                 <div class="example">
-                    💡 提示：磁力链接可以用于 BT 下载工具（如 qBittorrent、Transmission 等）
+                    💡 提示：磁力链接可用于 qBittorrent 4.3+、Transmission 3.0+ 等支持 v2 的客户端<br>
+                    📌 混合格式种子会同时生成 v1 和 v2 链接，推荐使用 v2 链接以获得更好的完整性验证<br>
+                    🌐 公共 Tracker 来自网络，自动缓存，提升下载速度
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 解析 torrent 文件并生成磁力链接
-        class TorrentParser {
-            static decodeBencode(data, start = 0) {
+        // ==================== Bencode 编解码器 ====================
+        class Bencode {
+            static decode(data, start = 0) {
                 const type = String.fromCharCode(data[start]);
                 
-                if (type === 'd') { // 字典
+                if (type === 'd') {
                     const dict = {};
                     let i = start + 1;
                     while (String.fromCharCode(data[i]) !== 'e') {
-                        const key = this.decodeBencode(data, i);
+                        const key = this.decode(data, i);
                         i = key.index;
-                        const value = this.decodeBencode(data, i);
+                        const value = this.decode(data, i);
                         i = value.index;
                         dict[key.value] = value.value;
                     }
                     return { value: dict, index: i + 1 };
-                } else if (type === 'l') { // 列表
+                } else if (type === 'l') {
                     const list = [];
                     let i = start + 1;
                     while (String.fromCharCode(data[i]) !== 'e') {
-                        const item = this.decodeBencode(data, i);
+                        const item = this.decode(data, i);
                         i = item.index;
                         list.push(item.value);
                     }
                     return { value: list, index: i + 1 };
-                } else if (type === 'i') { // 整数
+                } else if (type === 'i') {
                     let i = start + 1;
                     let numStr = '';
                     while (String.fromCharCode(data[i]) !== 'e') {
                         numStr += String.fromCharCode(data[i]);
                         i++;
                     }
-                    return { value: parseInt(numStr), index: i + 1 };
-                } else if (type >= '0' && type <= '9') { // 字符串
+                    return { value: BigInt(numStr), index: i + 1 };
+                } else if (type >= '0' && type <= '9') {
                     let lenStr = '';
                     let i = start;
                     while (String.fromCharCode(data[i]) !== ':') {
@@ -318,12 +405,202 @@
                     const str = data.slice(i, i + len);
                     return { value: new TextDecoder().decode(str), index: i + len };
                 }
-                throw new Error('Invalid bencode data');
+                throw new Error('Invalid bencode data at position ' + start);
             }
 
+            static encode(obj) {
+                if (typeof obj === 'string') {
+                    const str = obj;
+                    return `${str.length}:${str}`;
+                } else if (typeof obj === 'number' || typeof obj === 'bigint') {
+                    return `i${obj}e`;
+                } else if (Array.isArray(obj)) {
+                    let result = 'l';
+                    for (const item of obj) {
+                        result += this.encode(item);
+                    }
+                    result += 'e';
+                    return result;
+                } else if (obj && typeof obj === 'object') {
+                    let result = 'd';
+                    const keys = Object.keys(obj).sort();
+                    for (const key of keys) {
+                        result += this.encode(key);
+                        result += this.encode(obj[key]);
+                    }
+                    result += 'e';
+                    return result;
+                }
+                throw new Error('Cannot encode value: ' + obj);
+            }
+        }
+
+        // ==================== Tracker 管理器 ====================
+        class TrackerManager {
+            constructor() {
+                this.cacheKey = 'cached_public_trackers';
+                this.lastFetchKey = 'last_tracker_fetch';
+                this.trackersUrl = 'https://adysec.github.io/tracker/trackers_best_https.txt';
+                this.cachedTrackers = [];
+                this.isLoading = false;
+                this.listeners = [];
+            }
+
+            // 初始化：从缓存加载，然后后台更新
+            async init() {
+                this.loadFromCache();
+                this.updateTrackersInBackground();
+            }
+
+            // 从 localStorage 加载缓存
+            loadFromCache() {
+                try {
+                    const cached = localStorage.getItem(this.cacheKey);
+                    if (cached) {
+                        this.cachedTrackers = JSON.parse(cached);
+                        console.log(`从缓存加载了 ${this.cachedTrackers.length} 个 Tracker`);
+                        this.notifyListeners();
+                        return true;
+                    }
+                } catch (e) {
+                    console.warn('读取 Tracker 缓存失败:', e);
+                }
+                return false;
+            }
+
+            // 保存到缓存
+            saveToCache(trackers) {
+                try {
+                    localStorage.setItem(this.cacheKey, JSON.stringify(trackers));
+                    localStorage.setItem(this.lastFetchKey, Date.now().toString());
+                    this.cachedTrackers = trackers;
+                    console.log(`已缓存 ${trackers.length} 个 Tracker`);
+                    this.notifyListeners();
+                    return true;
+                } catch (e) {
+                    console.warn('保存 Tracker 缓存失败:', e);
+                }
+                return false;
+            }
+
+            // 手动更新 Tracker 列表
+            async manualUpdate() {
+                this.notifyListeners('loading');
+                const success = await this.downloadTrackers();
+                if (!success) {
+                    this.notifyListeners('error');
+                }
+                return success;
+            }
+
+            // 后台更新 Tracker 列表
+            async updateTrackersInBackground() {
+                if (this.isLoading) return;
+                
+                // 检查是否需要更新（超过24小时才更新）
+                const lastFetch = localStorage.getItem(this.lastFetchKey);
+                if (lastFetch) {
+                    const hoursSinceUpdate = (Date.now() - parseInt(lastFetch)) / (1000 * 60 * 60);
+                    if (hoursSinceUpdate < 24) {
+                        console.log(`Tracker 缓存新鲜（${hoursSinceUpdate.toFixed(1)}小时前更新），跳过下载`);
+                        return;
+                    }
+                }
+                
+                await this.downloadTrackers();
+            }
+
+            // 下载 Tracker 列表
+            async downloadTrackers() {
+                if (this.isLoading) return false;
+                
+                this.isLoading = true;
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15秒超时
+                    
+                    const response = await fetch(this.trackersUrl, {
+                        signal: controller.signal,
+                        cache: 'no-cache'
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    const text = await response.text();
+                    const trackers = this.parseTrackerText(text);
+                    
+                    if (trackers.length > 0) {
+                        this.saveToCache(trackers);
+                        this.notifyListeners('success', trackers.length);
+                        return true;
+                    } else {
+                        console.warn('下载的 Tracker 列表为空');
+                        this.notifyListeners('empty');
+                        return false;
+                    }
+                } catch (error) {
+                    console.warn('下载 Tracker 列表失败:', error.message);
+                    this.notifyListeners('error');
+                    return false;
+                } finally {
+                    this.isLoading = false;
+                }
+            }
+
+            // 解析 Tracker 文本文件
+            parseTrackerText(text) {
+                const lines = text.split(/\r?\n/);
+                const trackers = [];
+                
+                for (const line of lines) {
+                    let trimmed = line.trim();
+                    if (trimmed === '' || trimmed.startsWith('#')) continue;
+                    
+                    if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || 
+                        trimmed.startsWith('udp://') || trimmed.startsWith('wss://')) {
+                        trackers.push(trimmed);
+                    }
+                }
+                
+                return [...new Set(trackers)];
+            }
+
+            // 获取当前的 Tracker 列表
+            getTrackers() {
+                return [...this.cachedTrackers];
+            }
+
+            // 获取 Tracker 数量
+            getTrackerCount() {
+                return this.cachedTrackers.length;
+            }
+
+            // 添加监听器
+            addListener(callback) {
+                this.listeners.push(callback);
+            }
+
+            // 通知所有监听器
+            notifyListeners(status, count = null) {
+                for (const callback of this.listeners) {
+                    callback({
+                        status: status || 'update',
+                        count: count !== null ? count : this.cachedTrackers.length,
+                        trackers: this.cachedTrackers
+                    });
+                }
+            }
+        }
+
+        // ==================== Torrent 解析器 ====================
+        class TorrentParser {
             static parseTorrent(arrayBuffer) {
                 const data = new Uint8Array(arrayBuffer);
-                const decoded = this.decodeBencode(data, 0);
+                const decoded = Bencode.decode(data, 0);
                 const torrent = decoded.value;
                 
                 if (!torrent.info) {
@@ -333,90 +610,212 @@
                 return torrent;
             }
 
-            static calculateInfoHash(info) {
-                // 重新编码 info 字典
-                const encodeInfo = (obj) => {
-                    if (typeof obj === 'string') {
-                        const str = obj;
-                        return `${str.length}:${str}`;
-                    } else if (typeof obj === 'number') {
-                        return `i${obj}e`;
-                    } else if (Array.isArray(obj)) {
-                        let result = 'l';
-                        for (const item of obj) {
-                            result += encodeInfo(item);
-                        }
-                        result += 'e';
-                        return result;
-                    } else if (typeof obj === 'object') {
-                        let result = 'd';
-                        const keys = Object.keys(obj).sort();
-                        for (const key of keys) {
-                            result += encodeInfo(key);
-                            result += encodeInfo(obj[key]);
-                        }
-                        result += 'e';
-                        return result;
-                    }
-                    return '';
-                };
-                
-                const infoEncoded = encodeInfo(info);
+            static async calculateInfoHashV1(info) {
+                const infoEncoded = Bencode.encode(info);
                 const encoder = new TextEncoder();
                 const infoBuffer = encoder.encode(infoEncoded);
-                
-                // 计算 SHA-1 哈希
-                return crypto.subtle.digest('SHA-1', infoBuffer);
-            }
-
-            static async generateMagnetLink(torrent) {
-                const infoHashBuffer = await this.calculateInfoHash(torrent.info);
-                const infoHash = Array.from(new Uint8Array(infoHashBuffer))
+                const hashBuffer = await crypto.subtle.digest('SHA-1', infoBuffer);
+                return Array.from(new Uint8Array(hashBuffer))
                     .map(b => b.toString(16).padStart(2, '0'))
                     .join('');
-                
-                let magnetLink = `magnet:?xt=urn:btih:${infoHash}`;
+            }
+
+            static isV2Torrent(torrent) {
+                return torrent.info && (
+                    torrent.info.metaVersion === 2 ||
+                    torrent.info.fileTree ||
+                    torrent.info.filesRoot
+                );
+            }
+
+            static isHybridTorrent(torrent) {
+                return this.isV2Torrent(torrent) && 
+                       torrent.info.pieces && 
+                       torrent.info.pieceLength;
+            }
+
+            static async generateMagnetLinks(torrent, publicTrackers = []) {
+                const links = {
+                    v1: null,
+                    v2: null,
+                    isHybrid: false,
+                    version: 'v1',
+                    trackerCount: 0
+                };
+
+                // 收集所有 Tracker
+                let allTrackers = new Set();
                 
                 if (torrent.announce) {
-                    magnetLink += `&tr=${encodeURIComponent(torrent.announce)}`;
+                    allTrackers.add(torrent.announce);
                 }
                 
                 if (torrent.announceList) {
                     for (const trackerList of torrent.announceList) {
                         for (const tracker of trackerList) {
-                            magnetLink += `&tr=${encodeURIComponent(tracker)}`;
+                            if (tracker) allTrackers.add(tracker);
                         }
                     }
                 }
                 
-                if (torrent.info.name) {
-                    magnetLink += `&dn=${encodeURIComponent(torrent.info.name)}`;
+                for (const tracker of publicTrackers) {
+                    allTrackers.add(tracker);
                 }
                 
-                return magnetLink;
+                links.trackerCount = allTrackers.size;
+
+                // 辅助函数：构建带所有 Tracker 的磁力链接
+                const buildMagnetWithTrackers = (hash, xtType) => {
+                    let magnetLink = `magnet:?xt=urn:${xtType}:${hash}`;
+                    for (const tracker of allTrackers) {
+                        magnetLink += `&tr=${encodeURIComponent(tracker)}`;
+                    }
+                    if (torrent.info && torrent.info.name) {
+                        magnetLink += `&dn=${encodeURIComponent(torrent.info.name)}`;
+                    }
+                    return magnetLink;
+                };
+
+                // 生成 v1 链接
+                if (torrent.info && torrent.info.pieces) {
+                    try {
+                        const v1Hash = await this.calculateInfoHashV1(torrent.info);
+                        links.v1 = buildMagnetWithTrackers(v1Hash, 'btih');
+                        links.version = 'v1';
+                    } catch (e) {
+                        console.warn('Failed to generate v1 hash:', e);
+                    }
+                }
+
+                // 生成 v2 链接
+                if (this.isV2Torrent(torrent)) {
+                    try {
+                        const infoEncoded = Bencode.encode(torrent.info);
+                        const encoder = new TextEncoder();
+                        const infoBuffer = encoder.encode(infoEncoded);
+                        const hashBuffer = await crypto.subtle.digest('SHA-256', infoBuffer);
+                        const v2Hash = Array.from(new Uint8Array(hashBuffer))
+                            .map(b => b.toString(16).padStart(2, '0'))
+                            .join('');
+                        
+                        links.v2 = buildMagnetWithTrackers(v2Hash, 'btihv2');
+                        links.version = this.isHybridTorrent(torrent) ? 'hybrid' : 'v2';
+                        links.isHybrid = this.isHybridTorrent(torrent);
+                    } catch (e) {
+                        console.warn('Failed to generate v2 hash:', e);
+                    }
+                }
+
+                return links;
+            }
+
+            static getFileList(torrent) {
+                const files = [];
+                if (torrent.info.files && torrent.info.files.length > 0) {
+                    for (const file of torrent.info.files) {
+                        if (file.path) {
+                            files.push(file.path.join('/'));
+                        } else if (file.pathUtf8) {
+                            files.push(file.pathUtf8.join('/'));
+                        }
+                    }
+                } else if (torrent.info.name) {
+                    files.push(torrent.info.name);
+                }
+                
+                if (torrent.info.fileTree) {
+                    const collectFiles = (node, path = '') => {
+                        for (const [name, value] of Object.entries(node)) {
+                            const newPath = path ? `${path}/${name}` : name;
+                            if (value && typeof value === 'object') {
+                                if (value[''] || value.length) {
+                                    files.push(newPath);
+                                } else {
+                                    collectFiles(value, newPath);
+                                }
+                            }
+                        }
+                    };
+                    collectFiles(torrent.info.fileTree);
+                }
+                
+                return [...new Set(files)];
+            }
+
+            static getTotalSize(torrent) {
+                let totalSize = 0;
+                if (torrent.info.files && torrent.info.files.length > 0) {
+                    for (const file of torrent.info.files) {
+                        totalSize += Number(file.length || 0);
+                    }
+                } else if (torrent.info.length) {
+                    totalSize = Number(torrent.info.length);
+                }
+                return totalSize;
             }
         }
 
-        // UI 交互逻辑
+        // ==================== UI 交互逻辑 ====================
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
         const resultDiv = document.getElementById('result');
         const errorDiv = document.getElementById('error');
         const fileNameSpan = document.getElementById('fileName');
         const fileSizeSpan = document.getElementById('fileSize');
-        const magnetLinkSpan = document.getElementById('magnetLink');
+        const v1MagnetLinkSpan = document.getElementById('v1MagnetLink');
+        const v2MagnetLinkSpan = document.getElementById('v2MagnetLink');
+        const v2InfoDiv = document.getElementById('v2Info');
         const openMagnetBtn = document.getElementById('openMagnet');
         const copyMagnetBtn = document.getElementById('copyMagnet');
         const filesInfoDiv = document.getElementById('filesInfo');
         const filesListDiv = document.getElementById('filesList');
+        const trackerCountSpan = document.getElementById('trackerCount');
+        const refreshTrackerBtn = document.getElementById('refreshTrackerBtn');
 
-        let currentMagnetLink = '';
+        let currentLinks = { v1: null, v2: null };
+        let currentRecommendLink = null;
+
+        // 初始化 Tracker 管理器
+        const trackerManager = new TrackerManager();
+        
+        // 更新 Tracker 状态显示
+        function updateTrackerStatus(statusData) {
+            if (statusData.status === 'loading') {
+                trackerCountSpan.innerHTML = '<span class="loading"></span> 下载中...';
+            } else if (statusData.status === 'error') {
+                trackerCountSpan.innerHTML = '⚠️ 下载失败，使用缓存';
+            } else if (statusData.status === 'empty') {
+                trackerCountSpan.innerHTML = '⚠️ 列表为空';
+            } else {
+                const count = statusData.count;
+                if (count > 0) {
+                    trackerCountSpan.innerHTML = `✅ 已加载 ${count} 个公共 Tracker`;
+                } else {
+                    trackerCountSpan.innerHTML = `⚠️ 暂无公共 Tracker`;
+                }
+            }
+        }
+        
+        // 监听 Tracker 更新
+        trackerManager.addListener(updateTrackerStatus);
+        
+        // 初始化 Tracker
+        trackerManager.init();
+        
+        // 手动刷新 Tracker
+        refreshTrackerBtn.addEventListener('click', async () => {
+            refreshTrackerBtn.disabled = true;
+            refreshTrackerBtn.textContent = '⏳ 下载中...';
+            await trackerManager.manualUpdate();
+            refreshTrackerBtn.textContent = '🔄 手动更新';
+            refreshTrackerBtn.disabled = false;
+        });
 
         // 格式化文件大小
         function formatFileSize(bytes) {
             if (bytes === 0) return '0 Bytes';
             const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
             const i = Math.floor(Math.log(bytes) / Math.log(k));
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
@@ -426,50 +825,22 @@
             if (files && files.length > 0) {
                 filesInfoDiv.style.display = 'block';
                 filesListDiv.innerHTML = '';
-                files.forEach(file => {
+                const displayFiles = files.slice(0, 50);
+                displayFiles.forEach(file => {
                     const fileItem = document.createElement('div');
                     fileItem.className = 'file-item';
                     fileItem.textContent = file;
                     filesListDiv.appendChild(fileItem);
                 });
+                if (files.length > 50) {
+                    const moreItem = document.createElement('div');
+                    moreItem.className = 'file-item';
+                    moreItem.textContent = `... 还有 ${files.length - 50} 个文件`;
+                    moreItem.style.color = '#a0aec0';
+                    filesListDiv.appendChild(moreItem);
+                }
             } else {
                 filesInfoDiv.style.display = 'none';
-            }
-        }
-
-        // 处理 torrent 文件
-        async function processTorrentFile(file) {
-            try {
-                // 显示基本信息
-                fileNameSpan.textContent = file.name;
-                fileSizeSpan.textContent = formatFileSize(file.size);
-                
-                // 读取文件
-                const arrayBuffer = await file.arrayBuffer();
-                
-                // 解析 torrent
-                const torrent = TorrentParser.parseTorrent(arrayBuffer);
-                
-                // 生成磁力链接
-                currentMagnetLink = await TorrentParser.generateMagnetLink(torrent);
-                magnetLinkSpan.textContent = currentMagnetLink;
-                
-                // 显示文件列表（如果是多文件 torrent）
-                if (torrent.info.files && torrent.info.files.length > 0) {
-                    const fileNames = torrent.info.files.map(f => f.path.join('/'));
-                    displayFiles(fileNames);
-                } else if (torrent.info.name) {
-                    displayFiles([torrent.info.name]);
-                }
-                
-                // 显示结果
-                resultDiv.classList.add('show');
-                errorDiv.classList.remove('show');
-                
-            } catch (err) {
-                console.error('解析失败:', err);
-                showError('解析 torrent 文件失败：' + err.message);
-                resultDiv.classList.remove('show');
             }
         }
 
@@ -482,18 +853,79 @@
             }, 5000);
         }
 
+        // 处理 torrent 文件
+        async function processTorrentFile(file) {
+            try {
+                fileNameSpan.textContent = file.name;
+                
+                const arrayBuffer = await file.arrayBuffer();
+                const torrent = TorrentParser.parseTorrent(arrayBuffer);
+                
+                const totalSize = TorrentParser.getTotalSize(torrent);
+                fileSizeSpan.textContent = formatFileSize(totalSize);
+                
+                // 获取公共 Tracker 并生成磁力链接
+                const publicTrackers = trackerManager.getTrackers();
+                currentLinks = await TorrentParser.generateMagnetLinks(torrent, publicTrackers);
+                
+                // 显示 v1 链接
+                if (currentLinks.v1) {
+                    v1MagnetLinkSpan.textContent = currentLinks.v1;
+                } else {
+                    v1MagnetLinkSpan.textContent = '无法生成 v1 链接（可能为纯 v2 格式）';
+                }
+                
+                // 显示 v2 链接
+                if (currentLinks.v2) {
+                    v2MagnetLinkSpan.textContent = currentLinks.v2;
+                    v2InfoDiv.style.display = 'block';
+                    currentRecommendLink = currentLinks.v2;
+                } else {
+                    v2InfoDiv.style.display = 'none';
+                    currentRecommendLink = currentLinks.v1;
+                }
+                
+                // 显示文件列表
+                const files = TorrentParser.getFileList(torrent);
+                displayFiles(files);
+                
+                resultDiv.classList.add('show');
+                errorDiv.classList.remove('show');
+                
+                // 更新按钮文本
+                if (currentLinks.v2) {
+                    openMagnetBtn.textContent = '🔗 打开 v2 磁力链接（推荐）';
+                    copyMagnetBtn.textContent = '📋 复制 v2 链接';
+                } else {
+                    openMagnetBtn.textContent = '🔗 打开磁力链接';
+                    copyMagnetBtn.textContent = '📋 复制链接';
+                }
+                
+                // 可选：在控制台输出 Tracker 数量
+                console.log(`磁力链接包含 ${currentLinks.trackerCount} 个 Tracker`);
+                
+            } catch (err) {
+                console.error('解析失败:', err);
+                showError('解析 torrent 文件失败：' + err.message);
+                resultDiv.classList.remove('show');
+            }
+        }
+
         // 打开磁力链接
         openMagnetBtn.addEventListener('click', () => {
-            if (currentMagnetLink) {
-                window.location.href = currentMagnetLink;
+            if (currentRecommendLink) {
+                window.location.href = currentRecommendLink;
+            } else if (currentLinks.v1) {
+                window.location.href = currentLinks.v1;
             }
         });
 
         // 复制磁力链接
         copyMagnetBtn.addEventListener('click', async () => {
-            if (currentMagnetLink) {
+            const linkToCopy = currentRecommendLink || currentLinks.v1;
+            if (linkToCopy) {
                 try {
-                    await navigator.clipboard.writeText(currentMagnetLink);
+                    await navigator.clipboard.writeText(linkToCopy);
                     const originalText = copyMagnetBtn.textContent;
                     copyMagnetBtn.textContent = '✅ 已复制！';
                     setTimeout(() => {
@@ -539,8 +971,9 @@
             }
         });
 
-        // 示例提示：在控制台输出使用方法
-        console.log('Torrent 转磁力链接工具已加载，点击或拖拽上传 .torrent 文件即可');
+        console.log('Torrent 转磁力链接工具 v2.0 已加载');
+        console.log('支持 BitTorrent v1、v2 及混合格式种子');
+        console.log('公共 Tracker 会自动从网络下载并缓存24小时');
     </script>
 </body>
 </html>
