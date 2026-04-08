@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>哈希工具箱 - 文本/文件 MD5, SHA256 在线计算</title>
+    <!-- 使用轻量级 CryptoJS 库，支持常见哈希算法 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, 'Segoe UI', 'SF Pro Text', 'Roboto', monospace;
+        }
+        body {
+            background: linear-gradient(145deg, #f5f7fc 0%, #eef2f6 100%);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+			flex-direction: column;
+        }
+        .card {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        .header {
+            background: #1e2a3e;
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.8rem;
+            letter-spacing: -0.3px;
+        }
+        .header p {
+            margin: 0.5rem 0 0;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        .tab-bar {
+            display: flex;
+            background: #ffffffdd;
+            border-bottom: 1px solid #e2e8f0;
+            backdrop-filter: blur(4px);
+        }
+        .tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #4a5568;
+            letter-spacing: 0.3px;
+        }
+        .tab-btn.active {
+            color: #2563eb;
+            border-bottom: 3px solid #2563eb;
+            background: #f8fafc;
+        }
+        .tab-btn:hover:not(.active) {
+            background: #f1f5f9;
+            color: #1e40af;
+        }
+        .content {
+            padding: 2rem 2rem 2rem 2rem;
+        }
+        .tab-pane {
+            display: none;
+            animation: fade 0.2s ease;
+        }
+        .tab-pane.active-pane {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(5px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 1rem;
+            background: #fefefe;
+            resize: vertical;
+            outline: none;
+            transition: 0.15s;
+        }
+        textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+        .hash-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.2rem 0 1.2rem 0;
+            align-items: center;
+        }
+        .hash-check {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #f1f4f9;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        .hash-check:hover {
+            background: #e2e8f0;
+        }
+        .hash-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #2563eb;
+        }
+        .hash-check label {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #1e293b;
+            cursor: pointer;
+        }
+        button {
+            background: #2563eb;
+            border: none;
+            padding: 0.7rem 1.6rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        button:active {
+            transform: translateY(1px);
+        }
+        .secondary-btn {
+            background: #475569;
+            box-shadow: none;
+        }
+        .secondary-btn:hover {
+            background: #334155;
+        }
+        .result-area {
+            margin-top: 1.8rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.5rem;
+        }
+        .result-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .hash-result {
+            background: #0f172a;
+            color: #a5f3c3;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            word-break: break-all;
+            white-space: pre-wrap;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .file-info {
+            background: #eef2ff;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #1e293b;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .file-name {
+            font-weight: 600;
+            font-family: monospace;
+        }
+        .copy-btn {
+            background: #2d3a4e;
+            padding: 0.25rem 0.8rem;
+            font-size: 0.7rem;
+            border-radius: 1rem;
+            margin-left: 0.5rem;
+        }
+        .flex-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+            align-items: center;
+        }
+        .status-msg {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 0.5rem;
+        }
+        hr {
+            margin: 1rem 0;
+        }
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 1rem;
+            background: #f1f5f9;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+        @media (max-width: 640px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .hash-options {
+                gap: 0.5rem;
+            }
+            .hash-check {
+                padding: 0.3rem 0.8rem;
+            }
+        }
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+	<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="card">
+    <div class="header">
+        <h1>🔐 哈希摘要计算器</h1>
+        <p>支持 MD5 · SHA-1 · SHA-256 · SHA-512 · SHA-3 (Keccak) 等常用算法</p>
+    </div>
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="text">📝 文本哈希</button>
+        <button class="tab-btn" data-tab="file">📁 文件哈希</button>
+    </div>
+    <div class="content">
+        <!-- 文本模式 -->
+        <div id="textPane" class="tab-pane active-pane">
+            <div class="hash-options" id="textAlgos">
+                <!-- 动态生成复选框更方便，但为了清晰直接写但用JS维护状态 -->
+            </div>
+            <textarea id="textInput" rows="5" placeholder="请输入要计算哈希的文本内容...&#10;例如：Hello, World! 或 任意字符串"></textarea>
+            <div class="flex-btns">
+                <button id="calcTextBtn">✨ 计算哈希值</button>
+                <button id="clearTextBtn" class="secondary-btn">🗑️ 清空文本</button>
+            </div>
+            <div id="textResultArea" class="result-area">
+                <div class="result-title">📋 计算结果</div>
+                <div id="textResultsContainer"></div>
+            </div>
+        </div>
+
+        <!-- 文件模式 -->
+        <div id="filePane" class="tab-pane">
+            <div class="hash-options" id="fileAlgos">
+                <!-- 动态渲染 -->
+            </div>
+            <div style="border: 2px dashed #cbd5e1; border-radius: 1.5rem; padding: 1.5rem; text-align: center; background: #fafcff;">
+                <input type="file" id="fileInput" style="display: none;" />
+                <button id="selectFileBtn" style="background: #2c3e66;">📂 选择文件</button>
+                <span id="fileNameDisplay" style="margin-left: 1rem; font-size: 0.85rem; color: #334155;">未选择任何文件</span>
+                <div style="margin-top: 0.8rem;">
+                    <button id="calcFileBtn" style="background: #2563eb;">⚡ 计算文件哈希</button>
+                    <button id="clearFileBtn" class="secondary-btn">🔄 重置</button>
+                </div>
+            </div>
+            <div id="fileProgressMsg" class="status-msg"></div>
+            <div id="fileResultArea" class="result-area">
+                <div class="result-title">📄 文件哈希值</div>
+                <div id="fileResultsContainer"></div>
+            </div>
+        </div>
+    </div>
+    <footer>⚠️ 所有哈希计算均在本地浏览器中完成，文件不会被上传，确保隐私安全。</footer>
+</div>
+
+<script>
+    // ----- 定义支持的哈希算法列表 (CryptoJS 原生 + 额外处理 SHA3)
+    const algorithms = [
+        { id: 'md5', name: 'MD5', method: (word) => CryptoJS.MD5(word) },
+        { id: 'sha1', name: 'SHA-1', method: (word) => CryptoJS.SHA1(word) },
+        { id: 'sha256', name: 'SHA-256', method: (word) => CryptoJS.SHA256(word) },
+        { id: 'sha512', name: 'SHA-512', method: (word) => CryptoJS.SHA512(word) },
+        { id: 'sha3', name: 'SHA-3 (Keccak)', method: (word) => CryptoJS.SHA3(word, { outputLength: 256 }) }  // 默认256位，也常用
+    ];
+    // 附加额外显示长模式：再添加一个SHA3-512? 为了丰富, 可再加入 SHA-384
+    // 但为了界面简洁，再加 SHA-384 和 RIPEMD160? 不过上面5种已够主流，但用户可能需要更多，再补2个常见。
+    const extraAlgos = [
+        { id: 'sha384', name: 'SHA-384', method: (word) => CryptoJS.SHA384(word) },
+        { id: 'ripemd160', name: 'RIPEMD-160', method: (word) => CryptoJS.RIPEMD160(word) }
+    ];
+    const fullAlgos = [...algorithms, ...extraAlgos];
+
+    // 分别存储文本和文件选中的算法
+    let selectedTextAlgos = new Set(['md5', 'sha256']);   // 默认选中MD5 和 SHA256
+    let selectedFileAlgos = new Set(['md5', 'sha256']);
+
+    // DOM 元素
+    const textPane = document.getElementById('textPane');
+    const filePane = document.getElementById('filePane');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const textAlgosDiv = document.getElementById('textAlgos');
+    const fileAlgosDiv = document.getElementById('fileAlgos');
+    const textInput = document.getElementById('textInput');
+    const calcTextBtn = document.getElementById('calcTextBtn');
+    const clearTextBtn = document.getElementById('clearTextBtn');
+    const textResultsContainer = document.getElementById('textResultsContainer');
+    const fileInput = document.getElementById('fileInput');
+    const selectFileBtn = document.getElementById('selectFileBtn');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const calcFileBtn = document.getElementById('calcFileBtn');
+    const clearFileBtn = document.getElementById('clearFileBtn');
+    const fileResultsContainer = document.getElementById('fileResultsContainer');
+    const fileProgressMsg = document.getElementById('fileProgressMsg');
+
+    let currentFile = null;      // 存储选中的File对象
+    let isFileComputing = false; // 防止重复计算
+
+    // ---------- 渲染算法复选框 (通用) ----------
+    function renderAlgoCheckboxes(container, selectedSet, onChange) {
+        container.innerHTML = '';
+        fullAlgos.forEach(algo => {
+            const div = document.createElement('div');
+            div.className = 'hash-check';
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.id = `chk_${algo.id}`;
+            cb.value = algo.id;
+            cb.checked = selectedSet.has(algo.id);
+            cb.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    selectedSet.add(algo.id);
+                } else {
+                    selectedSet.delete(algo.id);
+                }
+                if (onChange) onChange(selectedSet);
+            });
+            const label = document.createElement('label');
+            label.htmlFor = `chk_${algo.id}`;
+            label.innerText = algo.name;
+            div.appendChild(cb);
+            div.appendChild(label);
+            container.appendChild(div);
+        });
+    }
+
+    // 渲染文本算法复选框
+    renderAlgoCheckboxes(textAlgosDiv, selectedTextAlgos, (newSet) => {
+        selectedTextAlgos = newSet;
+        // 可选：自动重新计算? 不自动，保持体验
+    });
+    renderAlgoCheckboxes(fileAlgosDiv, selectedFileAlgos, (newSet) => {
+        selectedFileAlgos = newSet;
+    });
+
+    // ---------- 文本哈希计算 ----------
+    function computeTextHash() {
+        const rawText = textInput.value;
+        if (rawText.trim() === '') {
+            textResultsContainer.innerHTML = `<div class="hash-result" style="background:#fff0f0; color:#b91c1c;">⚠️ 请输入文本内容后再计算哈希。</div>`;
+            return;
+        }
+        if (selectedTextAlgos.size === 0) {
+            textResultsContainer.innerHTML = `<div class="hash-result" style="background:#fff3e0;">⚠️ 请至少选择一种哈希算法。</div>`;
+            return;
+        }
+        // 构建结果HTML
+        let resultsHtml = '';
+        for (let algo of fullAlgos) {
+            if (selectedTextAlgos.has(algo.id)) {
+                try {
+                    const wordObj = CryptoJS.enc.Utf8.parse(rawText);
+                    const hashObj = algo.method(wordObj);
+                    const hashStr = hashObj.toString(CryptoJS.enc.Hex);
+                    resultsHtml += `
+                        <div class="hash-result">
+                            <strong style="color:#93c5fd;">${algo.name}</strong><br>
+                            <span style="font-family: monospace; word-break:break-all;">${hashStr}</span>
+                            <button class="copy-btn" data-copy="${hashStr}" style="float:right;">📋 复制</button>
+                            <div style="clear:both"></div>
+                        </div>
+                    `;
+                } catch (err) {
+                    resultsHtml += `<div class="hash-result"><strong>${algo.name}</strong> 计算错误: ${err.message}</div>`;
+                }
+            }
+        }
+        textResultsContainer.innerHTML = resultsHtml;
+        // 绑定复制事件
+        attachCopyEvents(textResultsContainer);
+    }
+
+    // 复制功能
+    function attachCopyEvents(container) {
+        const copyBtns = container.querySelectorAll('.copy-btn');
+        copyBtns.forEach(btn => {
+            btn.removeEventListener('click', copyHandler);
+            btn.addEventListener('click', copyHandler);
+        });
+    }
+    function copyHandler(e) {
+        const textToCopy = e.currentTarget.getAttribute('data-copy');
+        if (!textToCopy) return;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalText = e.currentTarget.innerText;
+            e.currentTarget.innerText = '✅ 已复制';
+            setTimeout(() => {
+                e.currentTarget.innerText = originalText;
+            }, 1500);
+        }).catch(() => {
+            alert('复制失败，可手动选取');
+        });
+    }
+
+    // 清空文本
+    function clearText() {
+        textInput.value = '';
+        textResultsContainer.innerHTML = '<div class="status-msg">✨ 等待输入文本...</div>';
+    }
+
+    // ---------- 文件哈希核心 (使用 FileReader + CryptoJS 二进制WordArray) ----------
+    // 注意: 大文件可能会比较耗时，但现代浏览器处理几十MB依然流畅，为了更好的体验，用 slice 流式? CryptoJS 可以直接从ArrayBuffer转WordArray，一次性加载。
+    // 为了支持任意大小，提示较大文件可能内存占用，但大多数场景够用。添加进度提示。
+    function computeFileHash(file) {
+        if (!file) {
+            fileProgressMsg.innerText = '❌ 请先选择文件';
+            return Promise.reject('no file');
+        }
+        if (selectedFileAlgos.size === 0) {
+            fileProgressMsg.innerText = '⚠️ 请至少选择一种哈希算法';
+            return Promise.reject('no algo');
+        }
+        isFileComputing = true;
+        calcFileBtn.disabled = true;
+        calcFileBtn.textContent = '⏳ 计算中...';
+        fileProgressMsg.innerText = `正在读取文件 "${file.name}" (${(file.size / 1024).toFixed(2)} KB) ...`;
+        fileResultsContainer.innerHTML = '<div class="hash-result">⏳ 处理中，请稍候...</div>';
+
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const arrayBuffer = event.target.result;
+                    // 将 ArrayBuffer 转换为 CryptoJS 能识别的 WordArray
+                    const wordArray = CryptoJS.lib.WordArray.create(new Uint8Array(arrayBuffer));
+                    // 并行计算选中的哈希
+                    let resultsHtml = '';
+                    for (let algo of fullAlgos) {
+                        if (selectedFileAlgos.has(algo.id)) {
+                            try {
+                                const hashObj = algo.method(wordArray);
+                                const hashHex = hashObj.toString(CryptoJS.enc.Hex);
+                                resultsHtml += `
+                                    <div class="hash-result">
+                                        <strong style="color:#93c5fd;">${algo.name}</strong><br>
+                                        <span style="font-family: monospace; word-break:break-all;">${hashHex}</span>
+                                        <button class="copy-btn" data-copy="${hashHex}" style="float:right;">📋 复制</button>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                `;
+                            } catch (err) {
+                                resultsHtml += `<div class="hash-result"><strong>${algo.name}</strong> 错误: ${err.message}</div>`;
+                            }
+                        }
+                    }
+                    fileResultsContainer.innerHTML = resultsHtml;
+                    attachCopyEvents(fileResultsContainer);
+                    fileProgressMsg.innerHTML = `✅ 哈希计算完成 (文件: ${file.name}, 大小: ${(file.size / 1024).toFixed(2)} KB)`;
+                    resolve();
+                } catch (err) {
+                    fileResultsContainer.innerHTML = `<div class="hash-result" style="background:#fee2e2;">❌ 哈希计算失败: ${err.message}</div>`;
+                    fileProgressMsg.innerText = '计算失败，请重试。';
+                    reject(err);
+                } finally {
+                    isFileComputing = false;
+                    calcFileBtn.disabled = false;
+                    calcFileBtn.textContent = '⚡ 计算文件哈希';
+                }
+            };
+            reader.onerror = (err) => {
+                fileProgressMsg.innerText = '文件读取失败，请重试。';
+                fileResultsContainer.innerHTML = '<div class="hash-result">读取文件错误</div>';
+                isFileComputing = false;
+                calcFileBtn.disabled = false;
+                calcFileBtn.textContent = '⚡ 计算文件哈希';
+                reject(err);
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    }
+
+    // 选择文件触发
+    selectFileBtn.addEventListener('click', () => {
+        fileInput.click();
+    });
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            currentFile = e.target.files[0];
+            fileNameDisplay.innerText = currentFile.name + ` (${(currentFile.size / 1024).toFixed(2)} KB)`;
+            fileProgressMsg.innerHTML = '📄 文件已就绪，点击"计算文件哈希"';
+            // 清空之前结果
+            fileResultsContainer.innerHTML = '<div class="status-msg">等待计算...</div>';
+        } else {
+            currentFile = null;
+            fileNameDisplay.innerText = '未选择任何文件';
+            fileResultsContainer.innerHTML = '';
+            fileProgressMsg.innerHTML = '';
+        }
+    });
+
+    calcFileBtn.addEventListener('click', () => {
+        if (!currentFile) {
+            fileProgressMsg.innerText = '⚠️ 请先选择文件';
+            return;
+        }
+        if (isFileComputing) {
+            fileProgressMsg.innerText = '计算中，请稍后...';
+            return;
+        }
+        computeFileHash(currentFile).catch(() => {});
+    });
+
+    clearFileBtn.addEventListener('click', () => {
+        // 重置文件选择
+        fileInput.value = '';
+        currentFile = null;
+        fileNameDisplay.innerText = '未选择任何文件';
+        fileResultsContainer.innerHTML = '';
+        fileProgressMsg.innerHTML = '';
+        selectedFileAlgos.clear();
+        // 重置默认选中 md5 和 sha256
+        selectedFileAlgos.add('md5');
+        selectedFileAlgos.add('sha256');
+        // 重新渲染复选框UI
+        renderAlgoCheckboxes(fileAlgosDiv, selectedFileAlgos, (newSet) => {
+            selectedFileAlgos = newSet;
+        });
+    });
+
+    // 文本计算事件
+    calcTextBtn.addEventListener('click', computeTextHash);
+    clearTextBtn.addEventListener('click', clearText);
+
+    // 切换标签页
+    function switchTab(tabId) {
+        if (tabId === 'text') {
+            textPane.classList.add('active-pane');
+            filePane.classList.remove('active-pane');
+            tabBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === 'text') btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        } else {
+            filePane.classList.add('active-pane');
+            textPane.classList.remove('active-pane');
+            tabBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === 'file') btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        }
+    }
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const tab = btn.getAttribute('data-tab');
+            if (tab === 'text') switchTab('text');
+            else switchTab('file');
+        });
+    });
+
+    // 初始样例展示 (可预置一段文本示例)
+    textInput.value = 'Hello, 哈希世界! \nMD5 & SHA256 示例文本。';
+    // 初次展示时预先计算一下? 为了友好，显示一次示例结果
+    setTimeout(() => {
+        computeTextHash();
+    }, 50);
+
+    // 同时也监听文本输入框支持快捷键 Ctrl+Enter 计算
+    textInput.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            computeTextHash();
+        }
+    });
+
+    // 针对文件拖拽额外简易体验（可选）
+    const fileDropZone = document.querySelector('#filePane .hash-options').parentNode;
+    fileDropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileDropZone.style.border = '2px dashed #3b82f6';
+        fileDropZone.style.background = '#eef2ff';
+    });
+    fileDropZone.addEventListener('dragleave', () => {
+        fileDropZone.style.border = '';
+        fileDropZone.style.background = '';
+    });
+    fileDropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileDropZone.style.border = '';
+        fileDropZone.style.background = '';
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            currentFile = files[0];
+            fileNameDisplay.innerText = currentFile.name + ` (${(currentFile.size / 1024).toFixed(2)} KB)`;
+            fileProgressMsg.innerHTML = '📁 文件已通过拖拽添加，点击计算哈希';
+            fileResultsContainer.innerHTML = '';
+            // 同步fileInput
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(currentFile);
+            fileInput.files = dataTransfer.files;
+        }
+    });
+</script>
+</body>
+</html>
