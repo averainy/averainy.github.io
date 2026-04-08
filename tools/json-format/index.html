@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>JSON 魔术师 - 优雅美化 & 极速压缩</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f5f7fc 0%, #e9eef4 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+			flex-direction: column;
+        }
+
+        /* 主卡片 */
+        .card {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        /* 头部 */
+        .header {
+            background: #1e293b;
+            padding: 1.25rem 2rem;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid #334155;
+        }
+        .title-section h1 {
+            font-weight: 600;
+            font-size: 1.7rem;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #E2E8F0, #A5B4FC);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        .title-section p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .badge {
+            background: #0f172a;
+            padding: 6px 14px;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #cbd5e6;
+            border: 1px solid #334155;
+        }
+
+        /* 双栏核心区域 */
+        .dual-pane {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+        .pane {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+        }
+        .pane:last-child {
+            border-right: none;
+        }
+        .pane-header {
+            padding: 0.9rem 1.5rem;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .pane-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pane-header h2 i {
+            font-weight: 400;
+            font-size: 1.2rem;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-icon {
+            background: transparent;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #1e293b;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+        }
+        .btn-icon:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+            transform: translateY(-1px);
+        }
+        .btn-primary {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+        }
+        .btn-clear {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #b91c1c;
+        }
+        .btn-clear:hover {
+            background: #fee2e2;
+        }
+
+        /* 编辑器区域 */
+        .editor-area {
+            padding: 1.25rem;
+            flex: 1;
+            min-height: 550px;
+        }
+        textarea {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+            font-size: 13.5px;
+            line-height: 1.5;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            background: #fefefe;
+            resize: vertical;
+            outline: none;
+            transition: 0.15s;
+            color: #0f172a;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+        }
+        .status-bar {
+            padding: 0.7rem 1.5rem;
+            background: #f1f5f9;
+            font-size: 0.75rem;
+            color: #334155;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-family: monospace;
+        }
+        .error-msg {
+            color: #dc2626;
+            background: #fef2f2;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .success-msg {
+            color: #15803d;
+        }
+        footer {
+            padding: 0.9rem 2rem;
+            background: #f1f5f9;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+        @media (max-width: 780px) {
+            body { padding: 12px; }
+            .pane-header { flex-direction: column; align-items: flex-start; }
+            .btn-icon { padding: 4px 10px; }
+            textarea { min-height: 320px; }
+            .editor-area { min-height: auto; }
+        }
+        .glow {
+            transition: all 0.1s;
+        }
+        .copy-toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293bdd;
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 1000;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+    </style>
+	<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <div class="title-section">
+            <h1>✨ JSON 匠人</h1>
+            <p>美化 · 压缩 · 验证 · 一键转换</p>
+        </div>
+        <div class="badge">
+            ⚡ 实时格式化 | 智能解析
+        </div>
+    </div>
+
+    <div class="dual-pane">
+        <!-- 左侧：输入区域 (原始 / 待处理) -->
+        <div class="pane">
+            <div class="pane-header">
+                <h2>
+                    <span>📥</span> 输入 JSON
+                </h2>
+                <div class="action-buttons">
+                    <button class="btn-icon" id="clearInputBtn" title="清空输入区">🗑️ 清空</button>
+                    <button class="btn-icon" id="pasteBtn" title="粘贴剪贴板内容">📋 粘贴</button>
+                    <button class="btn-icon" id="exampleBtn" title="载入示例JSON">✨ 示例</button>
+                </div>
+            </div>
+            <div class="editor-area">
+                <textarea id="jsonInput" placeholder='例如：{"name":"JSON 工具","version":"1.0","features":["美化","压缩"]}' spellcheck="false"></textarea>
+            </div>
+            <div class="status-bar">
+                <span id="inputStats">📄 等待输入</span>
+                <span id="inputError" class="error-msg" style="display: none;">⚠️ 无效JSON</span>
+            </div>
+        </div>
+
+        <!-- 右侧：输出区域 + 双模式控制 -->
+        <div class="pane">
+            <div class="pane-header">
+                <h2>
+                    <span>🎨</span> 输出 JSON
+                </h2>
+                <div class="action-buttons">
+                    <button class="btn-icon btn-primary" id="beautifyBtn">✨ 美化 (格式化)</button>
+                    <button class="btn-icon btn-primary" id="compressBtn">⚡ 压缩 (紧凑)</button>
+                    <button class="btn-icon" id="copyOutputBtn" title="复制到剪贴板">📎 复制</button>
+                </div>
+            </div>
+            <div class="editor-area">
+                <textarea id="jsonOutput" placeholder="点击上方按钮 美化 / 压缩 后结果将显示在这里 ..." readonly spellcheck="false" style="background:#fdfdf5;"></textarea>
+            </div>
+            <div class="status-bar">
+                <span id="outputStats">📦 暂无输出</span>
+                <span id="outputHint" style="color:#4b5563;">⚡ 操作后自动更新</span>
+            </div>
+        </div>
+    </div>
+    <footer>
+        💡 智能提示：自动检测JSON有效性 | 美化支持缩进2空格 | 压缩去除所有空白 | 支持任意合法JSON
+    </footer>
+</div>
+
+<div id="toastMessage" class="copy-toast">✨ 已复制到剪贴板</div>
+
+<script>
+    (function() {
+        // DOM 元素
+        const inputTextarea = document.getElementById('jsonInput');
+        const outputTextarea = document.getElementById('jsonOutput');
+        const beautifyBtn = document.getElementById('beautifyBtn');
+        const compressBtn = document.getElementById('compressBtn');
+        const clearInputBtn = document.getElementById('clearInputBtn');
+        const pasteBtn = document.getElementById('pasteBtn');
+        const exampleBtn = document.getElementById('exampleBtn');
+        const copyOutputBtn = document.getElementById('copyOutputBtn');
+        const inputStatsSpan = document.getElementById('inputStats');
+        const inputErrorSpan = document.getElementById('inputError');
+        const outputStatsSpan = document.getElementById('outputStats');
+        const outputHintSpan = document.getElementById('outputHint');
+        const toastEl = document.getElementById('toastMessage');
+        
+        // 辅助函数: 显示短暂消息
+        let toastTimer = null;
+        function showToast(message, isError = false) {
+            toastEl.textContent = message || (isError ? '❌ 操作失败' : '✅ 完成');
+            toastEl.style.backgroundColor = isError ? '#b91c1cdd' : '#1e293bdd';
+            toastEl.style.opacity = '1';
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toastEl.style.opacity = '0';
+            }, 1800);
+        }
+        
+        // 更新左侧状态 (实时检测JSON语法)
+        function updateInputStatus() {
+            const rawJson = inputTextarea.value;
+            const trimmed = rawJson.trim();
+            if (trimmed === "") {
+                inputStatsSpan.innerHTML = "📄 空内容";
+                inputErrorSpan.style.display = "none";
+                return { valid: false, error: null, data: null };
+            }
+            try {
+                const parsed = JSON.parse(trimmed);
+                const size = JSON.stringify(parsed).length;
+                const lines = trimmed.split(/\r?\n/).length;
+                inputStatsSpan.innerHTML = `✅ 有效 JSON | 大小: ${size} 字符 | 行数: ${lines}`;
+                inputErrorSpan.style.display = "none";
+                return { valid: true, error: null, data: parsed };
+            } catch (e) {
+                inputStatsSpan.innerHTML = `⚠️ 无效 JSON`;
+                inputErrorSpan.style.display = "inline-block";
+                inputErrorSpan.innerText = `❌ ${e.message.substring(0, 70)}`;
+                return { valid: false, error: e.message, data: null };
+            }
+        }
+        
+        // 核心: 美化 (缩进2空格)
+        function beautifyJSON() {
+            const raw = inputTextarea.value;
+            if (raw.trim() === "") {
+                outputTextarea.value = "";
+                outputStatsSpan.innerHTML = "📭 无输入内容";
+                outputHintSpan.innerHTML = "💡 请在左侧输入JSON";
+                showToast("没有可美化的内容", false);
+                return false;
+            }
+            try {
+                const parsed = JSON.parse(raw);
+                const pretty = JSON.stringify(parsed, null, 2);
+                outputTextarea.value = pretty;
+                const outSize = pretty.length;
+                const outLines = pretty.split(/\r?\n/).length;
+                outputStatsSpan.innerHTML = `✨ 美化完成 | ${outSize} 字符 | ${outLines} 行`;
+                outputHintSpan.innerHTML = "🎉 缩进2空格，可读性极佳";
+                showToast("美化成功 ✓", false);
+                return true;
+            } catch (err) {
+                outputTextarea.value = `// JSON解析错误\n// ${err.message}\n// 请检查左侧输入是否为合法JSON格式`;
+                outputStatsSpan.innerHTML = "❌ 格式化失败";
+                outputHintSpan.innerHTML = "🔍 请修正左侧JSON语法";
+                showToast(`无效JSON: ${err.message}`, true);
+                return false;
+            }
+        }
+        
+        // 核心: 压缩 (去除所有空格/换行)
+        function compressJSON() {
+            const raw = inputTextarea.value;
+            if (raw.trim() === "") {
+                outputTextarea.value = "";
+                outputStatsSpan.innerHTML = "📭 无输入内容";
+                outputHintSpan.innerHTML = "💡 请在左侧输入JSON";
+                showToast("没有可压缩的内容", false);
+                return false;
+            }
+            try {
+                const parsed = JSON.parse(raw);
+                const minified = JSON.stringify(parsed);
+                outputTextarea.value = minified;
+                const outSize = minified.length;
+                outputStatsSpan.innerHTML = `⚡ 压缩完成 | ${outSize} 字符 (紧凑模式)`;
+                outputHintSpan.innerHTML = "📦 已移除所有空白字符，体积最小";
+                showToast("压缩成功 ✓", false);
+                return true;
+            } catch (err) {
+                outputTextarea.value = `// JSON 解析错误\n// ${err.message}\n// 无法压缩，请修复格式`;
+                outputStatsSpan.innerHTML = "❌ 压缩失败";
+                outputHintSpan.innerHTML = "⚠️ 请确保输入合法JSON";
+                showToast(`压缩失败: ${err.message}`, true);
+                return false;
+            }
+        }
+        
+        // 复制输出区域内容
+        async function copyOutput() {
+            const content = outputTextarea.value;
+            if (!content || content.trim() === "" || content.startsWith("// JSON解析错误")) {
+                showToast("没有有效输出可复制", true);
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(content);
+                showToast("📋 已复制到剪贴板", false);
+            } catch (err) {
+                // 降级方案
+                outputTextarea.select();
+                document.execCommand('copy');
+                showToast("📋 已复制 (传统方式)", false);
+                outputTextarea.blur();
+            }
+        }
+        
+        // 清空输入框，并清空输出提示
+        function clearInput() {
+            inputTextarea.value = "";
+            outputTextarea.value = "";
+            updateInputStatus();
+            outputStatsSpan.innerHTML = "📦 暂无输出";
+            outputHintSpan.innerHTML = "⚡ 操作后自动更新";
+            showToast("已清空输入区", false);
+        }
+        
+        // 粘贴剪贴板内容到输入区
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text !== undefined && text !== null) {
+                    inputTextarea.value = text;
+                    updateInputStatus();
+                    showToast("已粘贴剪贴板内容", false);
+                    // 可选自动美化？ 为了避免突兀，只粘贴，让用户决定操作
+                } else {
+                    showToast("剪贴板为空或无法读取", true);
+                }
+            } catch (err) {
+                showToast("无法读取剪贴板，请手动粘贴 (Ctrl+V)", true);
+                console.warn(err);
+            }
+        }
+        
+        // 载入优雅示例 (复杂嵌套JSON)
+        function loadExample() {
+            const exampleJson = {
+                "project": "JSON 魔术师",
+                "version": "2.0.0",
+                "releaseDate": "2025-03-18",
+                "author": {
+                    "name": "Web Craftsman",
+                    "contact": "tool@json.pretty",
+                    "active": true
+                },
+                "features": [
+                    {
+                        "id": "beautify",
+                        "description": "一键美化，智能缩进",
+                        "hotkey": "Ctrl+Shift+F"
+                    },
+                    {
+                        "id": "minify",
+                        "description": "极速压缩，节省带宽",
+                        "hotkey": "Ctrl+Shift+M"
+                    }
+                ],
+                "metadata": {
+                    "colors": ["#3b82f6", "#10b981", "#f59e0b"],
+                    "stats": {
+                        "likes": 128,
+                        "usedBy": "developers"
+                    }
+                },
+                "isOpenSource": true,
+                "notes": "支持任何有效JSON，包括数组、布尔、null等"
+            };
+            inputTextarea.value = JSON.stringify(exampleJson, null, 2);
+            updateInputStatus();
+            // 自动美化输出，更加友好
+            beautifyJSON();
+            showToast("已加载示例JSON，并自动美化展示", false);
+        }
+        
+        // 绑定事件 + 实时输入时更新左侧状态且若右侧有内容可提醒（但不清除右侧，用户自由）
+        inputTextarea.addEventListener('input', function() {
+            updateInputStatus();
+            // 可选项：如果右侧展示着内容但基于旧json，我们不做自动清除，但为了体验，不清除，
+            // 用户需要再次点击美化或压缩。但我们增加一个小提示更友好: 显示“需要重新处理”
+            const currentOut = outputTextarea.value;
+            if (currentOut && !currentOut.startsWith("// JSON解析错误") && currentOut !== "") {
+                outputHintSpan.innerHTML = "🔄 输入已更改，点击美化/压缩刷新输出";
+                outputHintSpan.style.color = "#d97706";
+            } else {
+                outputHintSpan.style.color = "#4b5563";
+                if (!currentOut) outputHintSpan.innerHTML = "⚡ 点击美化或压缩生成输出";
+            }
+        });
+        
+        // 美化按钮点击
+        beautifyBtn.addEventListener('click', () => {
+            updateInputStatus(); // 确保最新验证
+            beautifyJSON();
+        });
+        
+        // 压缩按钮点击
+        compressBtn.addEventListener('click', () => {
+            updateInputStatus();
+            compressJSON();
+        });
+        
+        clearInputBtn.addEventListener('click', clearInput);
+        pasteBtn.addEventListener('click', pasteFromClipboard);
+        exampleBtn.addEventListener('click', loadExample);
+        copyOutputBtn.addEventListener('click', copyOutput);
+        
+        // 快捷键支持: Ctrl+Enter 美化? 为方便，增加 Ctrl+Shift+B 美化，Ctrl+Shift+M 压缩
+        document.addEventListener('keydown', (e) => {
+            // 美化: Ctrl+Shift+B (或 Ctrl+Alt+F)
+            if ((e.ctrlKey && e.shiftKey && e.key === 'B') || (e.ctrlKey && e.altKey && e.key === 'F')) {
+                e.preventDefault();
+                beautifyJSON();
+                showToast("快捷键: 美化", false);
+            }
+            // 压缩: Ctrl+Shift+M
+            else if ((e.ctrlKey && e.shiftKey && e.key === 'M')) {
+                e.preventDefault();
+                compressJSON();
+                showToast("快捷键: 压缩", false);
+            }
+            // 清空 Ctrl+Shift+Del
+            else if (e.ctrlKey && e.shiftKey && e.key === 'Delete') {
+                e.preventDefault();
+                clearInput();
+                showToast("清空输入", false);
+            }
+            // Ctrl+Shift+C 复制输出
+            else if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                copyOutput();
+            }
+        });
+        
+        // 初始化状态: 更新空状态，无错误
+        updateInputStatus();
+        outputStatsSpan.innerHTML = "📦 暂无输出";
+        outputHintSpan.innerHTML = "✨ 点击美化或压缩开始转换";
+        // 默认给一个友好占位但不覆盖提示
+        inputTextarea.placeholder = '输入JSON代码，例如：\n{"tool":"JSON美化压缩","version":"1.0"}\n\n然后点击「美化」或「压缩」';
+        
+        // 附加功能: 如果用户点击输出区，不需要操作，但复制功能已经很完善
+        // 更优雅: 在右侧显示原始json行号参考不必要了，简单明了
+        
+        // 针对大JSON 渲染优化: 性能足够
+        // 扩展: 右侧自动检测当前是美化风格还是压缩风格？不重要, 由用户决定.
+        // 添加一个防抖？不需要, 按钮控制更明确
+        
+        // 当鼠标悬停在按钮上给出title提示
+        beautifyBtn.title = "将左侧JSON格式化为缩进2空格 (Ctrl+Shift+B)";
+        compressBtn.title = "移除所有空白字符，生成紧凑JSON (Ctrl+Shift+M)";
+        copyOutputBtn.title = "复制右侧输出结果 (Ctrl+Shift+C)";
+        clearInputBtn.title = "清空左侧输入框";
+        pasteBtn.title = "从剪贴板粘贴JSON";
+        exampleBtn.title = "加载演示JSON数据并自动美化";
+        
+        // 增加一个小优化：若右侧输出为空，点击复制时提示无效
+        // 已经处理
+        // 增加额外防呆: 如果用户未修改左侧直接按压缩/美化，会基于当前内容重复操作，没问题
+        // 确保任何压缩美化错误时输出区显示友好错误
+        // 处理右侧只读区域的自动换行友好。
+        
+        // 额外功能: 实时统计输入区字符数 (已有)
+        // 实现一个显示“是否空”时的样式
+    })();
+</script>
+</body>
+</html>
