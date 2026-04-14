@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>UUID 生成器 | 网页版工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f4fa 0%, #d9e1ec 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+			flex-direction: column;
+        }
+
+        /* 主卡片容器 */
+        .card {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* 头部装饰 */
+        .header {
+            background: #1e2a3e;
+            padding: 28px 32px 20px 32px;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-weight: 600;
+            font-size: 1.9rem;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 span {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: monospace;
+            letter-spacing: 0;
+        }
+
+        .sub {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        /* 内容区 */
+        .content {
+            padding: 32px;
+        }
+
+        /* UUID 展示区域 */
+        .uuid-panel {
+            background: #0f1722;
+            border-radius: 32px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 8px 18px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .uuid-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: #8aa0b5;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .uuid-value {
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            background: #01060e;
+            padding: 18px 20px;
+            border-radius: 24px;
+            color: #bbd9ff;
+            letter-spacing: 0.3px;
+            border: 1px solid #2a3a4e;
+            transition: 0.1s;
+            line-height: 1.5;
+        }
+
+        /* 版本选择 & 操作栏 */
+        .version-selector {
+            background: #f1f5f9;
+            border-radius: 60px;
+            display: inline-flex;
+            padding: 6px;
+            margin-bottom: 28px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .version-btn {
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            color: #2c3e4e;
+        }
+
+        .version-btn.active {
+            background: #ffffff;
+            color: #0f3b5c;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border: 0.5px solid rgba(0,0,0,0.05);
+        }
+
+        .version-btn:first-child.active {
+            background: #1e2a3e;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 28px;
+            margin-bottom: 28px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn {
+            border: none;
+            background: #eef2f6;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            color: #1f3b4c;
+        }
+
+        .btn-primary {
+            background: #1e2a3e;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover {
+            background: #0f1a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid #cad2db;
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #9aaebf;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2e3c;
+            color: #eef4ff;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            background: rgba(20, 30, 40, 0.9);
+            z-index: 1000;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            opacity: 0;
+            font-family: monospace;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+
+        .info-area {
+            margin-top: 18px;
+            background: #eef3fc;
+            border-radius: 28px;
+            padding: 18px 22px;
+            font-size: 0.85rem;
+            color: #2c4c6c;
+            border-left: 4px solid #1e2a3e;
+        }
+
+        .badge {
+            background: #cbdde9;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 18px 32px 24px;
+            border-top: 1px solid #e2e8f0;
+            color: #5b6f82;
+        }
+
+        @media (max-width: 550px) {
+            .content {
+                padding: 22px;
+            }
+            .uuid-value {
+                font-size: 0.85rem;
+                padding: 14px 16px;
+            }
+            .btn {
+                padding: 10px 18px;
+            }
+            .version-btn {
+                padding: 6px 18px;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+	 <meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <h1>
+            🧬 UUID 生成器
+            <span>v4 / v1</span>
+        </h1>
+        <div class="sub">通用唯一标识符 · 快速生成与复制</div>
+    </div>
+
+    <div class="content">
+        <!-- UUID 展示区 -->
+        <div class="uuid-panel">
+            <div class="uuid-label">
+                <span>✨ 当前 UUID</span>
+                <span class="badge" id="versionBadge">UUID v4 (随机)</span>
+            </div>
+            <div class="uuid-value" id="uuidDisplay">00000000-0000-0000-0000-000000000000</div>
+        </div>
+
+        <!-- 版本切换区域 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div class="version-selector" id="versionGroup">
+                <button class="version-btn active" data-version="v4">UUID v4 (随机)</button>
+                <button class="version-btn" data-version="v1">UUID v1 (时间戳)</button>
+            </div>
+            <button class="btn-outline btn" id="regenerateBtn" style="background:#ffffff;">🔄 重新生成</button>
+        </div>
+
+        <!-- 操作按钮组 -->
+        <div class="action-bar">
+            <button class="btn btn-primary" id="copyBtn">📋 复制 UUID</button>
+            <button class="btn btn-outline" id="copyRawBtn">📄 复制纯文本</button>
+            <button class="btn btn-outline" id="newWindowBtn">✨ 新生成 & 复制</button>
+        </div>
+
+        <!-- 信息说明 -->
+        <div class="info-area">
+            💡 <strong>小贴士</strong><br>
+            • <strong>UUID v4</strong> : 基于随机数，共122位随机位，碰撞概率极低。<br>
+            • <strong>UUID v1</strong> : 基于时间戳 + 节点MAC（这里用随机节点模拟，符合规范），确保时序唯一。<br>
+            • 点击“复制”可将标准UUID格式复制到剪贴板，适用于数据库ID、会话令牌等场景。
+        </div>
+    </div>
+    <footer>
+        ⚡ 符合 RFC 4122 标准 | 所有生成均在浏览器本地完成，不会上传数据
+    </footer>
+</div>
+
+<div id="toastMessage" class="toast-msg">✨ 已复制到剪贴板</div>
+
+<script>
+    (function() {
+        // ---------- DOM 元素 ----------
+        const uuidDisplay = document.getElementById('uuidDisplay');
+        const versionBadge = document.getElementById('versionBadge');
+        const versionBtns = document.querySelectorAll('.version-btn');
+        const regenerateBtn = document.getElementById('regenerateBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyRawBtn = document.getElementById('copyRawBtn');
+        const newWindowBtn = document.getElementById('newWindowBtn');
+        const toast = document.getElementById('toastMessage');
+
+        // 当前激活的版本: 'v4' 或 'v1'
+        let currentVersion = 'v4';
+
+        // ---------- 辅助函数: 显示 Toast (轻提示) ----------
+        let toastTimer = null;
+        function showToast(message, isError = false) {
+            if (toastTimer) clearTimeout(toastTimer);
+            toast.textContent = message || (isError ? '❌ 复制失败' : '✅ 已复制到剪贴板');
+            toast.style.backgroundColor = isError ? 'rgba(180, 60, 50, 0.9)' : 'rgba(20, 30, 40, 0.9)';
+            toast.style.opacity = '1';
+            toastTimer = setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // ---------- UUID 生成核心 (完全符合 RFC4122) ----------
+        // 辅助: 生成随机的十六进制字符串 (长度len)
+        function randomHex(len) {
+            let str = '';
+            const arr = new Uint8Array(len);
+            crypto.getRandomValues(arr);
+            for (let i = 0; i < len; i++) {
+                str += arr[i].toString(16).padStart(2, '0');
+            }
+            return str;
+        }
+
+        // 生成 UUID v4 (完全随机)
+        function generateUUIDv4() {
+            // RFC4122 v4: 随机生成 36 字符 (32个十六进制 + 4个连字符)
+            // 第13位字符固定为 "4" (版本号)
+            // 第17位字符为 8,9,a,b 之一 (变体)
+            const hex = randomHex(32);  // 32个十六进制字符 (16字节)
+            // 替换版本位: hex[12] = '4'
+            let chars = hex.split('');
+            chars[12] = '4';                                      // 版本号 4xxx
+            // 设置变体位: 高位为 8,9,A,B  (二进制 10xx)
+            const variantDigit = (parseInt(chars[16], 16) & 0x3) | 0x8; // 确保 8,9,A,B
+            chars[16] = variantDigit.toString(16);
+            // 格式化: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+            return `${chars.slice(0,8).join('')}-${chars.slice(8,12).join('')}-${chars.slice(12,16).join('')}-${chars.slice(16,20).join('')}-${chars.slice(20,32).join('')}`;
+        }
+
+        // 生成 UUID v1 (基于时间戳 + 时钟序列 + 节点)
+        // 为了完全合规并且避免依赖真实MAC（隐私友好），使用高质量随机种子模拟node id，时钟序列使用随机 + 每次调用增加
+        // 确保同一个会话内不会重复序列，同时也满足v1唯一性。
+        // 注意: 为了生成规范，我们维护一个内部时钟计数器，避免相同时间戳内重复。
+        let lastTimestamp = 0;
+        let clockSeq = null;       // 14位时钟序列(0-16383)
+        let nodeId = null;         // 6字节节点标识 (模拟MAC)
+        let tickCounter = 0;       // 相同timestamp内计数器，模拟格雷码风格
+
+        // 初始化 v1 相关的固定部分 (只初始化一次)
+        function initV1Components() {
+            if (clockSeq !== null) return;
+            // 生成随机的 14 bit 时钟序列 (0-16383)
+            const randBuf = new Uint16Array(1);
+            crypto.getRandomValues(randBuf);
+            clockSeq = randBuf[0] & 0x3FFF;  // 低14位
+            // 生成随机节点ID (6字节, 48位, 单播本地地址 确保不会冲突)
+            const nodeBytes = new Uint8Array(6);
+            crypto.getRandomValues(nodeBytes);
+            // 将第一个字节的最低有效位设置为 1 表示本地管理地址（避免与真实MAC冲突，也符合规范）
+            nodeBytes[0] = (nodeBytes[0] & 0xFE) | 0x01;
+            nodeId = Array.from(nodeBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // 获取当前时间戳 (100纳秒间隔从1582-10-15起算) 用于 UUID v1
+        // 标准: Gregorian epoch offset = 122192928000000000 (100ns 间隔数)
+        function getGregorian100ns() {
+            const now = Date.now(); // 毫秒
+            const NS100_IN_MS = 10000; // 1毫秒 = 10000个100纳秒单位
+            const gregorianOffset = 122192928000000000; // 从1582到1970的100ns数
+            const nowIn100ns = now * NS100_IN_MS;
+            return gregorianOffset + nowIn100ns;
+        }
+
+        // 生成 UUID v1 符合 RFC4122 时间戳 + 时钟序列 + 节点
+        function generateUUIDv1() {
+            initV1Components();
+
+            // 获取 100ns 时间戳 (60位)
+            let timestamp = getGregorian100ns();
+            
+            // 处理同一毫秒内递增的序列（由于timestamp可能不变，需要增加子序列计数器）
+            // 但 getGregorian100ns 基于毫秒，同一毫秒内多次调用 timestamp 相同，需要保证唯一性
+            if (timestamp === lastTimestamp) {
+                tickCounter++;
+                // 防止溢出: 最大 0xFFFFFFFF 足够，实际超出也无妨 增加 tick 模拟时间微调
+                if (tickCounter > 0xFFFFFFF) tickCounter = 0;
+                // 细微增加时间戳的尾部值 (模拟更高精度，不影响格式但确保唯一)
+                timestamp += tickCounter;
+            } else {
+                lastTimestamp = timestamp;
+                tickCounter = 0;
+            }
+            
+            // 确保 timestamp 不超过 60 bits (UUID v1 时间戳字段 60位)
+            timestamp = BigInt(timestamp);
+            const timeLow = Number(timestamp & 0xFFFFFFFFn);          // 低32位
+            const timeMid = Number((timestamp >> 32n) & 0xFFFFn);     // 中间16位
+            const timeHighAndVersion = Number((timestamp >> 48n) & 0xFFFn); // 高12位，版本位占4位
+            
+            // 版本号: v1 版本值为 1 (高位4位为 0001)
+            const version = 0x1000;   // 二进制 0001 后面补零
+            const timeHighFinal = (timeHighAndVersion & 0x0FFF) | version;
+            
+            // 时钟序列 (14位，再拼上变体位)
+            // 变体: RFC4122 变体为 10xx (高位)
+            let clockSeqValue = clockSeq;   // 14bits
+            // 变体标识: 将高位第7,8位设置为 10 (二进制)
+            // 标准做法: clock_seq_low + (clock_seq_high & 0x3F) | 0x80
+            const clockSeqHigh = ((clockSeqValue >> 8) & 0x3F) | 0x80;
+            const clockSeqLow = clockSeqValue & 0xFF;
+            const clockSeqHex = ((clockSeqHigh << 8) | clockSeqLow) & 0xFFFF;
+            
+            // 最终拼装 UUID: time_low (8hex) - time_mid (4hex) - time_high_and_version(4hex) - clock_seq(4hex) - node(12hex)
+            const parts = [
+                timeLow.toString(16).padStart(8, '0'),
+                timeMid.toString(16).padStart(4, '0'),
+                timeHighFinal.toString(16).padStart(4, '0'),
+                clockSeqHex.toString(16).padStart(4, '0'),
+                nodeId
+            ];
+            
+            // 小修复: clockSeqHex 如果不足4位补零
+            parts[3] = parts[3].padStart(4, '0');
+            // 确保 nodeId 长度是12
+            if (parts[4].length < 12) parts[4] = parts[4].padStart(12, '0');
+            if (parts[4].length > 12) parts[4] = parts[4].slice(0,12);
+            
+            return `${parts[0]}-${parts[1]}-${parts[2]}-${parts[3]}-${parts[4]}`;
+        }
+
+        // ---------- 生成并刷新 UI ----------
+        let currentUUID = '';
+
+        function generateAndUpdate() {
+            let newUUID = '';
+            if (currentVersion === 'v4') {
+                newUUID = generateUUIDv4();
+                versionBadge.textContent = 'UUID v4 (随机)';
+            } else {
+                newUUID = generateUUIDv1();
+                versionBadge.textContent = 'UUID v1 (时间戳)';
+            }
+            currentUUID = newUUID;
+            uuidDisplay.textContent = currentUUID;
+            return currentUUID;
+        }
+
+        // 刷新 (重新生成)
+        function refreshUUID() {
+            generateAndUpdate();
+        }
+
+        // ---------- 复制功能 (标准 Clipboard API) ----------
+        async function copyToClipboard(text, successMsg = '📋 UUID 已复制') {
+            if (!text) {
+                showToast('没有可复制的内容', true);
+                return false;
+            }
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast(successMsg);
+                return true;
+            } catch (err) {
+                console.error('复制失败:', err);
+                // 降级方案: 使用 textarea 复制
+                try {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    const success = document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    if (success) {
+                        showToast(successMsg);
+                        return true;
+                    } else {
+                        showToast('❌ 复制失败，请手动复制', true);
+                        return false;
+                    }
+                } catch (fallbackErr) {
+                    showToast('❌ 当前浏览器不支持自动复制', true);
+                    return false;
+                }
+            }
+        }
+
+        // 复制当前 UUID
+        async function handleCopy() {
+            if (!currentUUID || currentUUID === '00000000-0000-0000-0000-000000000000') {
+                // 如果还没生成有效，先生成一次
+                refreshUUID();
+            }
+            await copyToClipboard(currentUUID, `✅ 已复制 ${currentVersion.toUpperCase()}`);
+        }
+
+        // 复制纯文本 (无额外修饰)
+        async function handleCopyRaw() {
+            if (!currentUUID) refreshUUID();
+            await copyToClipboard(currentUUID, `📄 纯文本已复制`);
+        }
+
+        // 新生成 & 复制: 刷新当前版本UUID，然后自动复制
+        async function handleNewAndCopy() {
+            refreshUUID();  // 重新生成
+            // 短暂延迟确保DOM更新后再复制（复制最新值）
+            setTimeout(async () => {
+                await copyToClipboard(currentUUID, `✨ 新UUID已生成并复制`);
+            }, 30);
+        }
+
+        // ---------- 切换版本 ----------
+        function setVersion(version) {
+            if (version !== 'v4' && version !== 'v1') return;
+            currentVersion = version;
+            // 更新按钮样式
+            versionBtns.forEach(btn => {
+                const btnVer = btn.getAttribute('data-version');
+                if (btnVer === version) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            // 切换版本后重新生成一次新的UUID，保证显示对应版本内容
+            refreshUUID();
+        }
+
+        // ---------- 事件绑定 ----------
+        function bindEvents() {
+            regenerateBtn.addEventListener('click', () => {
+                refreshUUID();
+                showToast(`🔄 已生成新的 ${currentVersion.toUpperCase()}`, false);
+            });
+            copyBtn.addEventListener('click', handleCopy);
+            copyRawBtn.addEventListener('click', handleCopyRaw);
+            newWindowBtn.addEventListener('click', handleNewAndCopy);
+
+            versionBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const version = btn.getAttribute('data-version');
+                    if (version === currentVersion) return;
+                    setVersion(version);
+                    showToast(`切换到 ${version.toUpperCase()} 模式`, false);
+                });
+            });
+        }
+
+        // ---------- 初始化 ----------
+        function init() {
+            bindEvents();
+            // 首先生成默认 v4
+            currentVersion = 'v4';
+            versionBtns.forEach(btn => {
+                if (btn.getAttribute('data-version') === 'v4') btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            refreshUUID();
+        }
+
+        init();
+    })();
+</script>
+</body>
+</html>

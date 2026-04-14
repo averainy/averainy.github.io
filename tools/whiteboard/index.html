@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>在线白板 | 专业图层绘画板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: #1a1e2c;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 工具栏样式 */
+        .toolbar {
+            background: rgba(30, 34, 48, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            z-index: 20;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .tool-group {
+            display: flex;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 12px;
+            border-radius: 48px;
+            align-items: center;
+        }
+
+        .tool-btn {
+            background: transparent;
+            border: none;
+            color: #eef2ff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .tool-btn span {
+            font-size: 0.85rem;
+        }
+
+        .tool-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .tool-btn.active {
+            background: #3b82f6;
+            color: white;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.4);
+        }
+
+        .separator {
+            width: 1px;
+            height: 30px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 4px;
+        }
+
+        .color-preview {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 1px 4px black;
+            cursor: pointer;
+        }
+        input[type="color"] {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            position: absolute;
+        }
+        .size-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 12px;
+            border-radius: 32px;
+        }
+        .size-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+        button.clear-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 32px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button.clear-btn:hover {
+            background: #dc2626;
+        }
+
+        /* 主内容区域: 画布区 + 图层面板 */
+        .main-layout {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .board-container {
+            flex: 1;
+            position: relative;
+            background: #eef2f5;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+        }
+
+        #gridCanvas {
+            background-color: #f8fafc;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 图层画布容器: 动态叠加层, 使用多个canvas进行图层管理 */
+        .layers-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .layer-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: auto;
+        }
+
+        /* 图层面板 */
+        .layers-panel {
+            width: 260px;
+            background: rgba(25, 28, 40, 0.92);
+            backdrop-filter: blur(12px);
+            border-left: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            flex-direction: column;
+            z-index: 15;
+            color: #eef2ff;
+            overflow-y: auto;
+        }
+
+        .layers-header {
+            padding: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .layers-list {
+            flex: 1;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+        }
+
+        .layer-item {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.1s;
+            border: 1px solid transparent;
+        }
+        .layer-item.active-layer {
+            background: #3b82f6;
+            border-color: white;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.5);
+        }
+        .layer-preview {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .layer-info {
+            flex: 1;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .layer-actions {
+            display: flex;
+            gap: 6px;
+        }
+        .layer-actions button {
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            border-radius: 20px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .add-layer-btn {
+            background: #3b82f6;
+            border: none;
+            padding: 8px;
+            border-radius: 40px;
+            margin: 12px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .status-bar {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            color: #ddd;
+            font-size: 0.75rem;
+            padding: 6px 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 20;
+        }
+
+        @media (max-width: 700px) {
+            .layers-panel { width: 200px; }
+            .tool-btn span { display: none; }
+        }
+    </style>
+	<meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6668670193528363"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="toolbar">
+    <div class="tool-group">
+        <button class="tool-btn" id="penBtn" title="画笔">✏️ <span>画笔</span></button>
+        <button class="tool-btn" id="eraserBtn" title="橡皮擦">🧽 <span>橡皮擦</span></button>
+        <div class="separator"></div>
+        <div class="color-preview" id="colorPreview" style="background-color: #3b82f6;"></div>
+        <input type="color" id="colorPicker" value="#3b82f6">
+        <div class="size-control">
+            <span>✏️ 粗细</span>
+            <button id="sizeMinus" style="background:#333; border:none; color:white; width:26px; border-radius:30px;">-</button>
+            <span class="size-value" id="brushSizeValue">4</span>
+            <button id="sizePlus" style="background:#333; border:none; color:white; width:26px; border-radius:30px;">+</button>
+        </div>
+    </div>
+    <div class="tool-group">
+        <button class="tool-btn" id="undoBtn" title="撤销">↩️ <span>撤销</span></button>
+        <button class="tool-btn" id="redoBtn" title="重做">↪️ <span>重做</span></button>
+        <div class="separator"></div>
+        <button class="tool-btn" id="downloadBtn" title="保存图片">📸 <span>保存</span></button>
+        <button class="tool-btn" id="mergeVisibleBtn" title="合并可见图层">🔗 <span>合并可见</span></button>
+    </div>
+</div>
+
+<div class="main-layout">
+    <div class="board-container">
+        <canvas id="gridCanvas"></canvas>
+        <div id="layersContainer" class="layers-canvas-container"></div>
+    </div>
+    <div class="layers-panel">
+        <div class="layers-header">
+            <span>🎨 图层管理</span>
+            <span style="font-size:12px;">点击激活</span>
+        </div>
+        <div class="layers-list" id="layersList"></div>
+        <button class="add-layer-btn" id="addLayerBtn">+ 新建图层</button>
+    </div>
+</div>
+<div class="status-bar">
+    <span>🖌️ 图层白板 | 每个图层独立绘制 | 支持撤销/重做</span>
+    <span id="coordStatus">坐标: - , -</span>
+</div>
+
+<script>
+    (function() {
+        // ---------- 核心数据结构: 图层管理 ----------
+        let layers = [];            // 每个元素: { id, name, canvas, ctx, visible, order }
+        let activeLayerId = null;
+        let nextLayerId = 1;
+        
+        // 全局历史 (存储每个图层的快照，用于全局撤销重做)
+        let historyStack = [];      // 存储图层快照数组 [{ layerId, imageData }, ...] 全量快照
+        let historyIndex = -1;
+        let maxHistory = 40;
+        let isUndoRedo = false;
+        
+        // 工具状态
+        let painting = false;
+        let currentTool = 'pen';
+        let brushColor = '#3b82f6';
+        let brushSize = 4;
+        let lastX = 0, lastY = 0;
+        
+        // DOM 元素
+        const gridCanvas = document.getElementById('gridCanvas');
+        const gridCtx = gridCanvas.getContext('2d');
+        const layersContainer = document.getElementById('layersContainer');
+        const layersListDiv = document.getElementById('layersList');
+        const penBtn = document.getElementById('penBtn');
+        const eraserBtn = document.getElementById('eraserBtn');
+        const colorPreview = document.getElementById('colorPreview');
+        const colorPicker = document.getElementById('colorPicker');
+        const brushSizeValueSpan = document.getElementById('brushSizeValue');
+        const sizeMinus = document.getElementById('sizeMinus');
+        const sizePlus = document.getElementById('sizePlus');
+        const undoBtn = document.getElementById('undoBtn');
+        const redoBtn = document.getElementById('redoBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const mergeVisibleBtn = document.getElementById('mergeVisibleBtn');
+        const addLayerBtn = document.getElementById('addLayerBtn');
+        const coordStatus = document.getElementById('coordStatus');
+        
+        // 初始化画板容器尺寸
+        let boardWidth = 0, boardHeight = 0;
+        
+        function updateContainerSize() {
+            const container = document.querySelector('.board-container');
+            boardWidth = container.clientWidth;
+            boardHeight = container.clientHeight;
+            gridCanvas.width = boardWidth;
+            gridCanvas.height = boardHeight;
+            drawGridBackground();
+            // 调整所有图层canvas尺寸
+            layers.forEach(layer => {
+                if (layer.canvas) {
+                    layer.canvas.width = boardWidth;
+                    layer.canvas.height = boardHeight;
+                    // 保留原内容重绘 (重新渲染其内容)
+                    if (layer.imageDataCache) {
+                        const img = new Image();
+                        img.onload = () => {
+                            layer.ctx.clearRect(0, 0, boardWidth, boardHeight);
+                            layer.ctx.drawImage(img, 0, 0);
+                        };
+                        img.src = layer.imageDataCache;
+                    } else {
+                        // 初始透明
+                        layer.ctx.clearRect(0, 0, boardWidth, boardHeight);
+                    }
+                }
+            });
+            // 重新整理z-index
+            updateLayersZindex();
+        }
+        
+        function drawGridBackground() {
+            const w = boardWidth, h = boardHeight;
+            gridCtx.clearRect(0, 0, w, h);
+            gridCtx.fillStyle = '#fcfcfd';
+            gridCtx.fillRect(0, 0, w, h);
+            const step = 25;
+            gridCtx.beginPath();
+            gridCtx.strokeStyle = '#e2e8f0';
+            gridCtx.lineWidth = 0.8;
+            for (let x = step; x < w; x += step) { gridCtx.moveTo(x, 0); gridCtx.lineTo(x, h); gridCtx.stroke(); }
+            for (let y = step; y < h; y += step) { gridCtx.moveTo(0, y); gridCtx.lineTo(w, y); gridCtx.stroke(); }
+            gridCtx.beginPath();
+            gridCtx.strokeStyle = '#cbd5e1';
+            gridCtx.setLineDash([5, 8]);
+            gridCtx.moveTo(w/2, 0); gridCtx.lineTo(w/2, h); gridCtx.stroke();
+            gridCtx.moveTo(0, h/2); gridCtx.lineTo(w, h/2); gridCtx.stroke();
+            gridCtx.setLineDash([]);
+        }
+        
+        // 创建新图层
+        function createLayer(name, imageDataURL = null) {
+            const id = nextLayerId++;
+            const canvas = document.createElement('canvas');
+            canvas.className = 'layer-canvas';
+            canvas.width = boardWidth;
+            canvas.height = boardHeight;
+            canvas.style.position = 'absolute';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            const ctx = canvas.getContext('2d');
+            if (imageDataURL) {
+                const img = new Image();
+                img.onload = () => {
+                    ctx.drawImage(img, 0, 0, boardWidth, boardHeight);
+                };
+                img.src = imageDataURL;
+            } else {
+                ctx.clearRect(0, 0, boardWidth, boardHeight);
+            }
+            layersContainer.appendChild(canvas);
+            const layer = { id, name, canvas, ctx, visible: true, order: layers.length, imageDataCache: imageDataURL || null };
+            layers.push(layer);
+            bindLayerEvents(layer);
+            updateLayersZindex();
+            renderLayersPanel();
+            return layer;
+        }
+        
+        function bindLayerEvents(layer) {
+            const canvas = layer.canvas;
+            const handleStart = (e) => {
+                e.preventDefault();
+                if (activeLayerId !== layer.id) return;
+                painting = true;
+                const coords = getCanvasCoords(e, canvas);
+                lastX = coords.x; lastY = coords.y;
+                drawOnLayer(e, layer, true);
+            };
+            const handleMove = (e) => {
+                if (!painting || activeLayerId !== layer.id) return;
+                e.preventDefault();
+                drawOnLayer(e, layer, false);
+            };
+            const handleEnd = () => {
+                if (painting && activeLayerId === layer.id) {
+                    painting = false;
+                    saveGlobalState();  // 绘制结束保存全局快照
+                    updateLayerCache(layer);
+                }
+            };
+            canvas.addEventListener('mousedown', handleStart);
+            canvas.addEventListener('mousemove', handleMove);
+            canvas.addEventListener('mouseup', handleEnd);
+            canvas.addEventListener('mouseleave', handleEnd);
+            canvas.addEventListener('touchstart', handleStart);
+            canvas.addEventListener('touchmove', handleMove);
+            canvas.addEventListener('touchend', handleEnd);
+            canvas.addEventListener('touchcancel', handleEnd);
+            canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+        }
+        
+        function getCanvasCoords(e, canvasElem) {
+            const rect = canvasElem.getBoundingClientRect();
+            const scaleX = canvasElem.width / rect.width;
+            const scaleY = canvasElem.height / rect.height;
+            let clientX, clientY;
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            let x = (clientX - rect.left) * scaleX;
+            let y = (clientY - rect.top) * scaleY;
+            x = Math.min(Math.max(0, x), canvasElem.width);
+            y = Math.min(Math.max(0, y), canvasElem.height);
+            coordStatus.innerText = `坐标: ${Math.floor(x)}, ${Math.floor(y)} | 图层: ${getActiveLayer()?.name || '无'}`;
+            return { x, y };
+        }
+        
+        function drawOnLayer(e, layer, isStart) {
+            if (!layer.visible) return;
+            const ctxLayer = layer.ctx;
+            const { x, y } = getCanvasCoords(e, layer.canvas);
+            ctxLayer.save();
+            ctxLayer.lineCap = 'round';
+            ctxLayer.lineJoin = 'round';
+            if (currentTool === 'pen') {
+                ctxLayer.globalCompositeOperation = 'source-over';
+                ctxLayer.strokeStyle = brushColor;
+                ctxLayer.lineWidth = brushSize;
+            } else {
+                ctxLayer.globalCompositeOperation = 'destination-out';
+                ctxLayer.lineWidth = brushSize;
+                ctxLayer.strokeStyle = 'rgba(0,0,0,1)';
+            }
+            if (isStart) {
+                ctxLayer.beginPath();
+                ctxLayer.moveTo(x, y);
+                ctxLayer.lineTo(x + 0.5, y + 0.5);
+                ctxLayer.stroke();
+                lastX = x; lastY = y;
+            } else {
+                ctxLayer.beginPath();
+                ctxLayer.moveTo(lastX, lastY);
+                ctxLayer.lineTo(x, y);
+                ctxLayer.stroke();
+                lastX = x; lastY = y;
+            }
+            ctxLayer.restore();
+        }
+        
+        // 全局历史快照 (所有图层)
+        function captureGlobalState() {
+            const snapshot = layers.map(layer => {
+                return { layerId: layer.id, imageData: layer.canvas.toDataURL() };
+            });
+            return snapshot;
+        }
+        
+        function saveGlobalState() {
+            if (isUndoRedo) return;
+            const newSnapshot = captureGlobalState();
+            if (historyIndex < historyStack.length - 1) {
+                historyStack = historyStack.slice(0, historyIndex + 1);
+            }
+            historyStack.push(newSnapshot);
+            while (historyStack.length > maxHistory) historyStack.shift();
+            historyIndex = historyStack.length - 1;
+        }
+        
+        function restoreGlobalState(snapshot) {
+            isUndoRedo = true;
+            for (let item of snapshot) {
+                const layer = layers.find(l => l.id === item.layerId);
+                if (layer) {
+                    const img = new Image();
+                    img.onload = () => {
+                        layer.ctx.clearRect(0, 0, boardWidth, boardHeight);
+                        layer.ctx.drawImage(img, 0, 0, boardWidth, boardHeight);
+                        updateLayerCache(layer);
+                    };
+                    img.src = item.imageData;
+                }
+            }
+            setTimeout(() => { isUndoRedo = false; renderLayersPanel(); }, 10);
+        }
+        
+        function undo() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                restoreGlobalState(historyStack[historyIndex]);
+            }
+        }
+        function redo() {
+            if (historyIndex < historyStack.length - 1) {
+                historyIndex++;
+                restoreGlobalState(historyStack[historyIndex]);
+            }
+        }
+        
+        function updateLayerCache(layer) {
+            layer.imageDataCache = layer.canvas.toDataURL();
+        }
+        
+        function updateLayersZindex() {
+            layers.sort((a,b) => a.order - b.order);
+            layers.forEach((layer, idx) => {
+                layer.canvas.style.zIndex = 10 + idx;
+            });
+        }
+        
+        function setActiveLayer(layerId) {
+            activeLayerId = layerId;
+            renderLayersPanel();
+        }
+        
+        function getActiveLayer() {
+            return layers.find(l => l.id === activeLayerId);
+        }
+        
+        function deleteLayer(layerId) {
+            if (layers.length <= 1) {
+                alert("至少保留一个图层");
+                return;
+            }
+            const index = layers.findIndex(l => l.id === layerId);
+            if (index !== -1) {
+                const layer = layers[index];
+                layer.canvas.remove();
+                layers.splice(index, 1);
+                if (activeLayerId === layerId) {
+                    activeLayerId = layers[0]?.id || null;
+                }
+                saveGlobalState();
+                renderLayersPanel();
+                updateLayersZindex();
+            }
+        }
+        
+        function toggleVisibility(layerId) {
+            const layer = layers.find(l => l.id === layerId);
+            if (layer) {
+                layer.visible = !layer.visible;
+                layer.canvas.style.display = layer.visible ? 'block' : 'none';
+                renderLayersPanel();
+            }
+        }
+        
+        // 合并可见图层 (新建一个图层包含所有可见内容)
+        function mergeVisibleLayers() {
+            const visibleLayers = layers.filter(l => l.visible);
+            if (visibleLayers.length === 0) return;
+            const newCanvas = document.createElement('canvas');
+            newCanvas.width = boardWidth;
+            newCanvas.height = boardHeight;
+            const tempCtx = newCanvas.getContext('2d');
+            tempCtx.clearRect(0, 0, boardWidth, boardHeight);
+            visibleLayers.forEach(layer => {
+                tempCtx.drawImage(layer.canvas, 0, 0);
+            });
+            const mergedDataURL = newCanvas.toDataURL();
+            const newLayer = createLayer(`合并层-${Date.now()}`, mergedDataURL);
+            setActiveLayer(newLayer.id);
+            saveGlobalState();
+        }
+        
+        // 导出最终图片 (所有可见图层合并 + 网格)
+        function downloadFullImage() {
+            const exportCanvas = document.createElement('canvas');
+            exportCanvas.width = boardWidth;
+            exportCanvas.height = boardHeight;
+            const expCtx = exportCanvas.getContext('2d');
+            expCtx.fillStyle = '#fcfcfd';
+            expCtx.fillRect(0, 0, boardWidth, boardHeight);
+            // 绘制网格
+            const step = 25;
+            expCtx.beginPath();
+            expCtx.strokeStyle = '#e2e8f0';
+            expCtx.lineWidth = 0.8;
+            for (let x = step; x < boardWidth; x += step) { expCtx.moveTo(x, 0); expCtx.lineTo(x, boardHeight); expCtx.stroke(); }
+            for (let y = step; y < boardHeight; y += step) { expCtx.moveTo(0, y); expCtx.lineTo(boardWidth, y); expCtx.stroke(); }
+            layers.forEach(layer => {
+                if (layer.visible) expCtx.drawImage(layer.canvas, 0, 0);
+            });
+            const link = document.createElement('a');
+            link.download = `whiteboard-layers-${Date.now()}.png`;
+            link.href = exportCanvas.toDataURL();
+            link.click();
+        }
+        
+        function renderLayersPanel() {
+            layersListDiv.innerHTML = '';
+            layers.slice().sort((a,b) => a.order - b.order).forEach(layer => {
+                const div = document.createElement('div');
+                div.className = `layer-item ${activeLayerId === layer.id ? 'active-layer' : ''}`;
+                div.innerHTML = `
+                    <div class="layer-preview">🎨</div>
+                    <div class="layer-info">
+                        <div>${layer.name}</div>
+                        <div style="font-size:10px; opacity:0.7;">${layer.visible ? '可见' : '隐藏'}</div>
+                    </div>
+                    <div class="layer-actions">
+                        <button class="vis-toggle" data-id="${layer.id}">👁️</button>
+                        <button class="layer-del" data-id="${layer.id}">🗑️</button>
+                    </div>
+                `;
+                div.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('vis-toggle') && !e.target.classList.contains('layer-del')) {
+                        setActiveLayer(layer.id);
+                    }
+                });
+                const visBtn = div.querySelector('.vis-toggle');
+                visBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleVisibility(layer.id); });
+                const delBtn = div.querySelector('.layer-del');
+                delBtn.addEventListener('click', (e) => { e.stopPropagation(); deleteLayer(layer.id); });
+                layersListDiv.appendChild(div);
+            });
+        }
+        
+        // UI绑定
+        function bindUI() {
+            penBtn.addEventListener('click', () => { currentTool = 'pen'; penBtn.classList.add('active'); eraserBtn.classList.remove('active'); });
+            eraserBtn.addEventListener('click', () => { currentTool = 'eraser'; eraserBtn.classList.add('active'); penBtn.classList.remove('active'); });
+            colorPicker.addEventListener('input', (e) => { brushColor = e.target.value; colorPreview.style.backgroundColor = brushColor; });
+            colorPreview.addEventListener('click', () => colorPicker.click());
+            sizeMinus.addEventListener('click', () => { brushSize = Math.max(2, brushSize-2); brushSizeValueSpan.innerText = brushSize; });
+            sizePlus.addEventListener('click', () => { brushSize = Math.min(60, brushSize+2); brushSizeValueSpan.innerText = brushSize; });
+            undoBtn.addEventListener('click', () => undo());
+            redoBtn.addEventListener('click', () => redo());
+            downloadBtn.addEventListener('click', () => downloadFullImage());
+            mergeVisibleBtn.addEventListener('click', () => { mergeVisibleLayers(); });
+            addLayerBtn.addEventListener('click', () => { createLayer(`图层 ${nextLayerId}`); saveGlobalState(); });
+        }
+        
+        function init() {
+            bindUI();
+            updateContainerSize();
+            // 默认创建一个图层
+            const defaultLayer = createLayer('背景图层');
+            activeLayerId = defaultLayer.id;
+            setActiveLayer(activeLayerId);
+            saveGlobalState();
+            window.addEventListener('resize', () => {
+                setTimeout(() => { updateContainerSize(); saveGlobalState(); }, 100);
+            });
+            penBtn.classList.add('active');
+            brushSizeValueSpan.innerText = brushSize;
+        }
+        init();
+    })();
+</script>
+</body>
+</html>
