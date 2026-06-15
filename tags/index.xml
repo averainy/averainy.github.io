@@ -6,10 +6,22 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Fri, 19 Dec 2025 22:13:44 +0800</lastBuildDate>
+		<lastBuildDate>Mon, 15 Jun 2026 16:15:02 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Wsus</title>
+			<link>http://www.averainy.com/tags/wsus/</link>
+			<pubDate>Mon, 15 Jun 2026 16:15:02 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/wsus/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>消费</title>
 			<link>http://www.averainy.com/tags/%E6%B6%88%E8%B4%B9/</link>

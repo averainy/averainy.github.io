@@ -6,7 +6,7 @@
 		<description>Recent content on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Fri, 19 Dec 2025 22:13:44 +0800</lastBuildDate>
+		<lastBuildDate>Mon, 15 Jun 2026 16:15:02 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/index.xml" rel="self" type="application/rss+xml" />
 		
@@ -19,6 +19,19 @@
 			<description>
 			
 				 password-generator torrent种子转磁力链 二维码生成 json美化压缩 哈希摘要计算器 UUID生成器 在线白板 
+			
+			</description>
+		</item>
+		<item>
+			<title>如何修复wsus客户端长时间不报告状态</title>
+			<link>http://www.averainy.com/post/how-to-repair-wsus-client/</link>
+			<pubDate>Mon, 15 Jun 2026 16:15:02 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/how-to-repair-wsus-client/</guid>
+			<description>
+			
+				可以使用以下脚本尝试恢复wsus客户端长期不报告状态的故障:
+# 1. 停止Windows Update服务 net stop wuauserv # 2. 清除下载缓存和临时文件 del /f /s /q %windir%\SoftwareDistribution\*.* # …
 			
 			</description>
 		</item>

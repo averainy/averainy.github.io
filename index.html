@@ -66,6 +66,29 @@
 			<div class="post-header">
 				<div class="meta">
 					<div class="date">
+						<span class="day">15</span>
+						<span class="rest">Jun 2026</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/post/how-to-repair-wsus-client/">如何修复wsus客户端长时间不报告状态</a></h3>
+					<div class="author">
+					
+					</div>
+					<span class="description">
+					
+						可以使用以下脚本尝试恢复wsus客户端长期不报告状态的故障:
+# 1. 停止Windows Update服务 net stop wuauserv # 2. 清除下载缓存和临时文件 del /f /s /q %windir%\SoftwareDistribution\*.* # …
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
 						<span class="day">19</span>
 						<span class="rest">Dec 2025</span>
 					</div>
@@ -261,29 +284,6 @@ def delete_file(path:str): if not os.path.exists(path): return if(os.path.isfile
 					
 						edit ipxe config file like boot.ipxe:
 item win-wds Windows Deployment Services :win-wds set wdsserver:ipv4 192.168.11.xxx #your wds server …
-					
-					</span>
-				</div>
-			</div>
-		</div>
-	
-		<div class="post">
-			<div class="post-header">
-				<div class="meta">
-					<div class="date">
-						<span class="day">16</span>
-						<span class="rest">Oct 2024</span>
-					</div>
-				</div>
-				<div class="matter">
-					<h3 class="title small"><a href="/post/build-your-own-PXE-boot-server-on-fedora/">Build Your Own PXE Boot Server on Fedora</a></h3>
-					<div class="author">
-					
-					</div>
-					<span class="description">
-					
-						Build your own PXE boot server on Fedora Background 通过这篇文章设置可以从BIOS和UEFI启动PXE网络安装操作系统。
-安装前提 假设PXE服务器的ip地址是10.0.0.1 安装步骤 安装软件 更新PXE …
 					
 					</span>
 				</div>
