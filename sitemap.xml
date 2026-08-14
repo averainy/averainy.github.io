@@ -5,19 +5,31 @@
     <loc>http://www.averainy.com/links/</loc>
   </url><url>
     <loc>http://www.averainy.com/</loc>
-    <lastmod>2026-06-15T16:15:02+08:00</lastmod>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2026-06-15T16:15:02+08:00</lastmod>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/Configure_Docker_Proxy_on_Synology_DSM7.1/</loc>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/docker/</loc>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/DSM/</loc>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/</loc>
-    <lastmod>2026-06-15T16:15:02+08:00</lastmod>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/categories/share/</loc>
-    <lastmod>2026-06-15T16:15:02+08:00</lastmod>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/Synology/</loc>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/</loc>
-    <lastmod>2026-06-15T16:15:02+08:00</lastmod>
+    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/wsus/</loc>
     <lastmod>2026-06-15T16:15:02+08:00</lastmod>
@@ -111,9 +123,6 @@
   </url><url>
     <loc>http://www.averainy.com/post/configuring-bind-as-a-caching-dns-server-in-fedora40/</loc>
     <lastmod>2024-10-15T14:38:21+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/docker/</loc>
-    <lastmod>2024-10-11T14:38:09+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/wireguard/</loc>
     <lastmod>2024-10-11T14:38:09+08:00</lastmod>
@@ -404,9 +413,6 @@
     <lastmod>2022-11-08T09:40:18+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/cups/</loc>
-    <lastmod>2022-10-29T23:03:56+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/synology/</loc>
     <lastmod>2022-10-29T23:03:56+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/</loc>

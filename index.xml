@@ -6,7 +6,7 @@
 		<description>Recent content on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Mon, 15 Jun 2026 16:15:02 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 14 Aug 2026 16:57:07 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/index.xml" rel="self" type="application/rss+xml" />
 		
@@ -19,6 +19,19 @@
 			<description>
 			
 				 password-generator torrent种子转磁力链 二维码生成 json美化压缩 哈希摘要计算器 UUID生成器 在线白板 
+			
+			</description>
+		</item>
+		<item>
+			<title>Configure_Docker_Proxy_on_Synology_DSM7.1</title>
+			<link>http://www.averainy.com/post/Configure_Docker_Proxy_on_Synology_DSM7.1/</link>
+			<pubDate>Fri, 14 Aug 2026 16:57:07 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/Configure_Docker_Proxy_on_Synology_DSM7.1/</guid>
+			<description>
+			
+				参照以下操作配置群晖的DSM7.1的docker的代理。
+mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat > …
 			
 			</description>
 		</item>

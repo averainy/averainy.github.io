@@ -6,10 +6,46 @@
 		<description>Recent content in Tags on www.averainy.com</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-CN</language>
-		<lastBuildDate>Mon, 15 Jun 2026 16:15:02 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 14 Aug 2026 16:57:07 +0800</lastBuildDate>
 		
 		<atom:link href="http://www.averainy.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Docker</title>
+			<link>http://www.averainy.com/tags/docker/</link>
+			<pubDate>Fri, 14 Aug 2026 16:57:07 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/docker/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>DSM</title>
+			<link>http://www.averainy.com/tags/DSM/</link>
+			<pubDate>Fri, 14 Aug 2026 16:57:07 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/DSM/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
+		<item>
+			<title>Synology</title>
+			<link>http://www.averainy.com/tags/Synology/</link>
+			<pubDate>Fri, 14 Aug 2026 16:57:07 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/tags/Synology/</guid>
+			<description>
+			
+				
+			
+			</description>
+		</item>
 		<item>
 			<title>Wsus</title>
 			<link>http://www.averainy.com/tags/wsus/</link>
@@ -220,18 +256,6 @@
 			<pubDate>Tue, 15 Oct 2024 14:38:21 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/tags/fedora/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>Docker</title>
-			<link>http://www.averainy.com/tags/docker/</link>
-			<pubDate>Fri, 11 Oct 2024 14:38:09 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/docker/</guid>
 			<description>
 			
 				
@@ -856,18 +880,6 @@
 			<pubDate>Sat, 29 Oct 2022 23:03:56 +0800</pubDate>
 			
 			<guid>http://www.averainy.com/tags/cups/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>Synology</title>
-			<link>http://www.averainy.com/tags/synology/</link>
-			<pubDate>Sat, 29 Oct 2022 23:03:56 +0800</pubDate>
-			
-			<guid>http://www.averainy.com/tags/synology/</guid>
 			<description>
 			
 				

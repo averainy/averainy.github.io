@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Synology on averainy&#39;s Blog</title>
+		<link>http://www.averainy.com/tags/Synology/</link>
+		<description>Recent content in Synology on www.averainy.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-CN</language>
+		<lastBuildDate>Fri, 14 Aug 2026 16:57:07 +0800</lastBuildDate>
+		
+		<atom:link href="http://www.averainy.com/tags/Synology/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Configure_Docker_Proxy_on_Synology_DSM7.1</title>
+			<link>http://www.averainy.com/post/Configure_Docker_Proxy_on_Synology_DSM7.1/</link>
+			<pubDate>Fri, 14 Aug 2026 16:57:07 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/Configure_Docker_Proxy_on_Synology_DSM7.1/</guid>
+			<description>
+			
+				参照以下操作配置群晖的DSM7.1的docker的代理。
+mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat > …
+			
+			</description>
+		</item>
+		<item>
+			<title>在群晖设备上使用docker搭建cups服务器</title>
+			<link>http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/</link>
+			<pubDate>Sat, 29 Oct 2022 23:03:56 +0800</pubDate>
+			
+			<guid>http://www.averainy.com/post/create-cups-service-with-docker-on-synology-nas/</guid>
+			<description>
+			
+				今天终于在群晖ds218+上面配置好了cups打印服务。特地记录一下。
+起因 我的打印机是brother hl-2260d。感觉是一个很特别的一个型号。群晖自带的打印驱动里面没有相应的驱动。只能用别的办法来实现。我这里是在群晖ds218+上面搭建一个docker容器。
+搭 …
+			
+			</description>
+		</item>
+		
+	</channel>
+</rss>
