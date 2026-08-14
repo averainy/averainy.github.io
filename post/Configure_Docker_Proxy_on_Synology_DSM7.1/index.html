@@ -6,13 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
-	<meta property="og:title" content="Configure_Docker_Proxy_on_Synology_DSM7.1">
+	<meta property="og:title" content="Configure Docker Proxy on Synology DSM7.1">
 	
 	
 	<meta name="author" content="averainy"><meta name="keywords" content="docker,DSM,Synology"><meta name="description" content="参照以下操作配置群晖的DSM7.1的docker的代理。
 mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat &gt; …"><meta property="og:url" content="http://www.averainy.com/post/Configure_Docker_Proxy_on_Synology_DSM7.1/">
   <meta property="og:site_name" content="averainy&#39;s Blog">
-  <meta property="og:title" content="Configure_Docker_Proxy_on_Synology_DSM7.1">
+  <meta property="og:title" content="Configure Docker Proxy on Synology DSM7.1">
   <meta property="og:description" content="参照以下操作配置群晖的DSM7.1的docker的代理。 mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat &gt; /etc/systemd/system/pkg-Docker-dockerd.service.d/http-proxy.conf &lt;&lt; EOF [Service] Environment=&#34;HTTP_PROXY=http://192.168.0.6:7890&#34; Environment=&#34;HTTPS_PROXY=http://192.168.0.6:7890&#34; Environment=&#34;NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12&#34; EOF systemctl daemon-reload systemctl restart pkg-Docker-dockerd.service">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
@@ -24,7 +24,7 @@ mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat &gt; …"><meta pr
     <meta property="article:tag" content="Synology">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Configure_Docker_Proxy_on_Synology_DSM7.1">
+  <meta name="twitter:title" content="Configure Docker Proxy on Synology DSM7.1">
   <meta name="twitter:description" content="参照以下操作配置群晖的DSM7.1的docker的代理。 mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat &gt; /etc/systemd/system/pkg-Docker-dockerd.service.d/http-proxy.conf &lt;&lt; EOF [Service] Environment=&#34;HTTP_PROXY=http://192.168.0.6:7890&#34; Environment=&#34;HTTPS_PROXY=http://192.168.0.6:7890&#34; Environment=&#34;NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12&#34; EOF systemctl daemon-reload systemctl restart pkg-Docker-dockerd.service">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
@@ -32,7 +32,7 @@ mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat &gt; …"><meta pr
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/js/c.js"></script>
-	<title>Configure_Docker_Proxy_on_Synology_DSM7.1 | averainy&#39;s Blog</title>
+	<title>Configure Docker Proxy on Synology DSM7.1 | averainy&#39;s Blog</title>
 
 
 <meta name="google-site-verification" content="cNHz7L8mSB7qFKcSkGRHkmjAab0Fc8qR0rhRZCQspow" />
@@ -80,7 +80,7 @@ mkdir -p /etc/systemd/system/pkg-Docker-dockerd.service.d cat &gt; …"><meta pr
 		</div>
 		
 		<div class="matter">
-			<h1 class="title">Configure_Docker_Proxy_on_Synology_DSM7.1</h1>
+			<h1 class="title">Configure Docker Proxy on Synology DSM7.1</h1>
 		</div>
 	</div>
 	<div class="markdown">
