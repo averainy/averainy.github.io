@@ -7,11 +7,23 @@
     <loc>http://www.averainy.com/</loc>
     <lastmod>2026-09-29T20:11:10+08:00</lastmod>
   </url><url>
+    <loc>http://www.averainy.com/categories/</loc>
+    <lastmod>2026-09-29T20:11:10+08:00</lastmod>
+  </url><url>
     <loc>http://www.averainy.com/post/</loc>
     <lastmod>2026-09-29T20:11:10+08:00</lastmod>
   </url><url>
-    <loc>http://www.averainy.com/categories/</loc>
-    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
+    <loc>http://www.averainy.com/tags/</loc>
+    <lastmod>2026-09-29T20:11:10+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/post/riding-to-niangniangding/</loc>
+    <lastmod>2026-09-29T20:11:10+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/tags/%E6%91%A9%E6%97%85/</loc>
+    <lastmod>2026-09-29T20:11:10+08:00</lastmod>
+  </url><url>
+    <loc>http://www.averainy.com/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2026-09-29T20:11:10+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/Configure_Docker_Proxy_on_Synology_DSM7.1/</loc>
     <lastmod>2026-08-14T16:57:07+08:00</lastmod>
@@ -26,9 +38,6 @@
     <lastmod>2026-08-14T16:57:07+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/Synology/</loc>
-    <lastmod>2026-08-14T16:57:07+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/tags/</loc>
     <lastmod>2026-08-14T16:57:07+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/wsus/</loc>
@@ -149,9 +158,6 @@
     <lastmod>2024-08-18T00:43:32+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/post/yu-mai-gui-hua-tong-zai-jiu/</loc>
-    <lastmod>2024-08-18T00:43:32+08:00</lastmod>
-  </url><url>
-    <loc>http://www.averainy.com/categories/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2024-08-18T00:43:32+08:00</lastmod>
   </url><url>
     <loc>http://www.averainy.com/tags/decorator/</loc>
